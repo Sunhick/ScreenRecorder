@@ -134,9 +134,44 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Codecs\ffmpeg\avcodec-55.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Codecs\ffmpeg\avdevice-55.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Codecs\ffmpeg\avfilter-4.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Codecs\ffmpeg\avformat-55.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Codecs\ffmpeg\avutil-52.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Codecs\ffmpeg\ffmpeg.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Codecs\ffmpeg\ffplay.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Codecs\ffmpeg\ffprobe.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Codecs\ffmpeg\postproc-52.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Codecs\ffmpeg\swresample-0.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Codecs\ffmpeg\swscale-2.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Codecs\Gif\GifFormat.txt" />
     <Content Include="Resources\Help.png" />
     <Content Include="Resources\Bug.png" />
@@ -147,7 +182,8 @@
     <None Include="Resources\Information.png" />
     <Content Include="Resources\LeftSide.png" />
     <Content Include="Resources\Like.png" />
-    <Content Include="Resources\Maximize.png" />
+    <Content Include="Resources\MaximizePlus.png" />
+    <Content Include="Resources\MaximizeMinus.png" />
     <Content Include="Resources\Minimize.png" />
     <Content Include="Resources\Pause.png" />
     <Content Include="Resources\Record.png" />

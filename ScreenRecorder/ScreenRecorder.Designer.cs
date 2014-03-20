@@ -35,17 +35,17 @@ namespace ScreenRecorderMP
             this.titleLbl = new System.Windows.Forms.Label();
             this.screenViewMP = new System.Windows.Forms.Panel();
             this.configMP = new System.Windows.Forms.Panel();
-            this.frameCaptureTimer = new System.Windows.Forms.Timer(this.components);
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.hidePanel = new System.Windows.Forms.Panel();
-            this.hideBtn = new System.Windows.Forms.Button();
             this.infoBtn = new System.Windows.Forms.Button();
             this.stopBtn = new System.Windows.Forms.Button();
             this.recordBtn = new System.Windows.Forms.Button();
             this.settingBtn = new System.Windows.Forms.Button();
+            this.frameCaptureTimer = new System.Windows.Forms.Timer(this.components);
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.maxBtn = new System.Windows.Forms.Button();
             this.minBtn = new System.Windows.Forms.Button();
             this.closeBtn = new System.Windows.Forms.Button();
+            this.hidePanel = new System.Windows.Forms.Panel();
+            this.hideBtn = new System.Windows.Forms.Button();
             this.configMP.SuspendLayout();
             this.hidePanel.SuspendLayout();
             this.SuspendLayout();
@@ -87,40 +87,6 @@ namespace ScreenRecorderMP
             this.configMP.Name = "configMP";
             this.configMP.Size = new System.Drawing.Size(38, 489);
             this.configMP.TabIndex = 5;
-            // 
-            // frameCaptureTimer
-            // 
-            this.frameCaptureTimer.Interval = 50;
-            this.frameCaptureTimer.Tick += new System.EventHandler(this.frameCaptureTimer_Tick);
-            // 
-            // toolTip
-            // 
-            this.toolTip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            // 
-            // hidePanel
-            // 
-            this.hidePanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.hidePanel.Controls.Add(this.hideBtn);
-            this.hidePanel.Location = new System.Drawing.Point(791, 30);
-            this.hidePanel.Name = "hidePanel";
-            this.hidePanel.Size = new System.Drawing.Size(10, 489);
-            this.hidePanel.TabIndex = 6;
-            // 
-            // hideBtn
-            // 
-            this.hideBtn.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.hideBtn.FlatAppearance.BorderSize = 0;
-            this.hideBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.hideBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.hideBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hideBtn.Image = global::ScreenRecorder.Properties.Resources.RightSide;
-            this.hideBtn.Location = new System.Drawing.Point(0, 231);
-            this.hideBtn.Name = "hideBtn";
-            this.hideBtn.Size = new System.Drawing.Size(10, 23);
-            this.hideBtn.TabIndex = 6;
-            this.hideBtn.UseVisualStyleBackColor = true;
-            this.hideBtn.Click += new System.EventHandler(this.hideBtn_Click);
             // 
             // infoBtn
             // 
@@ -183,6 +149,15 @@ namespace ScreenRecorderMP
             this.settingBtn.UseVisualStyleBackColor = false;
             this.settingBtn.Click += new System.EventHandler(this.settingBtn_Click);
             // 
+            // frameCaptureTimer
+            // 
+            this.frameCaptureTimer.Interval = 50;
+            this.frameCaptureTimer.Tick += new System.EventHandler(this.frameCaptureTimer_Tick);
+            // 
+            // toolTip
+            // 
+            this.toolTip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            // 
             // maxBtn
             // 
             this.maxBtn.BackColor = System.Drawing.Color.Transparent;
@@ -190,7 +165,7 @@ namespace ScreenRecorderMP
             this.maxBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.maxBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.maxBtn.ForeColor = System.Drawing.Color.Transparent;
-            this.maxBtn.Image = global::ScreenRecorder.Properties.Resources.Maximize;
+            this.maxBtn.Image = ((System.Drawing.Image)(resources.GetObject("maxBtn.Image")));
             this.maxBtn.Location = new System.Drawing.Point(41, 4);
             this.maxBtn.Name = "maxBtn";
             this.maxBtn.Size = new System.Drawing.Size(22, 23);
@@ -230,6 +205,31 @@ namespace ScreenRecorderMP
             this.toolTip.SetToolTip(this.closeBtn, "Close");
             this.closeBtn.UseVisualStyleBackColor = false;
             this.closeBtn.Click += new System.EventHandler(this.closeBtn_Click);
+            // 
+            // hidePanel
+            // 
+            this.hidePanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.hidePanel.Controls.Add(this.hideBtn);
+            this.hidePanel.Location = new System.Drawing.Point(791, 30);
+            this.hidePanel.Name = "hidePanel";
+            this.hidePanel.Size = new System.Drawing.Size(10, 489);
+            this.hidePanel.TabIndex = 6;
+            // 
+            // hideBtn
+            // 
+            this.hideBtn.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.hideBtn.FlatAppearance.BorderSize = 0;
+            this.hideBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.hideBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.hideBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.hideBtn.Image = global::ScreenRecorder.Properties.Resources.RightSide;
+            this.hideBtn.Location = new System.Drawing.Point(0, 231);
+            this.hideBtn.Name = "hideBtn";
+            this.hideBtn.Size = new System.Drawing.Size(10, 23);
+            this.hideBtn.TabIndex = 6;
+            this.hideBtn.UseVisualStyleBackColor = true;
+            this.hideBtn.Click += new System.EventHandler(this.hideBtn_Click);
             // 
             // ScreenRecorder
             // 

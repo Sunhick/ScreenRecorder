@@ -20,6 +20,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
+using System.IO;
 #endregion
 
 namespace ScreenRecorderMP
@@ -52,7 +54,7 @@ namespace ScreenRecorderMP
         ///// <summary>
         ///// Index
         ///// </summary>
-        //private int index = 1;
+        private int index = 0;
 
         /// <summary>
         /// Initializes a new instance of the ScreenRecorderMP class.
@@ -110,12 +112,12 @@ namespace ScreenRecorderMP
             if (this.WindowState == FormWindowState.Normal)
             {
                 this.WindowState = FormWindowState.Maximized;
-                //this.maxBtn.Image = Resources.MaximizePlus;
+                this.maxBtn.Image = Resources.MaximizeMinus;
             }
             else
             {
                 this.WindowState = FormWindowState.Normal;
-                //this.maxBtn.Image = Resources.MaximizeMinus;
+                this.maxBtn.Image = Resources.MaximizePlus;
             }
         }
 
@@ -251,15 +253,15 @@ namespace ScreenRecorderMP
         /// <param name="e">Event arguments</param>
         private void frameCaptureTimer_Tick(object sender, EventArgs e)
         {
-            //string fileName = String.Format("{1}\\{0}.bmp", index++, saveLoc);
+            string fileName = String.Format("{1}\\img{0}.png", index++, saveLoc);
 
-            Point leftPt = new Point(this.Location.X, this.Location.Y);
+            Point leftPt = new Point(this.screenViewMP.Location.X, this.screenViewMP.Location.Y);
 
-            using (Bitmap bmp = new Bitmap(this.Bounds.Size.Width, this.Bounds.Size.Height))
+            using (Bitmap bmp = new Bitmap(this.screenViewMP.Bounds.Size.Width, this.screenViewMP.Bounds.Size.Height))
             {
                 using (Graphics g = Graphics.FromImage(bmp))
                 {
-                    g.CopyFromScreen(leftPt.X, leftPt.Y, 0, 0, this.Bounds.Size, CopyPixelOperation.SourceCopy);
+                    g.CopyFromScreen(leftPt.X, leftPt.Y, 0, 0, this.screenViewMP.Bounds.Size, CopyPixelOperation.SourceCopy);
 
                     Win32Api.PCURSORINFO cinfo = new Win32Api.PCURSORINFO
                     {
@@ -274,10 +276,10 @@ namespace ScreenRecorderMP
                             g.ReleaseHdc();
                         }
                     }
-
-                    encoder.AddFrame(bmp);
-                    //bmp.Save(fileName);
                 }
+
+                //encoder.AddFrame(bmp);
+                bmp.Save(fileName);
             }
         }
 
@@ -293,12 +295,12 @@ namespace ScreenRecorderMP
             screenViewMP.Controls.Clear();
             this.TransparencyKey = Color.Black;
 
-            encoder.Start(saveLoc + "\\rec.gif");
+            //encoder.Start(saveLoc + "\\rec.gif");
 
             NotifyUser("Recoding Started");
 
-            encoder.SetDelay(50);
-            encoder.SetRepeat(0);
+            //encoder.SetDelay(50);
+            //encoder.SetRepeat(0);
 
             frameCaptureTimer.Start();
         }
@@ -335,9 +337,39 @@ namespace ScreenRecorderMP
         private void stopBtn_Click(object sender, EventArgs e)
         {
             frameCaptureTimer.Stop();
-            encoder.Finish();
+            //encoder.Finish();
 
             NotifyUser("Recoding Stopped");
+
+            // .\ffmpeg -i img%d.png -r 10 -c:v libx264 -preset slow -crf 21 output.mp4
+
+            Process mp4Maker = new Process();
+            mp4Maker.StartInfo.FileName = @"G:\ScreenRecorder\ScreenRecorder\bin\x64\Debug\Codecs\ffmpeg\ffmpeg.exe";
+            string pngLoc = "img%d.png";
+            mp4Maker.StartInfo.Arguments = "-i " + pngLoc + @" -r 10 -c:v libx264 -preset slow -crf 21 output.mp4";
+            mp4Maker.ErrorDataReceived += new DataReceivedEventHandler(mp4Maker_ErrorDataReceived);
+            mp4Maker.StartInfo.UseShellExecute = false;
+            mp4Maker.EnableRaisingEvents = true;
+           // mp4Maker.StartInfo.CreateNoWindow = true;
+            mp4Maker.StartInfo.RedirectStandardOutput = true;
+            mp4Maker.StartInfo.RedirectStandardError = true; 
+
+            mp4Maker.Start();
+
+            string outline = mp4Maker.StandardOutput.ReadToEnd();
+            
+            TextWriter log = new StreamWriter("log.txt");
+            log.WriteLine(outline);
+            log.Flush();
+
+            mp4Maker.WaitForExit();
+            
+            NotifyUser("Mp4 Created");
+        }
+
+        void mp4Maker_ErrorDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            MessageBox.Show(e.Data);
         }
 
         /// <summary>
@@ -355,7 +387,7 @@ namespace ScreenRecorderMP
                 screenViewMP.Width -= (int)configMP.Tag;
 
                 hideBtn.Image = Resources.RightSide;
-                configMP.Show();  
+                configMP.Show();
             }
             else
             {

@@ -123,9 +123,16 @@ namespace ScreenRecorder.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap Maximize {
+        internal static System.Drawing.Bitmap MaximizeMinus {
             get {
-                object obj = ResourceManager.GetObject("Maximize", resourceCulture);
+                object obj = ResourceManager.GetObject("MaximizeMinus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap MaximizePlus {
+            get {
+                object obj = ResourceManager.GetObject("MaximizePlus", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
