@@ -1,5 +1,8 @@
 Thumbs.db
 *.obj
+!ffmpeg.exe
+!ffplay.exe
+!ffprobe.exe
 *.exe
 *.pdb
 *.user
