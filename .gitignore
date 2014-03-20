@@ -1,9 +1,6 @@
 Thumbs.db
 *.obj
-!ffmpeg.exe
-!ffplay.exe
-!ffprobe.exe
-*.exe
+ScreenRecorder.exe
 *.pdb
 *.user
 *.aps

@@ -154,15 +154,9 @@
     <Content Include="Codecs\ffmpeg\avutil-52.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Codecs\ffmpeg\ffmpeg.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Codecs\ffmpeg\ffplay.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Codecs\ffmpeg\ffprobe.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Codecs\ffmpeg\ffmpeg.exe" />
+    <Content Include="Codecs\ffmpeg\ffplay.exe" />
+    <Content Include="Codecs\ffmpeg\ffprobe.exe" />
     <Content Include="Codecs\ffmpeg\GNULicense.txt" />
     <Content Include="Codecs\ffmpeg\postproc-52.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
