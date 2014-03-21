@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using ScreenRecorder.ContentPages;
+using System.IO;
 
 namespace ScreenRecorderMP
 {
@@ -15,6 +16,10 @@ namespace ScreenRecorderMP
         public InformationCP()
         {
             InitializeComponent();
+
+            aboutffmpegBox.LoadFile(
+                Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, "About\\FfMpeg.txt"), RichTextBoxStreamType.PlainText
+                );
         }
     }
 }

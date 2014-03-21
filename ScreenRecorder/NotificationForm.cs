@@ -120,7 +120,7 @@ namespace ScreenRecorder
         public void Popup(string message, Point location)
         {
             this.userMsgBox.Text = message;
-            //this.Location = location;
+            this.Location = location;
 
             //this.Show();
             Application.Run(this);

@@ -1,0 +1,22 @@
+﻿FFmpeg is a free software project that produces libraries and programs for handling multimedia data. 
+FFmpeg includes libavcodec, an audio/video codec library used by several other projects, libavformat, 
+an audio/video container mux and demux library, and the ffmpeg command line program for transcoding 
+multimedia files. 
+
+
+FFmpeg is published under the GNU Lesser General Public License 2.1+ or 
+GNU General Public License 2+ (depending on which options are enabled).
+
+
+Legal status of codecs
+__________________________________________________________________________________________________
+
+FFmpeg contains more than 100 codecs, most of which do not just store uncompressed data. Most codecs 
+that compress information could be claimed by patent holders. Such claims may be enforceable in 
+countries like the United States which have implemented software patents, but are considered 
+unenforceable or void in countries that have not implemented software patents. Furthermore, 
+many of these codecs are only released under terms that forbid reverse engineering, even for 
+purposes of interoperability. These terms of use are forbidden in certain countries. 
+
+For example, some European Union nations have not implemented software patents and have laws expressly 
+allowing reverse engineering for purposes of interoperability.

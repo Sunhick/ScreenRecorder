@@ -22,6 +22,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 #endregion
 
 namespace ScreenRecorderMP
@@ -61,6 +62,7 @@ namespace ScreenRecorderMP
         /// </summary>
         public ScreenRecorder()
         {
+            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(Settings.Default.Language);
             InitializeComponent();
             ReadAppSettings();
             InitCP();
@@ -253,7 +255,7 @@ namespace ScreenRecorderMP
         /// <param name="e">Event arguments</param>
         private void frameCaptureTimer_Tick(object sender, EventArgs e)
         {
-            string fileName = String.Format("{1}\\img{0}.png", index++, saveLoc);
+            string fileName = String.Format("{1}\\bitmaps\\img{0}.png", index++, saveLoc);
 
             Point leftPt = new Point(this.screenViewMP.Location.X, this.screenViewMP.Location.Y);
 
@@ -297,7 +299,7 @@ namespace ScreenRecorderMP
 
             //encoder.Start(saveLoc + "\\rec.gif");
 
-            NotifyUser("Recoding Started");
+            NotifyUser(Resources.RecordStarted);
 
             //encoder.SetDelay(50);
             //encoder.SetRepeat(0);
@@ -320,13 +322,13 @@ namespace ScreenRecorderMP
         private void NotifyUserTask(string message)
         {
             NotificationForm notifyUser = new NotificationForm();
-
-            Point p = new Point(this.Width / 2 - this.Width / 2, this.Height / 2 - this.Height / 2);
+            //notifyUser.Owner = this;
+            //Point p = new Point(this.Location.X + this.Width / 2, this.Location.Y+this.Height / 2);
 
             //Point notifyLoc = new Point(this.Size.Width, this.Size.Height);
-            notifyUser.Location = p;//new Point(this.Location.X, this.Location.Y);
+            //notifyUser.Location = p;//new Point(this.Location.X, this.Location.Y);
 
-            notifyUser.Popup(message, p);
+            notifyUser.Popup(message, new Point(0,0));
         }
 
         /// <summary>
@@ -339,37 +341,72 @@ namespace ScreenRecorderMP
             frameCaptureTimer.Stop();
             //encoder.Finish();
 
-            NotifyUser("Recoding Stopped");
+            NotifyUser(Resources.RecordStopped);
 
-            // .\ffmpeg -i img%d.png -r 10 -c:v libx264 -preset slow -crf 21 output.mp4
+            //this is smaple
+            Process avMaker = new Process();    //Audio-Video maker process
 
-            Process mp4Maker = new Process();
-            mp4Maker.StartInfo.FileName = @"G:\ScreenRecorder\ScreenRecorder\bin\x64\Debug\Codecs\ffmpeg\ffmpeg.exe";
-            string pngLoc = "img%d.png";
-            mp4Maker.StartInfo.Arguments = "-i " + pngLoc + @" -r 10 -c:v libx264 -preset slow -crf 21 output.mp4";
-            mp4Maker.ErrorDataReceived += new DataReceivedEventHandler(mp4Maker_ErrorDataReceived);
-            mp4Maker.StartInfo.UseShellExecute = false;
-            mp4Maker.EnableRaisingEvents = true;
-           // mp4Maker.StartInfo.CreateNoWindow = true;
-            mp4Maker.StartInfo.RedirectStandardOutput = true;
-            mp4Maker.StartInfo.RedirectStandardError = true; 
+            avMaker.StartInfo.FileName = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName) +
+                        @"\Codecs\ffmpeg\ffmpeg.exe";
 
-            mp4Maker.Start();
+            const string pngLoc = "img%d.png";
+            //avMaker.StartInfo.Arguments = String.Format(@"-i bitmaps\{0} -vcodec huffyuv output.avi", pngLoc);
+            //avMaker.StartInfo.Arguments = String.Format(@"-i bitmaps\{0} -r 20 output.mp4", pngLoc);
+            avMaker.StartInfo.Arguments = String.Format(@"-i bitmaps\{0} -r 20 -c:v libx264 -preset slow -crf 21 output.mp4", pngLoc);
+            // avMaker.StartInfo.Arguments = String.Format(@" -r 20 -i bitmaps\{0} -c:v libx264 -r 20 -pix_fmt yuv420p output.mp4", pngLoc);
 
-            string outline = mp4Maker.StandardOutput.ReadToEnd();
-            
-            TextWriter log = new StreamWriter("log.txt");
-            log.WriteLine(outline);
-            log.Flush();
+            if (!avMaker.Start())
+            {
+                Console.WriteLine(Resources.AVError);
+                return;
+            }
 
-            mp4Maker.WaitForExit();
-            
-            NotifyUser("Mp4 Created");
-        }
+            avMaker.WaitForExit();
+            avMaker.Close();
 
-        void mp4Maker_ErrorDataReceived(object sender, DataReceivedEventArgs e)
-        {
-            MessageBox.Show(e.Data);
+            /*************************************************************************************
+             * For Creating mp4:
+             *      $.\ffmpeg -i img%d.png -r 10 -c:v libx264 -preset slow -crf 21 output.mp4
+             * 
+             * For Creating avi:
+             *      $.\ffmpeg.exe -i img%d.png -vcodec huffyuv out.avi
+            **************************************************************************************/
+
+            #region To be implemented later
+            // Process mp4Maker = new Process();
+
+            // mp4Maker.StartInfo.FileName = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName) +
+            //             @"\Codecs\ffmpeg\ffmpeg.exe";
+            // //mp4Maker.StartInfo.FileName = @"G:\ScreenRecorder\ScreenRecorder\bin\x64\Debug\Codecs\ffmpeg\ffmpeg.exe";
+            // const string pngLoc = "img%d.png";
+            // mp4Maker.StartInfo.Arguments = String.Format(@"-i {0} -r 10 -c:v libx264 -preset slow -crf 21 -pix_fmt yuv420p output.mp4", pngLoc);
+            //                                 //String.Format(@"-i {0} -r 10 -c:v libx264 -preset slow -crf 21 output.mp4", pngLoc);
+            // //mp4Maker.ErrorDataReceived += new DataReceivedEventHandler(mp4Maker_ErrorDataReceived);
+            // //mp4Maker.StartInfo.UseShellExecute = false;
+            // //mp4Maker.EnableRaisingEvents = true;
+            //// mp4Maker.StartInfo.CreateNoWindow = true;
+            // //mp4Maker.StartInfo.RedirectStandardOutput = true;
+            // //mp4Maker.StartInfo.RedirectStandardError = true;
+
+            // if (!mp4Maker.Start())
+            // {
+            //     MessageBox.Show("Unable to start Mp4 movie maker");
+            //     return;
+            // }
+
+            // //string outline = mp4Maker.StandardError.ReadToEnd();
+
+
+            // //TextWriter log = new StreamWriter("log.txt");
+            // //log.WriteLine(outline);
+            // //log.Flush();
+
+            // mp4Maker.WaitForExit();
+            // mp4Maker.Close();
+
+            #endregion
+
+            NotifyUser(Resources.MovieCreated);
         }
 
         /// <summary>

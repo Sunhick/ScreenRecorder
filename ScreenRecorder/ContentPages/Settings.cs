@@ -43,6 +43,7 @@ namespace ScreenRecorder
         private void ReadConfig()
         {
             numericUpDown1.Value = Settings.Default.FramesPerSec;
+            saveLocBox.Text = Settings.Default.SaveLocation;
         }
 
         /// <summary>
@@ -64,6 +65,9 @@ namespace ScreenRecorder
         {
             Settings.Default.FramesPerSec = (int)numericUpDown1.Value;
             Settings.Default.SaveLocation = saveLocBox.Text;
+            Settings.Default.Language = langComboBox.SelectedItem as string;
+
+            Settings.Default.Save();
             //Settings.Default.Opacity = (decimal)OpacityBar.Value/10;
         }
     } // class AppSettings

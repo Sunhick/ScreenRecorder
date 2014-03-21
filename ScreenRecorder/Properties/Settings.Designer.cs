@@ -49,13 +49,25 @@ namespace ScreenRecorder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("D:\\Bitmaps")]
+        [global::System.Configuration.DefaultSettingValueAttribute("D:\\temp\\samples_code\\ScreenRecorder_v2.0\\ScreenRecorder\\bin\\x64\\Debug\\bitmaps")]
         public string SaveLocation {
             get {
                 return ((string)(this["SaveLocation"]));
             }
             set {
                 this["SaveLocation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("en")]
+        public string Language {
+            get {
+                return ((string)(this["Language"]));
+            }
+            set {
+                this["Language"] = value;
             }
         }
     }

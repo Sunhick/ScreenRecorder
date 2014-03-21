@@ -37,6 +37,8 @@
             this.opacityLbl = new System.Windows.Forms.Label();
             this.saveLbl = new System.Windows.Forms.Label();
             this.saveLocBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.langComboBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OpacityBar)).BeginInit();
             this.SuspendLayout();
@@ -114,13 +116,35 @@
             this.saveLocBox.Name = "saveLocBox";
             this.saveLocBox.Size = new System.Drawing.Size(265, 20);
             this.saveLocBox.TabIndex = 8;
-            this.saveLocBox.Text = "D:\\Bitmaps";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(359, 49);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(58, 13);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Language:";
+            // 
+            // langComboBox
+            // 
+            this.langComboBox.FormattingEnabled = true;
+            this.langComboBox.Items.AddRange(new object[] {
+            "en-US",
+            "es",
+            "zh"});
+            this.langComboBox.Location = new System.Drawing.Point(445, 41);
+            this.langComboBox.Name = "langComboBox";
+            this.langComboBox.Size = new System.Drawing.Size(121, 21);
+            this.langComboBox.TabIndex = 10;
             // 
             // AppSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.Controls.Add(this.langComboBox);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.saveLocBox);
             this.Controls.Add(this.saveLbl);
             this.Controls.Add(this.opacityLbl);
@@ -150,5 +174,7 @@
         private System.Windows.Forms.Label opacityLbl;
         private System.Windows.Forms.Label saveLbl;
         private System.Windows.Forms.TextBox saveLocBox;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox langComboBox;
     }
 }

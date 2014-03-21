@@ -60,13 +60,13 @@ namespace ScreenRecorderMP
             this.titleLbl.Name = "titleLbl";
             this.titleLbl.Size = new System.Drawing.Size(126, 16);
             this.titleLbl.TabIndex = 3;
-            this.titleLbl.Text = "Screen Recorder";
+            this.titleLbl.Text = Resources.ScreenRecorder;
             // 
             // screenViewMP
             // 
-            this.screenViewMP.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.screenViewMP.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.screenViewMP.AutoSize = true;
             this.screenViewMP.BackColor = System.Drawing.Color.Black;
             this.screenViewMP.Location = new System.Drawing.Point(12, 30);
@@ -76,8 +76,8 @@ namespace ScreenRecorderMP
             // 
             // configMP
             // 
-            this.configMP.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.configMP.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.configMP.BackColor = System.Drawing.Color.Transparent;
             this.configMP.Controls.Add(this.infoBtn);
             this.configMP.Controls.Add(this.stopBtn);
@@ -99,7 +99,7 @@ namespace ScreenRecorderMP
             this.infoBtn.Name = "infoBtn";
             this.infoBtn.Size = new System.Drawing.Size(30, 33);
             this.infoBtn.TabIndex = 0;
-            this.toolTip.SetToolTip(this.infoBtn, "Help");
+            this.toolTip.SetToolTip(this.infoBtn, Resources.HelpToolTip);
             this.infoBtn.UseVisualStyleBackColor = true;
             this.infoBtn.Click += new System.EventHandler(this.infoBtn_Click);
             // 
@@ -114,7 +114,7 @@ namespace ScreenRecorderMP
             this.stopBtn.Name = "stopBtn";
             this.stopBtn.Size = new System.Drawing.Size(30, 34);
             this.stopBtn.TabIndex = 4;
-            this.toolTip.SetToolTip(this.stopBtn, "Stop");
+            this.toolTip.SetToolTip(this.stopBtn, Resources.StopToolTip);
             this.stopBtn.UseVisualStyleBackColor = true;
             this.stopBtn.Click += new System.EventHandler(this.stopBtn_Click);
             // 
@@ -129,7 +129,7 @@ namespace ScreenRecorderMP
             this.recordBtn.Name = "recordBtn";
             this.recordBtn.Size = new System.Drawing.Size(30, 34);
             this.recordBtn.TabIndex = 3;
-            this.toolTip.SetToolTip(this.recordBtn, "Record");
+            this.toolTip.SetToolTip(this.recordBtn, Resources.RecordToolTip);
             this.recordBtn.UseVisualStyleBackColor = true;
             this.recordBtn.Click += new System.EventHandler(this.recordBtn_Click);
             // 
@@ -145,7 +145,7 @@ namespace ScreenRecorderMP
             this.settingBtn.Name = "settingBtn";
             this.settingBtn.Size = new System.Drawing.Size(30, 32);
             this.settingBtn.TabIndex = 2;
-            this.toolTip.SetToolTip(this.settingBtn, "Settings");
+            this.toolTip.SetToolTip(this.settingBtn, Resources.SettingsToolTip);
             this.settingBtn.UseVisualStyleBackColor = false;
             this.settingBtn.Click += new System.EventHandler(this.settingBtn_Click);
             // 
@@ -170,7 +170,7 @@ namespace ScreenRecorderMP
             this.maxBtn.Name = "maxBtn";
             this.maxBtn.Size = new System.Drawing.Size(22, 23);
             this.maxBtn.TabIndex = 2;
-            this.toolTip.SetToolTip(this.maxBtn, "Maximize");
+            this.toolTip.SetToolTip(this.maxBtn, Resources.MaximizeToolTip);
             this.maxBtn.UseVisualStyleBackColor = false;
             this.maxBtn.Click += new System.EventHandler(this.maxBtn_Click);
             // 
@@ -186,7 +186,7 @@ namespace ScreenRecorderMP
             this.minBtn.Name = "minBtn";
             this.minBtn.Size = new System.Drawing.Size(22, 23);
             this.minBtn.TabIndex = 1;
-            this.toolTip.SetToolTip(this.minBtn, "Minimize");
+            this.toolTip.SetToolTip(this.minBtn, Resources.MinimizeToolTip);
             this.minBtn.UseVisualStyleBackColor = false;
             this.minBtn.Click += new System.EventHandler(this.minBtn_Click);
             // 
@@ -202,14 +202,14 @@ namespace ScreenRecorderMP
             this.closeBtn.Name = "closeBtn";
             this.closeBtn.Size = new System.Drawing.Size(22, 23);
             this.closeBtn.TabIndex = 0;
-            this.toolTip.SetToolTip(this.closeBtn, "Close");
+            this.toolTip.SetToolTip(this.closeBtn, Resources.CloseToolTip);
             this.closeBtn.UseVisualStyleBackColor = false;
             this.closeBtn.Click += new System.EventHandler(this.closeBtn_Click);
             // 
             // hidePanel
             // 
-            this.hidePanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.hidePanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.hidePanel.Controls.Add(this.hideBtn);
             this.hidePanel.Location = new System.Drawing.Point(791, 30);
             this.hidePanel.Name = "hidePanel";
@@ -246,6 +246,7 @@ namespace ScreenRecorderMP
             this.Controls.Add(this.closeBtn);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = global::ScreenRecorder.Properties.Resources.AVRecorder;
             this.Name = "ScreenRecorder";
             this.Opacity = 0.9D;
             this.Text = "ScreenRecorder";

@@ -44,6 +44,11 @@ namespace ScreenRecorder
         [DllImport("user32.dll")]
         public static extern bool DrawIcon(IntPtr hDC, int X, int Y, IntPtr hIcon);
 
+        [DllImport("winmm.dll")]
+        private static extern int mciSendString(string MciComando, string MciRetorno, int MciRetornoLeng, int CallBack);
+ 
+
+
         public const Int32 CURSOR_SHOWING = 0x00000001;
     } // class Win32
 }

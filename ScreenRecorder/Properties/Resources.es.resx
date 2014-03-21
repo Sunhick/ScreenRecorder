@@ -117,107 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Bug" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\bug.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Close" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Comment" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\comment.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="EditPencil" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\editpencil.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Email" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\email.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LeftSide" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\leftside.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Like" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\like.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Pause" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\pause.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Record" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\record.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="RightSide" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\rightside.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Search" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Settings" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\settings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Settings_Edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\settings_edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Stop" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\stop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Warning" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\warning.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Help" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\help.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Information" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Information.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MaximizeMinus" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\maximizeminus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MaximizePlus" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\maximizeplus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Minimize" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\minimize.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="AVError" xml:space="preserve">
-    <value>Unable to start Mp4 movie maker</value>
-  </data>
-  <data name="AVRecorder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AVRecorder.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>No se puede iniciar el cineasta Mp4</value>
   </data>
   <data name="CloseToolTip" xml:space="preserve">
-    <value>Close</value>
-  </data>
-  <data name="FfMpegLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\FfMpegLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>cerca</value>
   </data>
   <data name="HelpToolTip" xml:space="preserve">
-    <value>Help</value>
+    <value>ayudar</value>
   </data>
   <data name="MaximizeToolTip" xml:space="preserve">
-    <value>Maximize</value>
+    <value>maximizar</value>
   </data>
   <data name="MinimizeToolTip" xml:space="preserve">
-    <value>Minimize</value>
+    <value>minimizar</value>
   </data>
   <data name="MovieCreated" xml:space="preserve">
-    <value>Movie Created</value>
+    <value>Película Creado</value>
   </data>
   <data name="RecordStarted" xml:space="preserve">
-    <value>Recoding Started</value>
+    <value>Recodificación Iniciado</value>
   </data>
   <data name="RecordStopped" xml:space="preserve">
-    <value>Recoding Stopped</value>
+    <value>Recodificación Detenido</value>
   </data>
   <data name="RecordToolTip" xml:space="preserve">
-    <value>Record</value>
+    <value>registro</value>
   </data>
   <data name="ScreenRecorder" xml:space="preserve">
     <value>Screen Recorder</value>
   </data>
   <data name="SettingsToolTip" xml:space="preserve">
-    <value>Settings</value>
+    <value>Configuración</value>
   </data>
   <data name="StopToolTip" xml:space="preserve">
-    <value>Stop</value>
+    <value>Deténgase</value>
   </data>
 </root>
