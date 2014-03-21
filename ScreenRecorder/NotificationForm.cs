@@ -48,7 +48,6 @@ namespace ScreenRecorder
         {
             InitializeComponent();
 
-            this.userMsgBox.SelectionAlignment = HorizontalAlignment.Center;
             this.ShowInTaskbar = false;
             this.Load  += new EventHandler(OnNotifierLoad);
         }

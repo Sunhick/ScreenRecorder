@@ -34,13 +34,13 @@ namespace ScreenRecorder
             OpacityBar.Maximum = 10;
             OpacityBar.Minimum = 1;
             OpacityBar.Value = 9;
-            ReadConfig();
+            ReadUserSettings();
         }
 
         /// <summary>
         /// Read config
         /// </summary>
-        private void ReadConfig()
+        private void ReadUserSettings()
         {
             numericUpDown1.Value = Settings.Default.FramesPerSec;
             saveLocBox.Text = Settings.Default.SaveLocation;
@@ -68,7 +68,26 @@ namespace ScreenRecorder
             Settings.Default.Language = langComboBox.SelectedItem as string;
 
             Settings.Default.Save();
+
+            //MessageBox.Show("Application must be restarted inorder to apply the changes", "Restart", 
+            //    MessageBoxButtons.OKCancel, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, 
+            //    MessageBoxOptions.ServiceNotification);
+            if (MessageBox.Show("Application must be restarted inorder to apply the changes", "Restart", "Cancel") == YesNo.Yes)
+            {
+                Application.Restart();
+            }
             //Settings.Default.Opacity = (decimal)OpacityBar.Value/10;
+        }
+
+        /// <summary>
+        /// About us 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void aboutusBtn_Click(object sender, EventArgs e)
+        {
+            AboutBox aboutUs = new AboutBox();
+            aboutUs.ShowDialog();
         }
     } // class AppSettings
 } // namespace ScreenRecorder

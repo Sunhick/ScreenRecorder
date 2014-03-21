@@ -23,6 +23,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
+using System.Text.RegularExpressions;
 #endregion
 
 namespace ScreenRecorderMP
@@ -48,6 +49,16 @@ namespace ScreenRecorderMP
         private Point lastPoint;
 
         /// <summary>
+        /// frames to be captured per secound
+        /// </summary>
+        private int fps = 1;
+
+        /// <summary>
+        /// is recording in progess
+        /// </summary>
+        private bool recoding = false;
+
+        /// <summary>
         /// Save loc
         /// </summary>
         string saveLoc = string.Empty;
@@ -62,18 +73,28 @@ namespace ScreenRecorderMP
         /// </summary>
         public ScreenRecorder()
         {
-            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(Settings.Default.Language);
+            ReadUserSettings();
             InitializeComponent();
-            ReadAppSettings();
             InitCP();
         }
         
         /// <summary>
-        /// Read app settings
+        /// Read user app settings
         /// </summary>
-        private void ReadAppSettings()
+        private void ReadUserSettings()
         {
-            //this.Opacity = (double)Settings.Default.Opacity;
+            this.Opacity = (double)Settings.Default.Opacity;
+            saveLoc = Settings.Default.SaveLocation;
+            if (string.IsNullOrEmpty(saveLoc))
+            {
+                saveLoc = Path.GetTempPath();
+                Settings.Default.SaveLocation = saveLoc;
+            }
+
+            //create dir if necessary
+            if (!Directory.Exists(saveLoc)) Directory.CreateDirectory(saveLoc);
+
+            fps = Settings.Default.FramesPerSec;
         }
 
         /// <summary>
@@ -81,6 +102,8 @@ namespace ScreenRecorderMP
         /// </summary>
         private void InitCP()
         {
+            //TODO: setup CP's from reading from Xmls
+            //Design: Dynamic versus static Cp's ?
             contentPages.Add(new InformationCP());
             contentPages.Add(new AppSettings());
         }
@@ -221,8 +244,6 @@ namespace ScreenRecorderMP
             Control control = page as Control;
             control.Dock = DockStyle.Fill;
 
-            screenViewMP.Controls.Clear();
-
             if (screenViewMP.Controls.Contains(control))
             {
                 screenViewMP.Controls.Remove(control);
@@ -231,6 +252,8 @@ namespace ScreenRecorderMP
             }
             else
             {
+                screenViewMP.Controls.Clear();
+
                 screenViewMP.Controls.Add(control);
                 //this.Opacity = 1;
                 this.TransparencyKey = Color.Red;
@@ -255,7 +278,7 @@ namespace ScreenRecorderMP
         /// <param name="e">Event arguments</param>
         private void frameCaptureTimer_Tick(object sender, EventArgs e)
         {
-            string fileName = String.Format("{1}\\bitmaps\\img{0}.png", index++, saveLoc);
+            string fileName = String.Format("{1}\\img{0}.png", index++, saveLoc);
 
             Point leftPt = new Point(this.screenViewMP.Location.X, this.screenViewMP.Location.Y);
 
@@ -292,19 +315,33 @@ namespace ScreenRecorderMP
         /// <param name="e">Event arguments</param>
         private void recordBtn_Click(object sender, EventArgs e)
         {
-            saveLoc = Settings.Default.SaveLocation;
+            if (recoding)
+            {
+                //pause the recording
+                NotifyUser(Resources.RecordPause);
+                frameCaptureTimer.Stop();
 
-            screenViewMP.Controls.Clear();
-            this.TransparencyKey = Color.Black;
+                recoding = false;
+                recordBtn.Image = Resources.Record;
+            }
+            else
+            {
+                screenViewMP.Controls.Clear();
+                this.TransparencyKey = Color.Black;
 
-            //encoder.Start(saveLoc + "\\rec.gif");
+                //encoder.Start(saveLoc + "\\rec.gif");
 
-            NotifyUser(Resources.RecordStarted);
+                NotifyUser(Resources.RecordStarted);
 
-            //encoder.SetDelay(50);
-            //encoder.SetRepeat(0);
+                //encoder.SetDelay(50);
+                //encoder.SetRepeat(0);
 
-            frameCaptureTimer.Start();
+                frameCaptureTimer.Interval = (int)(1000 / fps);
+                frameCaptureTimer.Start();
+
+                recoding = true;
+                recordBtn.Image = Resources.Pause;
+            }
         }
 
         /// <summary>
@@ -339,6 +376,7 @@ namespace ScreenRecorderMP
         private void stopBtn_Click(object sender, EventArgs e)
         {
             frameCaptureTimer.Stop();
+            recordBtn.Image = Resources.Record;
             //encoder.Finish();
 
             NotifyUser(Resources.RecordStopped);
@@ -349,10 +387,14 @@ namespace ScreenRecorderMP
             avMaker.StartInfo.FileName = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName) +
                         @"\Codecs\ffmpeg\ffmpeg.exe";
 
+            avMaker.StartInfo.UseShellExecute = false;
+            avMaker.StartInfo.CreateNoWindow = true;
+
             const string pngLoc = "img%d.png";
             //avMaker.StartInfo.Arguments = String.Format(@"-i bitmaps\{0} -vcodec huffyuv output.avi", pngLoc);
             //avMaker.StartInfo.Arguments = String.Format(@"-i bitmaps\{0} -r 20 output.mp4", pngLoc);
-            avMaker.StartInfo.Arguments = String.Format(@"-i bitmaps\{0} -r 20 -c:v libx264 -preset slow -crf 21 output.mp4", pngLoc);
+            avMaker.StartInfo.Arguments = 
+                String.Format(@"-i {1}\{0} -r 20 -c:v libx264 -preset slow -crf 21 output.mp4", pngLoc, saveLoc);
             // avMaker.StartInfo.Arguments = String.Format(@" -r 20 -i bitmaps\{0} -c:v libx264 -r 20 -pix_fmt yuv420p output.mp4", pngLoc);
 
             if (!avMaker.Start())
@@ -407,6 +449,29 @@ namespace ScreenRecorderMP
             #endregion
 
             NotifyUser(Resources.MovieCreated);
+
+            DeleteTempFiles();
+        }
+
+        /// <summary>
+        /// Delete temporary bmp/png/etc files 
+        /// </summary>
+        private void DeleteTempFiles()
+        {
+            //delete all temp bitmaps
+            foreach (string file in Directory.GetFiles(saveLoc))
+            {
+                try
+                {
+                    Regex regex = new Regex(@"img.*\.png");
+
+                    if (regex.Match(file).Success) File.Delete(file);
+                }
+                catch (Exception)
+                {
+                    continue;
+                }
+            }
         }
 
         /// <summary>
@@ -435,6 +500,16 @@ namespace ScreenRecorderMP
                     configMP.Tag = configMP.Width;
                 screenViewMP.Width += (int)configMP.Tag;
             }
+        }
+
+        /// <summary>
+        /// Reset the application settings to default
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void resetSettingBtn_Click(object sender, EventArgs e)
+        {
+            Settings.Default.Reset();
         }
     } // class ScreenRecorderMP
 } // namespace ScreenRecorderMP

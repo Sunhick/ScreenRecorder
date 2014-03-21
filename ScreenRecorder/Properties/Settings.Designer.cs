@@ -49,7 +49,7 @@ namespace ScreenRecorder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("D:\\temp\\samples_code\\ScreenRecorder_v2.0\\ScreenRecorder\\bin\\x64\\Debug\\bitmaps")]
+        [global::System.Configuration.DefaultSettingValueAttribute("D:\\temp\\samples_code\\ScreenRecorder_v2.0\\ScreenRecorder\\bin\\x64\\Debug\\Bitmaps")]
         public string SaveLocation {
             get {
                 return ((string)(this["SaveLocation"]));

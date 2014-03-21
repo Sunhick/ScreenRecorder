@@ -7,7 +7,7 @@ using ScreenRecorder.Properties;
 
 namespace ScreenRecorder
 {
-    static class Program
+    static class Starter
     {
         /// <summary>
         /// The main entry point for the application.
@@ -33,6 +33,8 @@ namespace ScreenRecorder
             { 
                 ApplicationBase = root.SetupInformation.ApplicationBase 
             };
+
+            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(Settings.Default.Language);
         }
     }
 }
