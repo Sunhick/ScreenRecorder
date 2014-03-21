@@ -7,7 +7,7 @@ using ScreenRecorder.Properties;
 
 namespace ScreenRecorder
 {
-    static class Starter
+    static class Program
     {
         /// <summary>
         /// The main entry point for the application.
