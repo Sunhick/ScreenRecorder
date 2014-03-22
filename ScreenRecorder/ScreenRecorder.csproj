@@ -70,6 +70,10 @@
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Extern\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -224,6 +228,7 @@
     <None Include="Resources\AVRecorder.png" />
     <None Include="Resources\AVRecorder.ico" />
     <None Include="Resources\FfMpegLogo.png" />
+    <Content Include="Extern\log4net.dll" />
     <Content Include="Resources\Help.png" />
     <Content Include="Resources\Bug.png" />
     <Content Include="Resources\Close.png" />

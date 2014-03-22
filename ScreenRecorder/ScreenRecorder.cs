@@ -24,6 +24,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Text.RegularExpressions;
+using log4net;
+using log4net.Repository.Hierarchy;
 #endregion
 
 namespace ScreenRecorderMP
@@ -68,6 +70,8 @@ namespace ScreenRecorderMP
         ///// </summary>
         private int index = 0;
 
+        private static ILog log = LogManager.GetLogger(typeof(ScreenRecorder).Name);
+
         /// <summary>
         /// Initializes a new instance of the ScreenRecorderMP class.
         /// </summary>
@@ -92,7 +96,20 @@ namespace ScreenRecorderMP
             }
 
             //create dir if necessary
-            if (!Directory.Exists(saveLoc)) Directory.CreateDirectory(saveLoc);
+            if (!Directory.Exists(saveLoc))
+            {
+                try
+                {
+                    Directory.CreateDirectory(saveLoc);
+                }
+                catch (Exception e)
+                {
+                    log.Error("unable to create dir", e);
+                    log.Info("Setting save loction to temp dir");
+                    saveLoc = Path.GetTempPath();
+                    Settings.Default.SaveLocation = saveLoc;
+                }
+            }
 
             fps = Settings.Default.FramesPerSec;
         }
@@ -303,9 +320,17 @@ namespace ScreenRecorderMP
                     }
                 }
 
-                //encoder.AddFrame(bmp);
-                bmp.Save(fileName);
+                try
+                {
+                    //encoder.AddFrame(bmp);
+                    bmp.Save(fileName);
+                }
+                catch (Exception ex)
+                {
+                    log.Error("unable to save bitmap", ex);
+                }
             }
+            
         }
 
         /// <summary>
@@ -381,11 +406,13 @@ namespace ScreenRecorderMP
 
             NotifyUser(Resources.RecordStopped);
 
-            //this is smaple
             Process avMaker = new Process();    //Audio-Video maker process
 
             avMaker.StartInfo.FileName = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName) +
                         @"\Codecs\ffmpeg\ffmpeg.exe";
+
+            //TODO: ask If output.mp4 need to be overwritten?
+            
 
             avMaker.StartInfo.UseShellExecute = false;
             avMaker.StartInfo.CreateNoWindow = true;

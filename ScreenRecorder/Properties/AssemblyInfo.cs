@@ -10,6 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct("ScreenRecorder")]
 [assembly: AssemblyCopyright("Copyright © Licence Owner 2014")]
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]   //For log4net 1.2.10.0
 [assembly: AssemblyTrademark("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 

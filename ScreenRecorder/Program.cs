@@ -4,11 +4,14 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Threading;
 using ScreenRecorder.Properties;
+using log4net;
 
 namespace ScreenRecorder
 {
     static class Program
     {
+        private static readonly ILog log = LogManager.GetLogger(typeof(Program).Name);
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -16,7 +19,6 @@ namespace ScreenRecorder
         static void Main()
         {
             Setup();
-
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -34,6 +36,7 @@ namespace ScreenRecorder
                 ApplicationBase = root.SetupInformation.ApplicationBase 
             };
 
+            log.Info("Setting the UI language to " + Settings.Default.Language);
             Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(Settings.Default.Language);
         }
     }
