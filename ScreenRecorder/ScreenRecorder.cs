@@ -386,7 +386,6 @@ namespace ScreenRecorderMP
         private void NotifyUserTask(string message)
         {
             NotificationForm notifyUser = new NotificationForm();
-            //notifyUser.Owner = this;
             //Point p = new Point(this.Location.X + this.Width / 2, this.Location.Y+this.Height / 2);
 
             //Point notifyLoc = new Point(this.Size.Width, this.Size.Height);

@@ -16,6 +16,7 @@ using ScreenRecorder.ContentPages;
 using ScreenRecorder.Properties;
 using System;
 using System.Windows.Forms;
+using System.Collections.Generic;
 #endregion
 
 namespace ScreenRecorder
@@ -45,6 +46,13 @@ namespace ScreenRecorder
             numericUpDown1.Value = Settings.Default.FramesPerSec;
             saveLocBox.Text = Settings.Default.BitmapTempLoc;
             langComboBox.SelectedItem = (string)Settings.Default.Language;
+            HookParser parser = new HookParser();
+            List<HookData> data = parser.Parse();
+
+            foreach (HookData item in data)
+            {
+                videoTypeBox.Items.Add(item.HookID);
+            }
         }
 
         /// <summary>

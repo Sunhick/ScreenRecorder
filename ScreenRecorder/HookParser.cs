@@ -23,6 +23,9 @@ using System.Xml.Linq;
 
 namespace ScreenRecorder
 {
+    /// <summary>
+    /// Hook Data
+    /// </summary>
     public class HookData
     {
         public string HookID;
@@ -50,14 +53,14 @@ namespace ScreenRecorder
         /// Parse
         /// </summary>
         /// <returns></returns>
-        public HookData Parse()
+        public List<HookData> Parse()
         {
             //get all hook files
             string[] files = Directory.GetFiles(
                 Path.Combine(AppDomain.CurrentDomain.BaseDirectory, hookLocation), "*.hook"
                 );
 
-            HookData data = new HookData();
+            List<HookData> data = new List<HookData>();
 
             foreach (string hookFile in files)
             {
@@ -66,17 +69,21 @@ namespace ScreenRecorder
 
                 foreach (var q in query)
                 {
+                    HookData hook = new HookData();
+
                     string exe = q.Element("Executable").Value;
                     string path = q.Element("Path").Value;
                     string arg = q.Element("Arguments").Value;
                     string hookid = q.FirstAttribute.Value;
                     string mode = q.LastAttribute.Value;
 
-                    data.HookID = hookid;
-                    data.Path = path;
-                    data.Executable = exe;
-                    data.Arguments = arg;
-                    data.Mode = mode;
+                    hook.HookID = hookid;
+                    hook.Path = path;
+                    hook.Executable = exe;
+                    hook.Arguments = arg;
+                    hook.Mode = mode;
+
+                    data.Add(hook);
                 }
             }
 

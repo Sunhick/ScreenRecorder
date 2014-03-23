@@ -1,16 +1,19 @@
 ﻿<Hook>
-  <!--ffmpeg -i img%d.png -r 10 -c:v libx264 -preset slow -crf 21 output.mp4-->
-  <Command hookid="mp4" mode="sequential">
-    <Executable>ffmpeg.exe</Executable>
-    <Path>..\</Path> <!-- Bin directory -->
-    <Arguments>-i img%d.png -r 10 -c:v libx264 -preset slow -crf 21 output.mp4</Arguments>
-  </Command>
+  <!--All the ffmpeg hooks are configured in here -->
   
+  <!--ffmpeg -i img%d.png -r 10 -c:v libx264 -preset slow -crf 21 output.mp4-->
+  <Command hookid="mp4" mode="sequential"> <!--Mode of operation: Synchronous | Asynchronous-->
+    <Executable>ffmpeg.exe</Executable>
+    <Path>..\</Path> <!-- Bin directory| Relative path, Environment variables, Absolute paths -->
+    <!-- ffMpeg Option :    -sn : No subtitles   -->
+    <Arguments>-sn -i img%d.png -r 10 -c:v libx264 -preset slow -crf 21 output.mp4</Arguments>
+  </Command>
+ 
   <!--$.\ffmpeg.exe -i img%d.png -vcodec huffyuv out.avi-->
   <Command hookid="avi" mode="sequential">
     <Executable>ffmpeg.exe</Executable>
     <Path>..\</Path>
-    <Arguments>-i img%d.png -vcodec huffyuv out.avi</Arguments>
+    <Arguments>-sn -i img%d.png -vcodec huffyuv out.avi</Arguments>
   </Command>
   
   <Command hookid="mkv" mode="sequential">
