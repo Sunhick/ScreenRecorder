@@ -103,8 +103,8 @@ namespace ScreenRecorder
             {
                 if (Opacity == 0)
                 {
-                   // this.Close();
-                    this.Hide();
+                   this.Close();
+                    //this.Hide();
                 }
 
                 Opacity -= 0.05;
@@ -123,6 +123,8 @@ namespace ScreenRecorder
 
             //this.Show();
             Application.Run(this);
+
+            animationTimer.Dispose();
         }
     } // class NotificationForm
 } // namespace ScreenRecorder

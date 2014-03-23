@@ -43,7 +43,8 @@ namespace ScreenRecorder
         private void ReadUserSettings()
         {
             numericUpDown1.Value = Settings.Default.FramesPerSec;
-            saveLocBox.Text = Settings.Default.SaveLocation;
+            saveLocBox.Text = Settings.Default.BitmapTempLoc;
+            langComboBox.SelectedItem = (string)Settings.Default.Language;
         }
 
         /// <summary>
@@ -64,8 +65,10 @@ namespace ScreenRecorder
         private void save_Click(object sender, EventArgs e)
         {
             Settings.Default.FramesPerSec = (int)numericUpDown1.Value;
-            Settings.Default.SaveLocation = saveLocBox.Text;
+            Settings.Default.BitmapTempLoc = saveLocBox.Text;
             Settings.Default.Language = langComboBox.SelectedItem as string;
+            Settings.Default.VideoLoc = voutLocBox.Text;
+            Settings.Default.VideoType = videoTypeBox.SelectedItem as string;
 
             Settings.Default.Save();
 

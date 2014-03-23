@@ -88,11 +88,11 @@ namespace ScreenRecorderMP
         private void ReadUserSettings()
         {
             this.Opacity = (double)Settings.Default.Opacity;
-            saveLoc = Settings.Default.SaveLocation;
+            saveLoc = Settings.Default.BitmapTempLoc;
             if (string.IsNullOrEmpty(saveLoc))
             {
                 saveLoc = Path.GetTempPath();
-                Settings.Default.SaveLocation = saveLoc;
+                Settings.Default.BitmapTempLoc = saveLoc;
             }
 
             //create dir if necessary
@@ -107,7 +107,7 @@ namespace ScreenRecorderMP
                     log.Error("unable to create dir", e);
                     log.Info("Setting save loction to temp dir");
                     saveLoc = Path.GetTempPath();
-                    Settings.Default.SaveLocation = saveLoc;
+                    Settings.Default.BitmapTempLoc = saveLoc;
                 }
             }
 
@@ -348,6 +348,7 @@ namespace ScreenRecorderMP
 
                 recoding = false;
                 recordBtn.Image = Resources.Record;
+                this.toolTip.SetToolTip(this.recordBtn, global::ScreenRecorder.Properties.Resources.RecordToolTip);
             }
             else
             {
@@ -366,6 +367,7 @@ namespace ScreenRecorderMP
 
                 recoding = true;
                 recordBtn.Image = Resources.Pause;
+                this.toolTip.SetToolTip(this.recordBtn, global::ScreenRecorder.Properties.Resources.PauseToolTip);
             }
         }
 
@@ -401,7 +403,11 @@ namespace ScreenRecorderMP
         private void stopBtn_Click(object sender, EventArgs e)
         {
             frameCaptureTimer.Stop();
+
+            recoding = false;
             recordBtn.Image = Resources.Record;
+            this.toolTip.SetToolTip(this.recordBtn, global::ScreenRecorder.Properties.Resources.RecordToolTip);
+
             //encoder.Finish();
 
             NotifyUser(Resources.RecordStopped);
@@ -413,15 +419,20 @@ namespace ScreenRecorderMP
 
             //TODO: ask If output.mp4 need to be overwritten?
             
-
+#if DEBUG
             avMaker.StartInfo.UseShellExecute = false;
             avMaker.StartInfo.CreateNoWindow = true;
+#else 
+            avMaker.StartInfo.UseShellExecute = false;
+            avMaker.StartInfo.CreateNoWindow = false;
+#endif
+            string outFile = GetUniquefileName();
 
             const string pngLoc = "img%d.png";
             //avMaker.StartInfo.Arguments = String.Format(@"-i bitmaps\{0} -vcodec huffyuv output.avi", pngLoc);
             //avMaker.StartInfo.Arguments = String.Format(@"-i bitmaps\{0} -r 20 output.mp4", pngLoc);
             avMaker.StartInfo.Arguments = 
-                String.Format(@"-i {1}\{0} -r 20 -c:v libx264 -preset slow -crf 21 output.mp4", pngLoc, saveLoc);
+                String.Format(@"-i {1}\{0} -r 20 -c:v libx264 -preset slow -crf 21 {2}", pngLoc, saveLoc, outFile);
             // avMaker.StartInfo.Arguments = String.Format(@" -r 20 -i bitmaps\{0} -c:v libx264 -r 20 -pix_fmt yuv420p output.mp4", pngLoc);
 
             if (!avMaker.Start())
@@ -481,6 +492,29 @@ namespace ScreenRecorderMP
         }
 
         /// <summary>
+        /// out file name
+        /// </summary>
+        /// <returns></returns>
+        private string GetUniquefileName()
+        {
+            string file = "output.mp4";
+
+            if (!File.Exists(file)) return file;
+
+            //create unique name
+            int index = 1;
+            while (true)
+            {
+                file = string.Format("output({0}).mp4", index);
+                
+                if (!File.Exists(file)) break;
+                index++;
+            }
+
+            return file;
+        }
+
+        /// <summary>
         /// Delete temporary bmp/png/etc files 
         /// </summary>
         private void DeleteTempFiles()
@@ -513,18 +547,32 @@ namespace ScreenRecorderMP
             {
                 if (configMP.Tag == null)
                     configMP.Tag = configMP.Width;
+                if (titlePanel.Tag == null)
+                    titlePanel.Tag = titlePanel.Height;
+
+                screenViewMP.Location = (Point)screenViewMP.Tag;
+                screenViewMP.Height -= (int)titlePanel.Tag;
                 screenViewMP.Width -= (int)configMP.Tag;
 
                 hideBtn.Image = Resources.RightSide;
                 configMP.Show();
+                titlePanel.Show();
             }
             else
             {
                 hideBtn.Image = Resources.LeftSide;
                 configMP.Hide();
+                titlePanel.Hide();
 
                 if (configMP.Tag == null)
                     configMP.Tag = configMP.Width;
+                if (titlePanel.Tag == null)
+                    titlePanel.Tag = titlePanel.Height;
+
+                screenViewMP.Tag = screenViewMP.Location;
+                screenViewMP.Location = titlePanel.Location;
+
+                screenViewMP.Height += (int)titlePanel.Tag;
                 screenViewMP.Width += (int)configMP.Tag;
             }
         }

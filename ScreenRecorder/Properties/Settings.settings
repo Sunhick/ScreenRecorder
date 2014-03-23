@@ -8,11 +8,17 @@
     <Setting Name="Opacity" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">0.9</Value>
     </Setting>
-    <Setting Name="SaveLocation" Type="System.String" Scope="User">
+    <Setting Name="BitmapTempLoc" Type="System.String" Scope="User">
       <Value Profile="(Default)">D:\temp\samples_code\ScreenRecorder_v2.0\ScreenRecorder\bin\x64\Debug\Bitmaps</Value>
     </Setting>
     <Setting Name="Language" Type="System.String" Scope="User">
       <Value Profile="(Default)">en</Value>
+    </Setting>
+    <Setting Name="VideoLoc" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="VideoType" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

@@ -111,6 +111,7 @@
     <Compile Include="Codecs\Gif\GifDecoder.cs" />
     <Compile Include="Codecs\Gif\LZWEncoder.cs" />
     <Compile Include="Codecs\Gif\NeuQuant.cs" />
+    <Compile Include="HookParser.cs" />
     <Compile Include="MessageBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -229,6 +230,9 @@
     <None Include="Resources\AVRecorder.ico" />
     <None Include="Resources\FfMpegLogo.png" />
     <Content Include="Extern\log4net.dll" />
+    <None Include="Hooks\ffmpeg.hook">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="Resources\Help.png" />
     <Content Include="Resources\Bug.png" />
     <Content Include="Resources\Close.png" />
@@ -273,6 +277,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

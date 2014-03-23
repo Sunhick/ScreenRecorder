@@ -1,0 +1,33 @@
+﻿<Hook>
+  <!--ffmpeg -i img%d.png -r 10 -c:v libx264 -preset slow -crf 21 output.mp4-->
+  <Command hookid="mp4" mode="sequential">
+    <Executable>ffmpeg.exe</Executable>
+    <Path>..\</Path> <!-- Bin directory -->
+    <Arguments>-i img%d.png -r 10 -c:v libx264 -preset slow -crf 21 output.mp4</Arguments>
+  </Command>
+  
+  <!--$.\ffmpeg.exe -i img%d.png -vcodec huffyuv out.avi-->
+  <Command hookid="avi" mode="sequential">
+    <Executable>ffmpeg.exe</Executable>
+    <Path>..\</Path>
+    <Arguments>-i img%d.png -vcodec huffyuv out.avi</Arguments>
+  </Command>
+  
+  <Command hookid="mkv" mode="sequential">
+    <Executable>ffmpeg.exe</Executable>
+    <Path>..\</Path>
+    <Arguments></Arguments>
+  </Command>
+  
+  <Command hookid="wmi" mode="sequential">
+    <Executable>ffmpeg.exe</Executable>
+    <Path>..\</Path>
+    <Arguments></Arguments>
+  </Command>
+  
+  <Command hookid="mp3" mode="sequential">
+    <Executable>ffmpeg.exe</Executable>
+    <Path>..\</Path>
+    <Arguments></Arguments>
+  </Command>
+</Hook>

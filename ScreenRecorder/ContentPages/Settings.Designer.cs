@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.saveBtn = new System.Windows.Forms.Button();
+            this.applyBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.saveLbl = new System.Windows.Forms.Label();
@@ -40,6 +40,10 @@
             this.opacityLbl = new System.Windows.Forms.Label();
             this.langComboBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.voutLbl = new System.Windows.Forms.Label();
+            this.voutLocBox = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.videoTypeBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.settingsTab.SuspendLayout();
             this.avSettings.SuspendLayout();
@@ -47,17 +51,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.OpacityBar)).BeginInit();
             this.SuspendLayout();
             // 
-            // saveBtn
+            // applyBtn
             // 
-            this.saveBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.saveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.saveBtn.Location = new System.Drawing.Point(573, 582);
-            this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(75, 23);
-            this.saveBtn.TabIndex = 1;
-            this.saveBtn.Text = "Save";
-            this.saveBtn.UseVisualStyleBackColor = true;
-            this.saveBtn.Click += new System.EventHandler(this.save_Click);
+            this.applyBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.applyBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.applyBtn.Location = new System.Drawing.Point(573, 582);
+            this.applyBtn.Name = "applyBtn";
+            this.applyBtn.Size = new System.Drawing.Size(75, 23);
+            this.applyBtn.TabIndex = 1;
+            this.applyBtn.Text = "Apply";
+            this.applyBtn.UseVisualStyleBackColor = true;
+            this.applyBtn.Click += new System.EventHandler(this.save_Click);
             // 
             // label1
             // 
@@ -67,6 +71,7 @@
             this.label1.Size = new System.Drawing.Size(80, 13);
             this.label1.TabIndex = 3;
             this.label1.Text = "Frames Per sec";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // numericUpDown1
             // 
@@ -74,23 +79,24 @@
             this.numericUpDown1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.numericUpDown1.Location = new System.Drawing.Point(168, 25);
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(52, 20);
+            this.numericUpDown1.Size = new System.Drawing.Size(79, 20);
             this.numericUpDown1.TabIndex = 4;
             // 
             // saveLbl
             // 
             this.saveLbl.AutoSize = true;
-            this.saveLbl.Location = new System.Drawing.Point(43, 77);
+            this.saveLbl.Location = new System.Drawing.Point(34, 77);
             this.saveLbl.Name = "saveLbl";
-            this.saveLbl.Size = new System.Drawing.Size(79, 13);
+            this.saveLbl.Size = new System.Drawing.Size(86, 13);
             this.saveLbl.TabIndex = 7;
-            this.saveLbl.Text = "Save Location:";
+            this.saveLbl.Text = "Bitmap Location:";
+            this.saveLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // saveLocBox
             // 
             this.saveLocBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.saveLocBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.saveLocBox.Location = new System.Drawing.Point(168, 77);
+            this.saveLocBox.Location = new System.Drawing.Point(168, 70);
             this.saveLocBox.Name = "saveLocBox";
             this.saveLocBox.Size = new System.Drawing.Size(325, 20);
             this.saveLocBox.TabIndex = 8;
@@ -111,6 +117,10 @@
             // avSettings
             // 
             this.avSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.avSettings.Controls.Add(this.videoTypeBox);
+            this.avSettings.Controls.Add(this.label3);
+            this.avSettings.Controls.Add(this.voutLocBox);
+            this.avSettings.Controls.Add(this.voutLbl);
             this.avSettings.Controls.Add(this.label1);
             this.avSettings.Controls.Add(this.numericUpDown1);
             this.avSettings.Controls.Add(this.saveLocBox);
@@ -175,6 +185,46 @@
             this.label2.TabIndex = 11;
             this.label2.Text = "Language:";
             // 
+            // voutLbl
+            // 
+            this.voutLbl.AutoSize = true;
+            this.voutLbl.Location = new System.Drawing.Point(39, 117);
+            this.voutLbl.Name = "voutLbl";
+            this.voutLbl.Size = new System.Drawing.Size(81, 13);
+            this.voutLbl.TabIndex = 9;
+            this.voutLbl.Text = "Video Location:";
+            this.voutLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // voutLocBox
+            // 
+            this.voutLocBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.voutLocBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.voutLocBox.Location = new System.Drawing.Point(168, 110);
+            this.voutLocBox.Name = "voutLocBox";
+            this.voutLocBox.Size = new System.Drawing.Size(325, 20);
+            this.voutLocBox.TabIndex = 10;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(42, 159);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(78, 13);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Save video as:";
+            // 
+            // videoTypeBox
+            // 
+            this.videoTypeBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.videoTypeBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.videoTypeBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.videoTypeBox.ForeColor = System.Drawing.Color.Black;
+            this.videoTypeBox.Location = new System.Drawing.Point(168, 151);
+            this.videoTypeBox.Name = "videoTypeBox";
+            this.videoTypeBox.Size = new System.Drawing.Size(79, 21);
+            this.videoTypeBox.TabIndex = 12;
+            // 
             // AppSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -182,7 +232,7 @@
             this.AutoScroll = true;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.Controls.Add(this.saveBtn);
+            this.Controls.Add(this.applyBtn);
             this.Controls.Add(this.settingsTab);
             this.DoubleBuffered = true;
             this.Name = "AppSettings";
@@ -200,7 +250,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button saveBtn;
+        private System.Windows.Forms.Button applyBtn;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label saveLbl;
@@ -212,5 +262,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TrackBar OpacityBar;
         private System.Windows.Forms.Label opacityLbl;
+        private System.Windows.Forms.Label voutLbl;
+        private System.Windows.Forms.TextBox voutLocBox;
+        private System.Windows.Forms.ComboBox videoTypeBox;
+        private System.Windows.Forms.Label label3;
     }
 }

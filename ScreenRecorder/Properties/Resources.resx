@@ -229,4 +229,7 @@
   <data name="ResetSettings" xml:space="preserve">
     <value>Reset application settings</value>
   </data>
+  <data name="PauseToolTip" xml:space="preserve">
+    <value>Pause</value>
+  </data>
 </root>
