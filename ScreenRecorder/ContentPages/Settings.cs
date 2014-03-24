@@ -78,6 +78,7 @@ namespace ScreenRecorder
             Settings.Default.VideoLoc = voutLocBox.Text;
             Settings.Default.VideoType = videoTypeBox.SelectedItem as string;
 
+            //save all the user settings.
             Settings.Default.Save();
 
             //MessageBox.Show("Application must be restarted inorder to apply the changes", "Restart", 

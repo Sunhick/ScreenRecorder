@@ -425,7 +425,9 @@ namespace ScreenRecorderMP
             avMaker.StartInfo.UseShellExecute = false;
             avMaker.StartInfo.CreateNoWindow = false;
 #endif
-            string outFile = GetUniquefileName();
+
+            string outFile = GetOutputFile();
+
 
             const string pngLoc = "img%d.png";
             //avMaker.StartInfo.Arguments = String.Format(@"-i bitmaps\{0} -vcodec huffyuv output.avi", pngLoc);
@@ -491,12 +493,14 @@ namespace ScreenRecorderMP
         }
 
         /// <summary>
-        /// out file name
+        /// video out file 
         /// </summary>
         /// <returns></returns>
-        private string GetUniquefileName()
+        private string GetOutputFile()
         {
-            string file = "output.mp4";
+            string file = Path.Combine(
+                Settings.Default.VideoLoc, "ScreenCapture.mp4"
+                );
 
             if (!File.Exists(file)) return file;
 
@@ -504,7 +508,9 @@ namespace ScreenRecorderMP
             int index = 1;
             while (true)
             {
-                file = string.Format("output({0}).mp4", index);
+                file = Path.Combine(
+                        Settings.Default.VideoLoc, string.Format("ScreenCapture({0}).mp4", index)
+                );
                 
                 if (!File.Exists(file)) break;
                 index++;
