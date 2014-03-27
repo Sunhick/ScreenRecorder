@@ -232,4 +232,43 @@
   <data name="PauseToolTip" xml:space="preserve">
     <value>Pause</value>
   </data>
+  <data name="AboutFFmpeg" xml:space="preserve">
+    <value>About FFMpeg</value>
+  </data>
+  <data name="AboutSR" xml:space="preserve">
+    <value>About Screen recorder</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="AudioCodec" xml:space="preserve">
+    <value>Audio codec</value>
+  </data>
+  <data name="AVSettings" xml:space="preserve">
+    <value>Audio &amp; Video Settings</value>
+  </data>
+  <data name="BmpLocation" xml:space="preserve">
+    <value>Bitmap location</value>
+  </data>
+  <data name="FPS" xml:space="preserve">
+    <value>Frames per second</value>
+  </data>
+  <data name="GeneralSettings" xml:space="preserve">
+    <value>General Settings</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Opacity" xml:space="preserve">
+    <value>Opacity</value>
+  </data>
+  <data name="VideoCodec" xml:space="preserve">
+    <value>Video Codec</value>
+  </data>
+  <data name="VideoLocation" xml:space="preserve">
+    <value>Video location</value>
+  </data>
+  <data name="VideoSaveAs" xml:space="preserve">
+    <value>Save video as</value>
+  </data>
 </root>

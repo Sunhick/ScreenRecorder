@@ -1,4 +1,4 @@
-﻿namespace ScreenRecorder
+﻿namespace ScreenRecorder.ContentPages
 {
     partial class AppSettings
     {

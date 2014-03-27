@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
-namespace ScreenRecorderMP
+
+namespace ScreenRecorder.ContentPages
 {
     partial class InformationCP
     {

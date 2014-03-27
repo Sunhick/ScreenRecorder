@@ -111,8 +111,9 @@
     <Compile Include="Codecs\Gif\GifDecoder.cs" />
     <Compile Include="Codecs\Gif\LZWEncoder.cs" />
     <Compile Include="Codecs\Gif\NeuQuant.cs" />
-    <Compile Include="HookData.cs" />
-    <Compile Include="HookParser.cs" />
+    <Compile Include="Hooks\HookData.cs" />
+    <Compile Include="Hooks\HookParser.cs" />
+    <Compile Include="Hooks\GlobalKeyboardHook.cs" />
     <Compile Include="MessageBox.cs">
       <SubType>Form</SubType>
     </Compile>

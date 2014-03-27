@@ -21,7 +21,7 @@ using System.Xml;
 using System.Xml.Linq;
 #endregion
 
-namespace ScreenRecorder
+namespace ScreenRecorder.Hooks
 {
 
     /// <summary>

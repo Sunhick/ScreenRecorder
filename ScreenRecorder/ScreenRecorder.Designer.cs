@@ -19,6 +19,11 @@ namespace ScreenRecorderMP
             {
                 components.Dispose();
             }
+
+            globalKeyHook.HookedKeys.Clear();
+            globalKeyHook.KeyUp -= globalKeyHook_KeyUp;
+            globalKeyHook.Unhook();
+
             base.Dispose(disposing);
         }
 
@@ -65,9 +70,9 @@ namespace ScreenRecorderMP
             // 
             // screenViewMP
             // 
-            this.screenViewMP.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.screenViewMP.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.screenViewMP.AutoSize = true;
             this.screenViewMP.BackColor = System.Drawing.Color.Black;
             this.screenViewMP.Location = new System.Drawing.Point(3, 33);
@@ -77,8 +82,8 @@ namespace ScreenRecorderMP
             // 
             // configMP
             // 
-            this.configMP.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.configMP.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.configMP.BackColor = System.Drawing.Color.Transparent;
             this.configMP.Controls.Add(this.resetSettingBtn);
             this.configMP.Controls.Add(this.infoBtn);
@@ -243,8 +248,8 @@ namespace ScreenRecorderMP
             // 
             // titlePanel
             // 
-            this.titlePanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.titlePanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.titlePanel.Controls.Add(this.titleLbl);
             this.titlePanel.Controls.Add(this.closeBtn);
             this.titlePanel.Controls.Add(this.maxBtn);

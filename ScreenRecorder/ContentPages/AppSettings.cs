@@ -17,9 +17,10 @@ using ScreenRecorder.Properties;
 using System;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using ScreenRecorder.Hooks;
 #endregion
 
-namespace ScreenRecorder
+namespace ScreenRecorder.ContentPages
 {
     /// <summary>
     /// App settings
@@ -66,7 +67,7 @@ namespace ScreenRecorder
         /// <param name="e">Event arguments</param>
         private void Opacity_Scroll(object sender, EventArgs e)
         {
-
+            int v = this.OpacityBar.Value;
         }
 
         /// <summary>

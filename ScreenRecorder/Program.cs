@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Threading;
 using ScreenRecorder.Properties;
 using log4net;
+using ScreenRecorder.Hooks;
 
 namespace ScreenRecorder
 {

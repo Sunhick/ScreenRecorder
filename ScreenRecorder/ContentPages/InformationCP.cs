@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using ScreenRecorder.ContentPages;
 using System.IO;
 
-namespace ScreenRecorderMP
+namespace ScreenRecorder.ContentPages
 {
     /// <summary>
     /// Information CP 

@@ -27,6 +27,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ScreenRecorder.Hooks;
 #endregion
 
 namespace ScreenRecorderMP
@@ -45,6 +46,11 @@ namespace ScreenRecorderMP
         /// encoder
         /// </summary>
         AnimatedGifEncoder encoder = new AnimatedGifEncoder();
+
+        /// <summary>
+        /// Global keyboard shortcuts
+        /// </summary>
+        GlobalKeyboardHook globalKeyHook = new GlobalKeyboardHook();
 
         /// <summary>
         /// Last point
@@ -86,6 +92,45 @@ namespace ScreenRecorderMP
             ReadUserSettings();
             InitializeComponent();
             InitCP();
+            SetupShortcuts();
+        }
+
+        /// <summary>
+        /// keyboard shortcuts
+        /// </summary>
+        private void SetupShortcuts()
+        {
+            globalKeyHook.HookedKeys.Add(Keys.LControlKey); //record/pause
+            globalKeyHook.HookedKeys.Add(Keys.RControlKey); //stop
+
+            globalKeyHook.KeyUp += globalKeyHook_KeyUp;
+            globalKeyHook.Hook();
+        }
+
+        /// <summary>
+        /// event handlers for keyboard shortcuts
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void globalKeyHook_KeyUp(object sender, KeyEventArgs e)
+        {
+            log.Info("Key Up " + e.KeyCode);
+            switch (e.KeyCode)
+            {
+                case Keys.RControlKey:
+                    {
+                        this.stopBtn_Click(this, EventArgs.Empty);
+                    }
+                    break;
+                case Keys.LControlKey:
+                    {
+                        this.recordBtn_Click(this, EventArgs.Empty);
+                    }
+                    break;
+                default:
+                    break;
+            }
+
         }
         
         /// <summary>
@@ -317,9 +362,9 @@ namespace ScreenRecorderMP
                 {
                     g.CopyFromScreen(leftPt.X, leftPt.Y, 0, 0, this.screenViewMP.Bounds.Size, CopyPixelOperation.SourceCopy);
 
-                    Win32Api.PCURSORINFO cinfo = new Win32Api.PCURSORINFO
+                    PCURSORINFO cinfo = new PCURSORINFO
                     {
-                        Size = System.Runtime.InteropServices.Marshal.SizeOf(typeof(Win32Api.PCURSORINFO))
+                        Size = System.Runtime.InteropServices.Marshal.SizeOf(typeof(PCURSORINFO))
                     };
 
                     if (Win32Api.GetCursorInfo(out cinfo))

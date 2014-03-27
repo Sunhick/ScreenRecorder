@@ -21,7 +21,7 @@ using System.IO;
 using System.Collections;
 #endregion
 
-namespace ScreenRecorder
+namespace ScreenRecorder.Hooks
 {
     /// <summary>
     /// Hook Data
