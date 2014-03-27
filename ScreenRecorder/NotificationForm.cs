@@ -1,9 +1,9 @@
 ﻿#region File Header
 /*[ Compilation unit ----------------------------------------------------------
  
-   Component       : ScreenRecorderMP
+   Component       : ScreenRecorder
  
-   Name            : Notification.cs
+   Name            : NotificationForm.cs
  
   Author           : Sunil
  
@@ -26,12 +26,13 @@ namespace ScreenRecorder
     /// <summary>
     /// Notification form
     /// </summary>
+    /// <returns>Form</returns>
     public partial class NotificationForm : Form
     {
-        /// <summary>
-        /// Animation timer
-        /// </summary>
-        Timer animationTimer;
+        ///// <summary>
+        ///// Animation timer
+        ///// </summary>
+        //Timer animationTimer;
         /// <summary>
         /// Wait timer
         /// </summary>
@@ -59,16 +60,18 @@ namespace ScreenRecorder
         /// <param name="e">Event arguments</param>
         private void OnNotifierLoad(object sender, EventArgs e)
         {
-            Opacity = 0;
+            //Opacity = 0;
 
-            animationTimer = new Timer { Interval = 100 };
+            //animationTimer = new Timer { Interval = 100 };
             myAppearing = true;
-            animationTimer.Tick += new EventHandler(animationTimer_Tick);
-            animationTimer.Start();
+            //animationTimer.Tick += new EventHandler(animationTimer_Tick);
+            //animationTimer.Start();
 
-            waitTimer = new Timer { Interval = 2500 /*wait for 2secs*/ };
+            waitTimer = new Timer { Interval = 700 /*wait for 0.7secs*/ };
             waitTimer.Tick += new EventHandler(waitTimer_Tick);
             waitTimer.Start();
+
+            this.Show();
         }
 
         /// <summary>
@@ -80,7 +83,9 @@ namespace ScreenRecorder
         {
             waitTimer.Stop();
             myAppearing = false;
-            animationTimer.Start();
+
+            this.Close();
+           // animationTimer.Start();
         }
 
         /// <summary>
@@ -94,7 +99,7 @@ namespace ScreenRecorder
             {
                 if (Opacity == 1)
                 {
-                    animationTimer.Stop();
+                    //animationTimer.Stop();
                 }
 
                 Opacity += 0.05;
@@ -110,21 +115,21 @@ namespace ScreenRecorder
                 Opacity -= 0.05;
             }
         }
-
+        
         /// <summary>
         /// Popup
         /// </summary>
         /// <param name="message">Message</param>
         /// <param name="location">Location</param>
-        public void Popup(string message, Point location)
+        public void Popup(string message)
         {
             this.userMsgBox.Text = message;
             //this.Location = location;
-            
+
             //this.Show();
             Application.Run(this);
 
-            animationTimer.Dispose();
+            //animationTimer.Dispose();
         }
     } // class NotificationForm
 } // namespace ScreenRecorder

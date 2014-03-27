@@ -4,33 +4,40 @@
   <!--ffmpeg -i img%d.png -r 10 -c:v libx264 -preset slow -crf 21 output.mp4-->
   <Command hookid="mp4" mode="sequential"> <!--Mode of operation: Synchronous | Asynchronous-->
     <Executable>ffmpeg.exe</Executable>
-    <Path>..\</Path> <!-- Bin directory| Relative path, Environment variables, Absolute paths -->
-    <!-- ffMpeg Option :    -sn : No subtitles   -->
-    <Arguments>-sn -i img%d.png -r 10 -c:v libx264 -preset slow -crf 21 output.mp4</Arguments>
+    <Path>Codecs\ffmpeg\</Path> <!-- Bin directory| Relative path, Application Environment variables, Absolute paths -->
+    <!-- ffMpeg Option :  
+                   -sn : No subtitles   -->
+    <!-- Application Environment variables 
+         $VIDEO_LOCATION$ : Video location
+         $BITMAPS$        : Temporary location for saving bitmaps
+         $FPS$            : Frames per second -->
+    <Arguments>-sn -i $BITMAPS$\img%d.png -r $FPS$ -c:v libx264 -preset slow -crf 21 $VIDEO_LOCATION$</Arguments>
   </Command>
  
   <!--$.\ffmpeg.exe -i img%d.png -vcodec huffyuv out.avi-->
   <Command hookid="avi" mode="sequential">
     <Executable>ffmpeg.exe</Executable>
-    <Path>..\</Path>
-    <Arguments>-sn -i img%d.png -vcodec huffyuv out.avi</Arguments>
+    <Path>Codecs\ffmpeg\</Path>
+    <Arguments>-i $BITMAPS$\img%d.png -s 1024x768 -c:v mjpeg -qscale:v 0 $VIDEO_LOCATION$</Arguments>
   </Command>
   
   <Command hookid="mkv" mode="sequential">
     <Executable>ffmpeg.exe</Executable>
-    <Path>..\</Path>
+    <Path>Codecs\ffmpeg\</Path>
     <Arguments></Arguments>
   </Command>
   
   <Command hookid="wmi" mode="sequential">
     <Executable>ffmpeg.exe</Executable>
-    <Path>..\</Path>
+    <Path>Codecs\ffmpeg\</Path>
     <Arguments></Arguments>
   </Command>
   
   <Command hookid="mp3" mode="sequential">
     <Executable>ffmpeg.exe</Executable>
-    <Path>..\</Path>
+    <Path>Codecs\ffmpeg\</Path>
     <Arguments></Arguments>
   </Command>
+  
+  <!--Add Commnd hooks for video/ Audio streaming here-->
 </Hook>

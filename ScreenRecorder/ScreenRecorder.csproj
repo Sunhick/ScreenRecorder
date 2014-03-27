@@ -101,16 +101,17 @@
     <Compile Include="ContentPages\InformationCP.Designer.cs">
       <DependentUpon>InformationCP.cs</DependentUpon>
     </Compile>
-    <Compile Include="ContentPages\Settings.cs">
+    <Compile Include="ContentPages\AppSettings.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ContentPages\Settings.Designer.cs">
-      <DependentUpon>Settings.cs</DependentUpon>
+    <Compile Include="ContentPages\AppSettings.Designer.cs">
+      <DependentUpon>AppSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="Codecs\Gif\AnimatedGifEncoder.cs" />
     <Compile Include="Codecs\Gif\GifDecoder.cs" />
     <Compile Include="Codecs\Gif\LZWEncoder.cs" />
     <Compile Include="Codecs\Gif\NeuQuant.cs" />
+    <Compile Include="HookData.cs" />
     <Compile Include="HookParser.cs" />
     <Compile Include="MessageBox.cs">
       <SubType>Form</SubType>
@@ -137,6 +138,7 @@
     <Compile Include="ScreenRecorder.Designer.cs">
       <DependentUpon>ScreenRecorder.cs</DependentUpon>
     </Compile>
+    <Compile Include="VariablesParser.cs" />
     <Compile Include="Win32Api.cs" />
     <EmbeddedResource Include="About\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
@@ -144,8 +146,8 @@
     <EmbeddedResource Include="ContentPages\InformationCP.resx">
       <DependentUpon>InformationCP.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ContentPages\Settings.resx">
-      <DependentUpon>Settings.cs</DependentUpon>
+    <EmbeddedResource Include="ContentPages\AppSettings.resx">
+      <DependentUpon>AppSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MessageBox.resx">
       <DependentUpon>MessageBox.cs</DependentUpon>

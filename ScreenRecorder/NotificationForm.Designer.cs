@@ -28,36 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.userMsgBox = new System.Windows.Forms.TextBox();
+            this.userMsgBox = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // userMsgBox
             // 
-            this.userMsgBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.userMsgBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.userMsgBox.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.userMsgBox.Font = new System.Drawing.Font("Lucida Sans Unicode", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userMsgBox.ForeColor = System.Drawing.Color.Black;
-            this.userMsgBox.Location = new System.Drawing.Point(12, 12);
+            this.userMsgBox.AutoSize = true;
+            this.userMsgBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 19F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userMsgBox.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.userMsgBox.Location = new System.Drawing.Point(12, 19);
             this.userMsgBox.Name = "userMsgBox";
-            this.userMsgBox.Size = new System.Drawing.Size(352, 33);
-            this.userMsgBox.TabIndex = 1;
-            this.userMsgBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.userMsgBox.Size = new System.Drawing.Size(108, 30);
+            this.userMsgBox.TabIndex = 0;
+            this.userMsgBox.Text = "Dummy";
             // 
             // NotificationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(376, 56);
+            this.ClientSize = new System.Drawing.Size(376, 69);
             this.Controls.Add(this.userMsgBox);
-            this.ForeColor = System.Drawing.Color.Black;
+            this.ForeColor = System.Drawing.Color.Transparent;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "NotificationForm";
-            this.Opacity = 0.6D;
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "NotificationForm";
             this.TopMost = true;
             this.TransparencyKey = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
@@ -68,7 +65,9 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox userMsgBox;
+        private System.Windows.Forms.Label userMsgBox;
+
+
 
     }
 }

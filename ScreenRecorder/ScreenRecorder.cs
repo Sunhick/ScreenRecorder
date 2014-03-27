@@ -11,21 +11,22 @@
 /*] END */
 #endregion
 #region Using directives
+using log4net;
+using log4net.Repository.Hierarchy;
 using ScreenRecorder;
 using ScreenRecorder.Codecs;
 using ScreenRecorder.ContentPages;
 using ScreenRecorder.Properties;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Diagnostics;
-using System.IO;
-using System.Threading;
-using System.Text.RegularExpressions;
-using log4net;
-using log4net.Repository.Hierarchy;
 #endregion
 
 namespace ScreenRecorderMP
@@ -70,6 +71,11 @@ namespace ScreenRecorderMP
         ///// </summary>
         private int index = 0;
 
+        /// <summary>
+        /// hooks
+        /// </summary>
+        List<HookData> hooks = null;
+
         private static ILog log = LogManager.GetLogger(typeof(ScreenRecorder).Name);
 
         /// <summary>
@@ -111,6 +117,10 @@ namespace ScreenRecorderMP
                 }
             }
 
+            HookParser parser = new HookParser();
+            hooks = parser.Parse();
+
+            //retrive the user stored fps from the settings file config.
             fps = Settings.Default.FramesPerSec;
         }
 
@@ -297,7 +307,9 @@ namespace ScreenRecorderMP
         {
             string fileName = String.Format("{1}\\img{0}.png", index++, saveLoc);
 
-            Point leftPt = new Point(this.screenViewMP.Location.X, this.screenViewMP.Location.Y);
+            //use the location of the form (x,y)
+            Point leftPt = //new Point(this.Location.X, this.Location.Y);
+                new Point(this.screenViewMP.Location.X, this.screenViewMP.Location.Y);
 
             using (Bitmap bmp = new Bitmap(this.screenViewMP.Bounds.Size.Width, this.screenViewMP.Bounds.Size.Height))
             {
@@ -385,13 +397,16 @@ namespace ScreenRecorderMP
         /// </summary>
         private void NotifyUserTask(string message)
         {
-            NotificationForm notifyUser = new NotificationForm();
-            //Point p = new Point(this.Location.X + this.Width / 2, this.Location.Y+this.Height / 2);
+            Point p = new Point(this.Location.X + this.Width / 3, this.Location.Y + this.Height / 3);
 
-            //Point notifyLoc = new Point(this.Size.Width, this.Size.Height);
-            //notifyUser.Location = p;//new Point(this.Location.X, this.Location.Y);
+            NotificationForm notifyUser = new NotificationForm()
+            {
+                /*set the location of the user notification*/
+                StartPosition = FormStartPosition.Manual,
+                Location = p
+            };
 
-            notifyUser.Popup(message, new Point(0,0));
+            notifyUser.Popup(message);
         }
 
         /// <summary>
@@ -403,120 +418,32 @@ namespace ScreenRecorderMP
         {
             frameCaptureTimer.Stop();
 
+            //reset the index
+            index = 0;
+
             recoding = false;
             recordBtn.Image = Resources.Record;
             this.toolTip.SetToolTip(this.recordBtn, global::ScreenRecorder.Properties.Resources.RecordToolTip);
-
-            //encoder.Finish();
-
-            NotifyUser(Resources.RecordStopped);
-
-            Process avMaker = new Process();    //Audio-Video maker process
-
-            avMaker.StartInfo.FileName = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName) +
-                        @"\Codecs\ffmpeg\ffmpeg.exe";
-
-            //TODO: ask If output.mp4 need to be overwritten?
             
-#if DEBUG
-            avMaker.StartInfo.UseShellExecute = false;
-            avMaker.StartInfo.CreateNoWindow = true;
-#else 
-            avMaker.StartInfo.UseShellExecute = false;
-            avMaker.StartInfo.CreateNoWindow = false;
-#endif
+            //encoder.Finish();
+           
+            NotifyUser(Resources.RecordStopped);
+            
+            //TODO : capture audio and embed with video file. check out NAudio from www.Codeplex.com
 
-            string outFile = GetOutputFile();
-
-
-            const string pngLoc = "img%d.png";
-            //avMaker.StartInfo.Arguments = String.Format(@"-i bitmaps\{0} -vcodec huffyuv output.avi", pngLoc);
-            //avMaker.StartInfo.Arguments = String.Format(@"-i bitmaps\{0} -r 20 output.mp4", pngLoc);
-            avMaker.StartInfo.Arguments = 
-                String.Format(@"-i {1}\{0} -r 20 -c:v libx264 -preset slow -crf 21 {2}", pngLoc, saveLoc, outFile);
-            // avMaker.StartInfo.Arguments = String.Format(@" -r 20 -i bitmaps\{0} -c:v libx264 -r 20 -pix_fmt yuv420p output.mp4", pngLoc);
-
-            if (!avMaker.Start())
+            //run the suitable hook command
+            foreach (HookData hook in hooks)
             {
-                Console.WriteLine(Resources.AVError);
-                return;
+                if (string.Equals(hook.HookID, Settings.Default.VideoType))
+                {
+                    hook.Execute();
+                    break;
+                }
             }
-
-            avMaker.WaitForExit();
-            avMaker.Close();
-
-            /*************************************************************************************
-             * For Creating mp4:
-             *      $.\ffmpeg -i img%d.png -r 10 -c:v libx264 -preset slow -crf 21 output.mp4
-             * 
-             * For Creating avi:
-             *      $.\ffmpeg.exe -i img%d.png -vcodec huffyuv out.avi
-            **************************************************************************************/
-
-            #region To be implemented later
-            // Process mp4Maker = new Process();
-
-            // mp4Maker.StartInfo.FileName = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName) +
-            //             @"\Codecs\ffmpeg\ffmpeg.exe";
-            // //mp4Maker.StartInfo.FileName = @"G:\ScreenRecorder\ScreenRecorder\bin\x64\Debug\Codecs\ffmpeg\ffmpeg.exe";
-            // const string pngLoc = "img%d.png";
-            // mp4Maker.StartInfo.Arguments = String.Format(@"-i {0} -r 10 -c:v libx264 -preset slow -crf 21 -pix_fmt yuv420p output.mp4", pngLoc);
-            //                                 //String.Format(@"-i {0} -r 10 -c:v libx264 -preset slow -crf 21 output.mp4", pngLoc);
-            // //mp4Maker.ErrorDataReceived += new DataReceivedEventHandler(mp4Maker_ErrorDataReceived);
-            // //mp4Maker.StartInfo.UseShellExecute = false;
-            // //mp4Maker.EnableRaisingEvents = true;
-            //// mp4Maker.StartInfo.CreateNoWindow = true;
-            // //mp4Maker.StartInfo.RedirectStandardOutput = true;
-            // //mp4Maker.StartInfo.RedirectStandardError = true;
-
-            // if (!mp4Maker.Start())
-            // {
-            //     MessageBox.Show("Unable to start Mp4 movie maker");
-            //     return;
-            // }
-
-            // //string outline = mp4Maker.StandardError.ReadToEnd();
-
-
-            // //TextWriter log = new StreamWriter("log.txt");
-            // //log.WriteLine(outline);
-            // //log.Flush();
-
-            // mp4Maker.WaitForExit();
-            // mp4Maker.Close();
-
-            #endregion
 
             NotifyUser(Resources.MovieCreated);
 
             DeleteTempFiles();
-        }
-
-        /// <summary>
-        /// video out file 
-        /// </summary>
-        /// <returns></returns>
-        private string GetOutputFile()
-        {
-            string file = Path.Combine(
-                Settings.Default.VideoLoc, "ScreenCapture.mp4"
-                );
-
-            if (!File.Exists(file)) return file;
-
-            //create unique name
-            int index = 1;
-            while (true)
-            {
-                file = Path.Combine(
-                        Settings.Default.VideoLoc, string.Format("ScreenCapture({0}).mp4", index)
-                );
-                
-                if (!File.Exists(file)) break;
-                index++;
-            }
-
-            return file;
         }
 
         /// <summary>
