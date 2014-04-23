@@ -15,9 +15,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.IO;
-using System.Xml;
 using System.Xml.Linq;
 #endregion
 
@@ -59,7 +57,7 @@ namespace ScreenRecorder.Hooks
                     string hookid = q.FirstAttribute.Value;
                     string mode = q.LastAttribute.Value;
 
-                    hook.HookID = hookid;
+                    hook.HookId = hookid;
                     hook.WorkingDir = path;
                     hook.Executable = exe;
                     hook.Arguments = arg;

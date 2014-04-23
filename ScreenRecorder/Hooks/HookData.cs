@@ -14,11 +14,8 @@
 #region Using directives
 using ScreenRecorder.Properties;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.IO;
-using System.Collections;
 #endregion
 
 namespace ScreenRecorder.Hooks
@@ -31,7 +28,7 @@ namespace ScreenRecorder.Hooks
         /// <summary>
         /// Hook ID
         /// </summary>
-        public string HookID;
+        public string HookId;
 
         /// <summary>
         /// Mode

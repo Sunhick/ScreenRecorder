@@ -12,7 +12,7 @@
 #endregion
 
 #region Using directives
-using ScreenRecorder.ContentPages;
+
 using ScreenRecorder.Properties;
 using System;
 using System.Windows.Forms;
@@ -56,7 +56,7 @@ namespace ScreenRecorder.ContentPages
 
             foreach (HookData item in data)
             {
-                videoTypeBox.Items.Add(item.HookID);
+                videoTypeBox.Items.Add(item.HookId);
             }
         }
 

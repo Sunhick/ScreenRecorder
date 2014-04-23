@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-using ScreenRecorder.Properties;
-namespace ScreenRecorderMP
+﻿namespace ScreenRecorderMP
 {
     partial class ScreenRecorder
     {

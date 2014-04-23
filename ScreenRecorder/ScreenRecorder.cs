@@ -12,19 +12,15 @@
 #endregion
 #region Using directives
 using log4net;
-using log4net.Repository.Hierarchy;
 using ScreenRecorder;
 using ScreenRecorder.Codecs;
 using ScreenRecorder.ContentPages;
 using ScreenRecorder.Properties;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ScreenRecorder.Hooks;
@@ -479,7 +475,7 @@ namespace ScreenRecorderMP
             //run the suitable hook command
             foreach (HookData hook in hooks)
             {
-                if (string.Equals(hook.HookID, Settings.Default.VideoType))
+                if (string.Equals(hook.HookId, Settings.Default.VideoType))
                 {
                     hook.Execute();
                     break;
