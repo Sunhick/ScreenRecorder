@@ -1,61 +1,65 @@
-#region File Header
-/*[ Compilation unit ----------------------------------------------------------
- 
-   Component       : ScreenRecorder
- 
-   Name            : HookData.cs
- 
-  Author           : Sunil
- 
------------------------------------------------------------------------------*/
-/*] END */
-#endregion
+// This file is part of ScreenRecorder
+//  
+// ScreenRecorder  is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// ScreenRecorder is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with ScreenRecorder.  If not, see <http://www.gnu.org/licenses/>.
 
 #region Using directives
-using ScreenRecorder.Properties;
+
 using System;
 using System.Diagnostics;
 using System.IO;
+using ScreenRecorder.Properties;
+
 #endregion
 
 namespace ScreenRecorder.Hooks
 {
     /// <summary>
-    /// Hook Data
+    ///     Hook Data
     /// </summary>
     public class HookData
     {
         /// <summary>
-        /// Hook ID
-        /// </summary>
-        public string HookId;
-
-        /// <summary>
-        /// Mode
-        /// </summary>
-        public string Mode;
-
-        /// <summary>
-        /// Executable
-        /// </summary>
-        public string Executable;
-
-        /// <summary>
-        /// Path
-        /// </summary>
-        public string WorkingDir;
-
-        /// <summary>
-        /// Arguments
+        ///     Arguments
         /// </summary>
         public string Arguments;
 
         /// <summary>
-        /// Execute
+        ///     Executable
+        /// </summary>
+        public string Executable;
+
+        /// <summary>
+        ///     Hook ID
+        /// </summary>
+        public string HookId;
+
+        /// <summary>
+        ///     Mode
+        /// </summary>
+        public string Mode;
+
+        /// <summary>
+        ///     Path
+        /// </summary>
+        public string WorkingDir;
+
+        /// <summary>
+        ///     Execute
         /// </summary>
         public void Execute()
         {
-            Process avMaker = new Process();    //Audio-Video maker process
+            Process avMaker = new Process(); //Audio-Video maker process
 
             avMaker.StartInfo.FileName = Path.Combine(WorkingDir, Executable);
 
@@ -74,8 +78,8 @@ namespace ScreenRecorder.Hooks
             //avMaker.StartInfo.Arguments = String.Format(@"-i bitmaps\{0} -vcodec huffyuv output.avi", pngLoc);
             //avMaker.StartInfo.Arguments = String.Format(@"-i bitmaps\{0} -r 20 output.mp4", pngLoc);
 
-            avMaker.StartInfo.Arguments = VariablesParser.ExpandVariables(this.Arguments);
-               // String.Format(@"-i {0} -r {2} -c:v libx264 -preset slow -crf 21 {1}", ifile, outFile, Settings.Default.FramesPerSec);
+            avMaker.StartInfo.Arguments = VariablesParser.ExpandVariables(Arguments);
+            // String.Format(@"-i {0} -r {2} -c:v libx264 -preset slow -crf 21 {1}", ifile, outFile, Settings.Default.FramesPerSec);
             // avMaker.StartInfo.Arguments = String.Format(@" -r 20 -i bitmaps\{0} -c:v libx264 -r 20 -pix_fmt yuv420p output.mp4", pngLoc);
 
             if (!avMaker.Start())
@@ -91,11 +95,10 @@ namespace ScreenRecorder.Hooks
 
             avMaker.WaitForExit();
             avMaker.Close();
-
         }
 
         /// <summary>
-        /// Get output file
+        ///     Get output file
         /// </summary>
         private string GetOutputFile()
         {
@@ -110,8 +113,8 @@ namespace ScreenRecorder.Hooks
                 while (true)
                 {
                     file = Path.Combine(
-                            Settings.Default.VideoLoc, string.Format("ScreenCapture({0})", index)
-                    );
+                        Settings.Default.VideoLoc, string.Format("ScreenCapture({0})", index)
+                        );
 
                     if (!File.Exists(file)) break;
                     index++;

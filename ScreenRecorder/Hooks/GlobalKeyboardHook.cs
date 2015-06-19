@@ -1,33 +1,48 @@
-﻿using System;
+﻿// This file is part of ScreenRecorder
+//  
+// ScreenRecorder  is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// ScreenRecorder is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with ScreenRecorder.  If not, see <http://www.gnu.org/licenses/>.
+
+using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using log4net;
 using System.ComponentModel;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using log4net;
 
 namespace ScreenRecorder.Hooks
 {
     public class GlobalKeyboardHook
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(GlobalKeyboardHook).Name);
+        private static readonly ILog log = LogManager.GetLogger(typeof (GlobalKeyboardHook).Name);
 
-        public List<Keys> HookedKeys = new List<Keys>();
-
-        public event KeyEventHandler KeyDown;
-        public event KeyEventHandler KeyUp;
         private static HookProc keyboardProcHook;
+        public List<Keys> HookedKeys = new List<Keys>();
         private IntPtr keyboardHook = IntPtr.Zero;
 
         /// <summary>
-        /// ctor
+        ///     ctor
         /// </summary>
         public GlobalKeyboardHook()
         {
             Hook();
         }
 
+        public event KeyEventHandler KeyDown;
+        public event KeyEventHandler KeyUp;
+
         /// <summary>
-        /// Keyboard hook proc
+        ///     Keyboard hook proc
         /// </summary>
         /// <param name="nCode"></param>
         /// <param name="wParam"></param>
@@ -37,7 +52,7 @@ namespace ScreenRecorder.Hooks
         {
             if (nCode >= 0)
             {
-                Keys key = (Keys)lParam.vkCode;
+                Keys key = (Keys) lParam.vkCode;
                 if (HookedKeys.Contains(key))
                 {
                     KeyEventArgs kArgs = new KeyEventArgs(key);
@@ -57,11 +72,10 @@ namespace ScreenRecorder.Hooks
         }
 
         /// <summary>
-        /// subscribe for Keyboard hook
+        ///     subscribe for Keyboard hook
         /// </summary>
         public void Hook()
         {
-
             // Create an instance of HookProc.
             keyboardProcHook = new HookProc(KeyboardHookProc);
 
@@ -85,7 +99,7 @@ namespace ScreenRecorder.Hooks
         }
 
         /// <summary>
-        /// Unsubscribe for keyboard hook 
+        ///     Unsubscribe for keyboard hook
         /// </summary>
         public void Unhook()
         {
@@ -105,7 +119,5 @@ namespace ScreenRecorder.Hooks
                 }
             }
         }
-
-
     }
 }

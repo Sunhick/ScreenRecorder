@@ -1,15 +1,17 @@
-﻿#region File Header
-/*[ Compilation unit ----------------------------------------------------------
- 
-   Component       : ScreenRecorderMP
- 
-   Name            : Win32Api.cs
- 
-  Author           : Sunil
- 
------------------------------------------------------------------------------*/
-/*] END */
-#endregion
+﻿// This file is part of ScreenRecorder
+//  
+// ScreenRecorder  is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// ScreenRecorder is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with ScreenRecorder.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
 using System.Runtime.InteropServices;
@@ -17,7 +19,7 @@ using System.Runtime.InteropServices;
 namespace ScreenRecorder
 {
     /// <summary>
-    /// Hook proc 
+    ///     Hook proc
     /// </summary>
     /// <param name="nCode"></param>
     /// <param name="wParam"></param>
@@ -26,7 +28,7 @@ namespace ScreenRecorder
     public delegate int HookProc(int nCode, int wParam, keyboardHookStruct lParam);
 
     /// <summary>
-    /// Pcursor info
+    ///     Pcursor info
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
     public struct PCURSORINFO
@@ -38,7 +40,7 @@ namespace ScreenRecorder
     }
 
     /// <summary>
-    /// Point 
+    ///     Point
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
     public struct POINTAPI
@@ -48,22 +50,29 @@ namespace ScreenRecorder
     }
 
     /// <summary>
-    /// keyboard hook struct
+    ///     keyboard hook struct
     /// </summary>
     public struct keyboardHookStruct
     {
-        public int vkCode;
-        public int scanCode;
-        public int flags;
-        public int time;
         public int dwExtraInfo;
+        public int flags;
+        public int scanCode;
+        public int time;
+        public int vkCode;
     }
 
     /// <summary>
-    /// Wrapper for windows 32 calls.
+    ///     Wrapper for windows 32 calls.
     /// </summary>
     public class Win32Api
     {
+        public const Int32 CURSOR_SHOWING = 0x00000001;
+        public const int WH_KEYBOARD_LL = 13;
+        public const int WM_KEYDOWN = 0x100;
+        public const int WM_KEYUP = 0x101;
+        public const int WM_SYSKEYDOWN = 0x104;
+        public const int WM_SYSKEYUP = 0x105;
+
         [DllImport("user32.dll")]
         public static extern bool GetCursorInfo(out PCURSORINFO cinfo);
 
@@ -86,9 +95,9 @@ namespace ScreenRecorder
             byte[] lpbKeyState,
             byte[] lpwTransKey,
             int fuState);
-        
+
         [DllImport("user32.dll", CharSet = CharSet.Auto,
-           CallingConvention = CallingConvention.StdCall)]
+            CallingConvention = CallingConvention.StdCall)]
         public static extern int CallNextHookEx(
             IntPtr idHook,
             int nCode,
@@ -96,11 +105,11 @@ namespace ScreenRecorder
             ref keyboardHookStruct lParam);
 
         [DllImport("user32.dll", CharSet = CharSet.Auto,
-          CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+            CallingConvention = CallingConvention.StdCall, SetLastError = true)]
         public static extern int UnhookWindowsHookEx(IntPtr idHook);
 
         [DllImport("user32.dll", CharSet = CharSet.Auto,
-         CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+            CallingConvention = CallingConvention.StdCall, SetLastError = true)]
         public static extern IntPtr SetWindowsHookEx(
             int idHook,
             HookProc lpfn,
@@ -111,11 +120,5 @@ namespace ScreenRecorder
         public static extern IntPtr LoadLibrary(string dllToLoad);
 
         //Constants
-        public const Int32 CURSOR_SHOWING = 0x00000001;
-        public const int WH_KEYBOARD_LL = 13;
-        public const int WM_KEYDOWN = 0x100;
-        public const int WM_KEYUP = 0x101;
-        public const int WM_SYSKEYDOWN = 0x104;
-        public const int WM_SYSKEYUP = 0x105;
     } // class Win32
 }

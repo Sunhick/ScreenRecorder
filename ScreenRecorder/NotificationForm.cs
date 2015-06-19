@@ -1,24 +1,29 @@
-﻿#region File Header
-/*[ Compilation unit ----------------------------------------------------------
- 
-   Component       : ScreenRecorder
- 
-   Name            : NotificationForm.cs
- 
-  Author           : Sunil
- 
------------------------------------------------------------------------------*/
-/*] END */
-#endregion
+﻿// This file is part of ScreenRecorder
+//  
+// ScreenRecorder  is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// ScreenRecorder is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with ScreenRecorder.  If not, see <http://www.gnu.org/licenses/>.
+
 #region Using directives
+
 using System;
 using System.Windows.Forms;
+
 #endregion
 
 namespace ScreenRecorder
 {
     /// <summary>
-    /// Notification form
+    ///     Notification form
     /// </summary>
     /// <returns>Form</returns>
     public partial class NotificationForm : Form
@@ -27,28 +32,30 @@ namespace ScreenRecorder
         ///// Animation timer
         ///// </summary>
         //Timer animationTimer;
-        /// <summary>
-        /// Wait timer
-        /// </summary>
-        Timer waitTimer;
-        /// <summary>
-        /// My appearing
-        /// </summary>
-        bool myAppearing;
 
         /// <summary>
-        /// Initializes a new instance of the NotificationForm class.
+        ///     My appearing
+        /// </summary>
+        private bool myAppearing;
+
+        /// <summary>
+        ///     Wait timer
+        /// </summary>
+        private Timer waitTimer;
+
+        /// <summary>
+        ///     Initializes a new instance of the NotificationForm class.
         /// </summary>
         public NotificationForm()
         {
             InitializeComponent();
 
-            this.ShowInTaskbar = false;
-            this.Load  += new EventHandler(OnNotifierLoad);
+            ShowInTaskbar = false;
+            Load += new EventHandler(OnNotifierLoad);
         }
 
         /// <summary>
-        /// On notifier load
+        ///     On notifier load
         /// </summary>
         /// <param name="sender">Sender of the event</param>
         /// <param name="e">Event arguments</param>
@@ -61,33 +68,33 @@ namespace ScreenRecorder
             //animationTimer.Tick += new EventHandler(animationTimer_Tick);
             //animationTimer.Start();
 
-            waitTimer = new Timer { Interval = 700 /*wait for 0.7secs*/ };
+            waitTimer = new Timer {Interval = 700 /*wait for 0.7secs*/};
             waitTimer.Tick += new EventHandler(waitTimer_Tick);
             waitTimer.Start();
 
-            this.Show();
+            Show();
         }
 
         /// <summary>
-        /// Wait timer tick
+        ///     Wait timer tick
         /// </summary>
         /// <param name="sender">Sender of the event</param>
         /// <param name="e">Event arguments</param>
-        void waitTimer_Tick(object sender, EventArgs e)
+        private void waitTimer_Tick(object sender, EventArgs e)
         {
             waitTimer.Stop();
             myAppearing = false;
 
-            this.Close();
-           // animationTimer.Start();
+            Close();
+            // animationTimer.Start();
         }
 
         /// <summary>
-        /// Animation timer tick
+        ///     Animation timer tick
         /// </summary>
         /// <param name="sender">Sender of the event</param>
         /// <param name="e">Event arguments</param>
-        void animationTimer_Tick(object sender, EventArgs e)
+        private void animationTimer_Tick(object sender, EventArgs e)
         {
             if (myAppearing)
             {
@@ -102,22 +109,22 @@ namespace ScreenRecorder
             {
                 if (Opacity == 0)
                 {
-                   this.Close();
+                    Close();
                     //this.Hide();
                 }
 
                 Opacity -= 0.05;
             }
         }
-        
+
         /// <summary>
-        /// Popup
+        ///     Popup
         /// </summary>
         /// <param name="message">Message</param>
         /// <param name="location">Location</param>
         public void Popup(string message)
         {
-            this.userMsgBox.Text = message;
+            userMsgBox.Text = message;
             //this.Location = location;
 
             //this.Show();

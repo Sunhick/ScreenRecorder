@@ -1,87 +1,94 @@
-﻿#region File Header
-/*[ Compilation unit ----------------------------------------------------------
- 
-   Component       : ScreenRecorderMP
- 
-   Name            : ScreenRecorder.cs
- 
-  Author           : Sunil
- 
------------------------------------------------------------------------------*/
-/*] END */
-#endregion
+﻿// This file is part of ScreenRecorder
+//  
+// ScreenRecorder  is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// ScreenRecorder is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with ScreenRecorder.  If not, see <http://www.gnu.org/licenses/>.
+
 #region Using directives
-using log4net;
-using ScreenRecorder;
-using ScreenRecorder.Codecs;
-using ScreenRecorder.ContentPages;
-using ScreenRecorder.Properties;
+
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using log4net;
+using ScreenRecorder;
+using ScreenRecorder.Codecs;
+using ScreenRecorder.ContentPages;
 using ScreenRecorder.Hooks;
+using ScreenRecorder.Properties;
+
 #endregion
 
 namespace ScreenRecorderMP
 {
     /// <summary>
-    /// Screen recorder MP
+    ///     Screen recorder MP
     /// </summary>
     public partial class ScreenRecorder : Form
     {
-        /// <summary>
-        /// Content pages
-        /// </summary>
-        List<IContentPage> contentPages = new List<IContentPage>();
+        private static readonly ILog log = LogManager.GetLogger(typeof (ScreenRecorder).Name);
 
         /// <summary>
-        /// encoder
+        ///     Content pages
         /// </summary>
-        AnimatedGifEncoder encoder = new AnimatedGifEncoder();
+        private readonly List<IContentPage> contentPages = new List<IContentPage>();
 
         /// <summary>
-        /// Global keyboard shortcuts
+        ///     Global keyboard shortcuts
         /// </summary>
-        GlobalKeyboardHook globalKeyHook = new GlobalKeyboardHook();
+        private readonly GlobalKeyboardHook globalKeyHook = new GlobalKeyboardHook();
 
         /// <summary>
-        /// Last point
+        ///     encoder
         /// </summary>
-        private Point lastPoint;
+        private AnimatedGifEncoder encoder = new AnimatedGifEncoder();
 
         /// <summary>
-        /// frames to be captured per secound
+        ///     frames to be captured per secound
         /// </summary>
         private int fps = 1;
 
         /// <summary>
-        /// is recording in progess
+        ///     hooks
+        /// </summary>
+        private List<HookData> hooks = null;
+
+        private int index = 0;
+
+        /// <summary>
+        ///     Last point
+        /// </summary>
+        private Point lastPoint;
+
+        /// <summary>
+        ///     is recording in progess
         /// </summary>
         private bool recoding = false;
 
         /// <summary>
-        /// Save loc
+        ///     Save loc
         /// </summary>
-        string saveLoc = string.Empty;
+        private string saveLoc = string.Empty;
 
         ///// <summary>
         ///// Index
         ///// </summary>
-        private int index = 0;
 
         /// <summary>
-        /// hooks
-        /// </summary>
-        List<HookData> hooks = null;
-
-        private static ILog log = LogManager.GetLogger(typeof(ScreenRecorder).Name);
-
-        /// <summary>
-        /// Initializes a new instance of the ScreenRecorderMP class.
+        ///     Initializes a new instance of the ScreenRecorderMP class.
         /// </summary>
         public ScreenRecorder()
         {
@@ -92,7 +99,7 @@ namespace ScreenRecorderMP
         }
 
         /// <summary>
-        /// keyboard shortcuts
+        ///     keyboard shortcuts
         /// </summary>
         private void SetupShortcuts()
         {
@@ -104,37 +111,36 @@ namespace ScreenRecorderMP
         }
 
         /// <summary>
-        /// event handlers for keyboard shortcuts
+        ///     event handlers for keyboard shortcuts
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void globalKeyHook_KeyUp(object sender, KeyEventArgs e)
+        private void globalKeyHook_KeyUp(object sender, KeyEventArgs e)
         {
             log.Info("Key Up " + e.KeyCode);
             switch (e.KeyCode)
             {
                 case Keys.RControlKey:
-                    {
-                        this.stopBtn_Click(this, EventArgs.Empty);
-                    }
+                {
+                    stopBtn_Click(this, EventArgs.Empty);
+                }
                     break;
                 case Keys.LControlKey:
-                    {
-                        this.recordBtn_Click(this, EventArgs.Empty);
-                    }
+                {
+                    recordBtn_Click(this, EventArgs.Empty);
+                }
                     break;
                 default:
                     break;
             }
-
         }
-        
+
         /// <summary>
-        /// Read user app settings
+        ///     Read user app settings
         /// </summary>
         private void ReadUserSettings()
         {
-            this.Opacity = (double)Settings.Default.Opacity;
+            Opacity = (double) Settings.Default.Opacity;
             saveLoc = Settings.Default.BitmapTempLoc;
             if (string.IsNullOrEmpty(saveLoc))
             {
@@ -166,7 +172,7 @@ namespace ScreenRecorderMP
         }
 
         /// <summary>
-        /// Init CP
+        ///     Init CP
         /// </summary>
         private void InitCP()
         {
@@ -177,18 +183,18 @@ namespace ScreenRecorderMP
         }
 
         /// <summary>
-        /// Close btn click
+        ///     Close btn click
         /// </summary>
         /// <param name="sender">Sender of the event</param>
         /// <param name="e">Event arguments</param>
         private void closeBtn_Click(object sender, EventArgs e)
         {
             SaveConfig();
-            this.Close();
+            Close();
         }
 
         /// <summary>
-        /// Save config
+        ///     Save config
         /// </summary>
         private void SaveConfig()
         {
@@ -196,50 +202,50 @@ namespace ScreenRecorderMP
         }
 
         /// <summary>
-        /// Maximum btn click
+        ///     Maximum btn click
         /// </summary>
         /// <param name="sender">Sender of the event</param>
         /// <param name="e">Event arguments</param>
         private void maxBtn_Click(object sender, EventArgs e)
         {
-            if (this.WindowState == FormWindowState.Normal)
+            if (WindowState == FormWindowState.Normal)
             {
-                this.WindowState = FormWindowState.Maximized;
-                this.maxBtn.Image = Resources.MaximizeMinus;
+                WindowState = FormWindowState.Maximized;
+                maxBtn.Image = Resources.MaximizeMinus;
             }
             else
             {
-                this.WindowState = FormWindowState.Normal;
-                this.maxBtn.Image = Resources.MaximizePlus;
+                WindowState = FormWindowState.Normal;
+                maxBtn.Image = Resources.MaximizePlus;
             }
         }
 
         /// <summary>
-        /// Minimum btn click
+        ///     Minimum btn click
         /// </summary>
         /// <param name="sender">Sender of the event</param>
         /// <param name="e">Event arguments</param>
         private void minBtn_Click(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Minimized;
+            WindowState = FormWindowState.Minimized;
         }
 
         /// <summary>
-        /// On mouse down
+        ///     On mouse down
         /// </summary>
         /// <param name="sender">Sender of the event</param>
         /// <param name="e">Event arguments</param>
         private void OnMouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Left && this.WindowState != FormWindowState.Maximized)
+            if (e.Button == MouseButtons.Left && WindowState != FormWindowState.Maximized)
             {
                 lastPoint = new Point(e.X, e.Y);
-                this.Cursor = Cursors.Hand;
+                Cursor = Cursors.Hand;
             }
         }
 
         /// <summary>
-        /// Wnd proc for handling form resize
+        ///     Wnd proc for handling form resize
         /// </summary>
         /// <param name="m">M</param>
         protected override void WndProc(ref Message m)
@@ -251,13 +257,14 @@ namespace ScreenRecorderMP
             bool handled = false;
             if (m.Msg == WM_NCHITTEST || m.Msg == WM_MOUSEMOVE)
             {
-                Size formSize = this.Size;
+                Size formSize = Size;
                 Point screenPoint = new Point(m.LParam.ToInt32());
-                Point clientPoint = this.PointToClient(screenPoint);
-                Rectangle hitBox = new Rectangle(formSize.Width - RESIZE_HANDLE_SIZE, formSize.Height - RESIZE_HANDLE_SIZE, RESIZE_HANDLE_SIZE, RESIZE_HANDLE_SIZE);
+                Point clientPoint = PointToClient(screenPoint);
+                Rectangle hitBox = new Rectangle(formSize.Width - RESIZE_HANDLE_SIZE,
+                    formSize.Height - RESIZE_HANDLE_SIZE, RESIZE_HANDLE_SIZE, RESIZE_HANDLE_SIZE);
                 if (hitBox.Contains(clientPoint))
                 {
-                    m.Result = (IntPtr)HTBOTTOMRIGHT;
+                    m.Result = (IntPtr) HTBOTTOMRIGHT;
                     handled = true;
                 }
             }
@@ -267,34 +274,34 @@ namespace ScreenRecorderMP
         }
 
         /// <summary>
-        /// On mouse move
+        ///     On mouse move
         /// </summary>
         /// <param name="sender">Sender of the event</param>
         /// <param name="e">Event arguments</param>
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            if (e.Button == MouseButtons.Left)
             {
                 Point p1 = new Point(e.X, e.Y);
-                Point p2 = this.PointToScreen(p1);
+                Point p2 = PointToScreen(p1);
                 Point p3 = new Point(p2.X - lastPoint.X, p2.Y - lastPoint.Y);
 
-                this.Location = p3;
+                Location = p3;
             }
         }
 
         /// <summary>
-        /// On mouse up
+        ///     On mouse up
         /// </summary>
         /// <param name="sender">Sender of the event</param>
         /// <param name="e">Event arguments</param>
         private void OnMouseUp(object sender, MouseEventArgs e)
         {
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
         }
 
         /// <summary>
-        /// Info btn click
+        ///     Info btn click
         /// </summary>
         /// <param name="sender">Sender of the event</param>
         /// <param name="e">Event arguments</param>
@@ -304,7 +311,7 @@ namespace ScreenRecorderMP
         }
 
         /// <summary>
-        /// Activate page
+        ///     Activate page
         /// </summary>
         /// <param name="page">Page</param>
         private void ActivatePage(IContentPage page)
@@ -316,7 +323,7 @@ namespace ScreenRecorderMP
             {
                 screenViewMP.Controls.Remove(control);
                 //this.Opacity = .9D;
-                this.TransparencyKey = Color.Black;
+                TransparencyKey = Color.Black;
             }
             else
             {
@@ -324,13 +331,13 @@ namespace ScreenRecorderMP
 
                 screenViewMP.Controls.Add(control);
                 //this.Opacity = 1;
-                this.TransparencyKey = Color.Red;
+                TransparencyKey = Color.Red;
             }
-            this.Invalidate();
+            Invalidate();
         }
 
         /// <summary>
-        /// Setting btn click
+        ///     Setting btn click
         /// </summary>
         /// <param name="sender">Sender of the event</param>
         /// <param name="e">Event arguments</param>
@@ -340,7 +347,7 @@ namespace ScreenRecorderMP
         }
 
         /// <summary>
-        /// Frame capture timer tick
+        ///     Frame capture timer tick
         /// </summary>
         /// <param name="sender">Sender of the event</param>
         /// <param name="e">Event arguments</param>
@@ -350,17 +357,17 @@ namespace ScreenRecorderMP
 
             //use the location of the form (x,y)
             Point leftPt = //new Point(this.Location.X, this.Location.Y);
-                new Point(this.screenViewMP.Location.X, this.screenViewMP.Location.Y);
+                new Point(screenViewMP.Location.X, screenViewMP.Location.Y);
 
-            using (Bitmap bmp = new Bitmap(this.screenViewMP.Bounds.Size.Width, this.screenViewMP.Bounds.Size.Height))
+            using (Bitmap bmp = new Bitmap(screenViewMP.Bounds.Size.Width, screenViewMP.Bounds.Size.Height))
             {
                 using (Graphics g = Graphics.FromImage(bmp))
                 {
-                    g.CopyFromScreen(leftPt.X, leftPt.Y, 0, 0, this.screenViewMP.Bounds.Size, CopyPixelOperation.SourceCopy);
+                    g.CopyFromScreen(leftPt.X, leftPt.Y, 0, 0, screenViewMP.Bounds.Size, CopyPixelOperation.SourceCopy);
 
                     PCURSORINFO cinfo = new PCURSORINFO
                     {
-                        Size = System.Runtime.InteropServices.Marshal.SizeOf(typeof(PCURSORINFO))
+                        Size = Marshal.SizeOf(typeof (PCURSORINFO))
                     };
 
                     if (Win32Api.GetCursorInfo(out cinfo))
@@ -383,11 +390,10 @@ namespace ScreenRecorderMP
                     log.Error("unable to save bitmap", ex);
                 }
             }
-            
         }
 
         /// <summary>
-        /// Record btn click
+        ///     Record btn click
         /// </summary>
         /// <param name="sender">Sender of the event</param>
         /// <param name="e">Event arguments</param>
@@ -401,12 +407,12 @@ namespace ScreenRecorderMP
 
                 recoding = false;
                 recordBtn.Image = Resources.Record;
-                this.toolTip.SetToolTip(this.recordBtn, global::ScreenRecorder.Properties.Resources.RecordToolTip);
+                toolTip.SetToolTip(recordBtn, Resources.RecordToolTip);
             }
             else
             {
                 screenViewMP.Controls.Clear();
-                this.TransparencyKey = Color.Black;
+                TransparencyKey = Color.Black;
 
                 //encoder.Start(saveLoc + "\\rec.gif");
 
@@ -415,17 +421,17 @@ namespace ScreenRecorderMP
                 //encoder.SetDelay(50);
                 //encoder.SetRepeat(0);
 
-                frameCaptureTimer.Interval = (int)(1000 / fps);
+                frameCaptureTimer.Interval = (int) (1000/fps);
                 frameCaptureTimer.Start();
 
                 recoding = true;
                 recordBtn.Image = Resources.Pause;
-                this.toolTip.SetToolTip(this.recordBtn, global::ScreenRecorder.Properties.Resources.PauseToolTip);
+                toolTip.SetToolTip(recordBtn, Resources.PauseToolTip);
             }
         }
 
         /// <summary>
-        /// Notify user
+        ///     Notify user
         /// </summary>
         /// <param name="message">Message</param>
         private void NotifyUser(string message)
@@ -434,11 +440,11 @@ namespace ScreenRecorderMP
         }
 
         /// <summary>
-        /// Notify user task. Don't call this method use NotifyUser(String message);
+        ///     Notify user task. Don't call this method use NotifyUser(String message);
         /// </summary>
         private void NotifyUserTask(string message)
         {
-            Point p = new Point(this.Location.X + this.Width / 3, this.Location.Y + this.Height / 3);
+            Point p = new Point(Location.X + Width/3, Location.Y + Height/3);
 
             NotificationForm notifyUser = new NotificationForm()
             {
@@ -451,7 +457,7 @@ namespace ScreenRecorderMP
         }
 
         /// <summary>
-        /// Stop btn click
+        ///     Stop btn click
         /// </summary>
         /// <param name="sender">Sender of the event</param>
         /// <param name="e">Event arguments</param>
@@ -464,12 +470,12 @@ namespace ScreenRecorderMP
 
             recoding = false;
             recordBtn.Image = Resources.Record;
-            this.toolTip.SetToolTip(this.recordBtn, global::ScreenRecorder.Properties.Resources.RecordToolTip);
-            
+            toolTip.SetToolTip(recordBtn, Resources.RecordToolTip);
+
             //encoder.Finish();
-           
+
             NotifyUser(Resources.RecordStopped);
-            
+
             //TODO : capture audio and embed with video file. check out NAudio from www.Codeplex.com
 
             //run the suitable hook command
@@ -488,7 +494,7 @@ namespace ScreenRecorderMP
         }
 
         /// <summary>
-        /// Delete temporary bmp/png/etc files 
+        ///     Delete temporary bmp/png/etc files
         /// </summary>
         private void DeleteTempFiles()
         {
@@ -509,7 +515,7 @@ namespace ScreenRecorderMP
         }
 
         /// <summary>
-        /// Hide button
+        ///     Hide button
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -523,9 +529,9 @@ namespace ScreenRecorderMP
                 if (titlePanel.Tag == null)
                     titlePanel.Tag = titlePanel.Height;
 
-                screenViewMP.Location = (Point)screenViewMP.Tag;
-                screenViewMP.Height -= (int)titlePanel.Tag;
-                screenViewMP.Width -= (int)configMP.Tag;
+                screenViewMP.Location = (Point) screenViewMP.Tag;
+                screenViewMP.Height -= (int) titlePanel.Tag;
+                screenViewMP.Width -= (int) configMP.Tag;
 
                 hideBtn.Image = Resources.RightSide;
                 configMP.Show();
@@ -545,13 +551,13 @@ namespace ScreenRecorderMP
                 screenViewMP.Tag = screenViewMP.Location;
                 screenViewMP.Location = titlePanel.Location;
 
-                screenViewMP.Height += (int)titlePanel.Tag;
-                screenViewMP.Width += (int)configMP.Tag;
+                screenViewMP.Height += (int) titlePanel.Tag;
+                screenViewMP.Width += (int) configMP.Tag;
             }
         }
 
         /// <summary>
-        /// Reset the application settings to default
+        ///     Reset the application settings to default
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

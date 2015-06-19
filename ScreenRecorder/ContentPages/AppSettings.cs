@@ -1,34 +1,37 @@
-﻿#region File Header
-/*[ Compilation unit ----------------------------------------------------------
- 
-   Component       : ScreenRecorderMP
- 
-   Name            : Settings.cs
- 
-  Author           : Sunil
- 
------------------------------------------------------------------------------*/
-/*] END */
-#endregion
+﻿// This file is part of ScreenRecorder
+//  
+// ScreenRecorder  is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// ScreenRecorder is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with ScreenRecorder.  If not, see <http://www.gnu.org/licenses/>.
 
 #region Using directives
 
-using ScreenRecorder.Properties;
 using System;
-using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using ScreenRecorder.Hooks;
+using ScreenRecorder.Properties;
+
 #endregion
 
 namespace ScreenRecorder.ContentPages
 {
     /// <summary>
-    /// App settings
+    ///     App settings
     /// </summary>
     public partial class AppSettings : UserControl, IContentPage
     {
         /// <summary>
-        /// Initializes a new instance of the AppSettings class.
+        ///     Initializes a new instance of the AppSettings class.
         /// </summary>
         public AppSettings()
         {
@@ -41,13 +44,13 @@ namespace ScreenRecorder.ContentPages
         }
 
         /// <summary>
-        /// Read config
+        ///     Read config
         /// </summary>
         private void ReadUserSettings()
         {
             numericUpDown1.Value = Settings.Default.FramesPerSec;
             saveLocBox.Text = Settings.Default.BitmapTempLoc;
-            langComboBox.SelectedItem = (string)Settings.Default.Language;
+            langComboBox.SelectedItem = (string) Settings.Default.Language;
             voutLocBox.Text = Settings.Default.VideoLoc;
             videoTypeBox.Text = Settings.Default.VideoType;
 
@@ -61,23 +64,23 @@ namespace ScreenRecorder.ContentPages
         }
 
         /// <summary>
-        /// Opacity scroll
+        ///     Opacity scroll
         /// </summary>
         /// <param name="sender">Sender of the event</param>
         /// <param name="e">Event arguments</param>
         private void Opacity_Scroll(object sender, EventArgs e)
         {
-            int v = this.OpacityBar.Value;
+            int v = OpacityBar.Value;
         }
 
         /// <summary>
-        /// Save click
+        ///     Save click
         /// </summary>
         /// <param name="sender">Sender of the event</param>
         /// <param name="e">Event arguments</param>
         private void save_Click(object sender, EventArgs e)
         {
-            Settings.Default.FramesPerSec = (int)numericUpDown1.Value;
+            Settings.Default.FramesPerSec = (int) numericUpDown1.Value;
             Settings.Default.BitmapTempLoc = saveLocBox.Text;
             Settings.Default.Language = langComboBox.SelectedItem as string;
             Settings.Default.VideoLoc = voutLocBox.Text;
@@ -89,7 +92,8 @@ namespace ScreenRecorder.ContentPages
             //MessageBox.Show("Application must be restarted inorder to apply the changes", "Restart", 
             //    MessageBoxButtons.OKCancel, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, 
             //    MessageBoxOptions.ServiceNotification);
-            if (MessageBox.Show("Application must be restarted inorder to apply the changes", "Restart", "Cancel") == YesNo.Yes)
+            if (MessageBox.Show("Application must be restarted inorder to apply the changes", "Restart", "Cancel") ==
+                YesNo.Yes)
             {
                 Application.Restart();
             }
@@ -97,7 +101,7 @@ namespace ScreenRecorder.ContentPages
         }
 
         /// <summary>
-        /// About us 
+        ///     About us
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

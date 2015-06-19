@@ -1,36 +1,39 @@
-﻿#region File Header
-/*[ Compilation unit ----------------------------------------------------------
- 
-   Component       : ScreenRecorderMP
- 
-   Name            : Settings.cs
- 
-  Author           : Sunil
- 
------------------------------------------------------------------------------*/
-/*] END */
-#endregion
+﻿// This file is part of ScreenRecorder
+//  
+// ScreenRecorder  is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// ScreenRecorder is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with ScreenRecorder.  If not, see <http://www.gnu.org/licenses/>.
 
 #region Using directives
+
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using System.Xml.Linq;
+
 #endregion
 
 namespace ScreenRecorder.Hooks
 {
-
     /// <summary>
-    /// Parses all the hook files
+    ///     Parses all the hook files
     /// </summary>
     public class HookParser
     {
-        const string hookLocation = @"Hooks\";
+        private const string hookLocation = @"Hooks\";
 
         /// <summary>
-        /// Parse
+        ///     Parse
         /// </summary>
         /// <returns></returns>
         public List<HookData> Parse()
