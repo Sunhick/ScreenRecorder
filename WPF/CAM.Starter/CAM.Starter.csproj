@@ -105,6 +105,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Logger\Log4NetLogger.cs" />
     <Compile Include="ViewModel\UIContainerViewModel.cs" />
     <Compile Include="Views\UIContainerView.xaml.cs">
       <DependentUpon>UIContainerView.xaml</DependentUpon>
@@ -146,16 +147,24 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\AVRecorder.ico" />
+    <Resource Include="Resources\AVRecorder.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\AVRecorder.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\CAM.Bootscreen\CAM.Bootscreen.csproj">
+      <Project>{8C937354-DD59-4857-B824-C8516F0A9C99}</Project>
+      <Name>CAM.Bootscreen</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CAM.Common\CAM.Common.csproj">
       <Project>{033C00D7-1510-462C-B67A-6C14C09905FE}</Project>
       <Name>CAM.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <SplashScreen Include="Resources\AVRecorder.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </SplashScreen>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

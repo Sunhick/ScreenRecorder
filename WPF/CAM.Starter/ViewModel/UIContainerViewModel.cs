@@ -15,6 +15,7 @@
 
 using System;
 using CAM.Common;
+using log4net;
 using Microsoft.Practices.Prism.PubSubEvents;
 
 namespace CAM.Starter.ViewModel
@@ -22,6 +23,8 @@ namespace CAM.Starter.ViewModel
     // ReSharper disable once InconsistentNaming
     public class UIContainerViewModel : ViewModelBase
     {
+        private static readonly ILog Log = LogManager.GetLogger(typeof (UIContainerViewModel));
+
         private string myActionAlertColor;
 
         public UIContainerViewModel(IEventAggregator theEventAggregator)
@@ -48,12 +51,15 @@ namespace CAM.Starter.ViewModel
             switch (theExitType)
             {
                 case AppExitType.Normal:
+                    Log.Info("Exiting CAM Application. Normal Exit");
                     break;
 
                 case AppExitType.Forced:
+                    Log.Info("Exiting CAM Application. Forced Exit!");
                     break;
 
                 case AppExitType.Error:
+                    Log.Info("Exiting CAM Application. Unknown error happened!");
                     break;
             }
 

@@ -14,6 +14,7 @@
 // along with ScreenRecorder.  If not, see <http://www.gnu.org/licenses/>.
 
 using CAM.Tools.Views;
+using log4net;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.Regions;
@@ -23,6 +24,7 @@ namespace CAM.Tools
 {
     public class BasicToolsModule : IModule
     {
+        private readonly ILog Log = LogManager.GetLogger(typeof (BasicToolsModule));
         private readonly IUnityContainer myContainer;
         private readonly IEventAggregator myEventAggregator;
         private readonly IRegionManager myRegionManager;
@@ -37,6 +39,7 @@ namespace CAM.Tools
 
         public void Initialize()
         {
+            Log.Info("Initializing BasicToolsModule");
             myRegionManager.RegisterViewWithRegion("ToolsRegion", typeof (ToolsView));
         }
     }

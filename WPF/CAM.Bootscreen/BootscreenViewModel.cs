@@ -14,32 +14,32 @@
 // along with ScreenRecorder.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Windows;
-using log4net;
+using CAM.Common;
 
-namespace CAM.Starter
+namespace CAM.Bootscreen
 {
-    /// <summary>
-    ///     Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    public class BootscreenViewModel : ViewModelBase
     {
-        private static readonly ILog Log = LogManager.GetLogger(typeof (App));
+        private string myStatus;
 
-        public App()
+        public BootscreenViewModel()
         {
-            AppDomain.CurrentDomain.UnhandledException += CurrentDomainUnhandledException;
+            StatusBar = "Loading CAM Recorder...";
         }
 
-        private void CurrentDomainUnhandledException(object theSender, UnhandledExceptionEventArgs theArgs)
+        public String StatusBar
         {
-            Log.Fatal("Unhandled exception from CAM Recorder!", (Exception) theArgs.ExceptionObject);
+            get { return myStatus; }
+            set
+            {
+                myStatus = value;
+                OnPropertyChanged("StatusBar");
+            }
         }
 
-        protected override void OnStartup(StartupEventArgs theArgs)
+        public void ShowStatus(string theMessage)
         {
-            Bootstrapper aBootstrapper = new Bootstrapper();
-            aBootstrapper.Run();
+            StatusBar = theMessage;
         }
     }
 }

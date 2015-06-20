@@ -4,8 +4,8 @@
         xmlns:regions="http://www.codeplex.com/CompositeWPF"
         Title="RECORDER" Background="Transparent" AllowsTransparency="True" 
         Foreground="#009688" WindowStyle="None" Topmost="True" 
-        BorderBrush="{Binding Path=ActionAlertColor}" BorderThickness="6"
-        WindowState="Maximized">
+        BorderBrush="{Binding Path=ActionAlertColor}" BorderThickness="7"
+        WindowState="Maximized" Icon="/CAM.Starter;component/Resources/AVRecorder.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

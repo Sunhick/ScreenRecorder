@@ -14,7 +14,10 @@
 // along with ScreenRecorder.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Windows;
+using CAM.Starter.Logger;
 using CAM.Starter.Views;
+using log4net;
+using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.UnityExtensions;
 using Microsoft.Practices.Unity;
@@ -23,6 +26,13 @@ namespace CAM.Starter
 {
     internal class Bootstrapper : UnityBootstrapper
     {
+        private static readonly ILog Log = LogManager.GetLogger(typeof (Bootstrapper));
+
+        protected override ILoggerFacade CreateLogger()
+        {
+            return new Log4NetLogger();
+        }
+
         protected override IModuleCatalog CreateModuleCatalog()
         {
             return new ConfigurationModuleCatalog();
@@ -35,6 +45,7 @@ namespace CAM.Starter
 
         protected override void InitializeShell()
         {
+            Log.Info("Starting the CAM Application");
             Application.Current.MainWindow = (UIContainerView) Shell;
             Application.Current.MainWindow.Show();
         }

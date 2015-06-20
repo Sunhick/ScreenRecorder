@@ -10,14 +10,19 @@
             <Setter Property="Foreground" Value="White" />
         </Style>
     </UserControl.Resources>
-    <UniformGrid Rows="1" Columns="3" Height="27">
-        <UniformGrid/>
-        <UniformGrid Columns="7" Background="#607D8B">
+    <Grid Height="27">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid Grid.Column="0"/>
+        <UniformGrid Grid.Column="1" Background="#607D8B" Columns="8">
             <Button x:Name="ExitButton" Background="#607D8B" Command="{Binding Path=AppExitCommand}" 
                 ToolTip="EXIT" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                 <Image Source="/CAM.Tools;component/Resources/Close.png"/>
             </Button>
-
             <Button x:Name="Settings" Background="#607D8B" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
                 ToolTip="SETTINGS" Command="{Binding Path=SettingsCommand}">
                 <Image Source="/CAM.Tools;component/Resources/Settings.png"/>
@@ -38,11 +43,12 @@
                 ToolTip="RESET">
                 <Image Source="/CAM.Tools;component/Resources/Reset.png"/>
             </Button>
+            <Label x:Name="RecordTime" Content="REC: 0:0:0" FontWeight="Bold"/>
             <Button x:Name="Pin" Background="#607D8B" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" 
                 ToolTip="PIN" Command="{Binding Path=PinUnPinCommand}">
                 <Image Source="/CAM.Tools;component/Resources/Pin.png"/>
             </Button>
         </UniformGrid>
-        <UniformGrid/>
-    </UniformGrid>
+        <Grid Grid.Column="2"/>
+    </Grid>
 </UserControl>

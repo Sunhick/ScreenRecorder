@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ScreenRecorder\Extern\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.Prism.Composition, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Composition.5.0.0\lib\NET45\Microsoft.Practices.Prism.Composition.dll</HintPath>
       <Private>True</Private>
@@ -120,6 +124,10 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CAM.Bootscreen\CAM.Bootscreen.csproj">
+      <Project>{8C937354-DD59-4857-B824-C8516F0A9C99}</Project>
+      <Name>CAM.Bootscreen</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CAM.Common\CAM.Common.csproj">
       <Project>{033C00D7-1510-462C-B67A-6C14C09905FE}</Project>
       <Name>CAM.Common</Name>

@@ -1,0 +1,19 @@
+﻿<Window x:Class="CAM.Bootscreen.Bootscreen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" BorderThickness="0" WindowStartupLocation="CenterScreen" 
+        ResizeMode="NoResize" AllowsTransparency="True"
+             WindowStyle="None" Background="Transparent" ShowInTaskbar="False" Height="471" Width="622">
+    <Grid Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Image Source="/CAM.Bootscreen;component/Images/AVRecorder.png"/>
+        <TextBlock Grid.Row="1" HorizontalAlignment="Left" TextWrapping="Wrap" 
+                   Text="{Binding Path=StatusBar}" VerticalAlignment="Top"
+                   TextAlignment="Left" Foreground="White" FontSize="15" FontFamily="Ariel"/>
+    </Grid>
+</Window>
