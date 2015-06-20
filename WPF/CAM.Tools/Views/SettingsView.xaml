@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="CAM.Tools.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" >
+    <Grid Background="#607D8B">
+        <TabControl Background="#607D8B">
+            <TabItem Header="GENERAL SETTINGS" Background="#607D8B" />
+            <TabItem Header="VIDEO SETTINGS" Background="#607D8B" />
+            <TabItem Header="AUDIO SETTINGS" Background="#607D8B" />
+            <TabItem Header="PREFERENCES" Background="#607D8B" />
+            <TabItem Header="ABOUT" Background="#607D8B" />
+        </TabControl>
+    </Grid>
+</UserControl>

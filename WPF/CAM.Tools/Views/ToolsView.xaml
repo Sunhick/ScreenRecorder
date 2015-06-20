@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="CAM.Tools.Views.ToolsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style x:Key="{x:Type ToolTip}" TargetType="ToolTip">
+            <Setter Property="Background" Value="#607D8B"/>
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+    </UserControl.Resources>
+    <UniformGrid Rows="1" Columns="3" Height="27">
+        <UniformGrid/>
+        <UniformGrid Columns="7" Background="#607D8B">
+            <Button x:Name="ExitButton" Background="#607D8B" Command="{Binding Path=AppExitCommand}" 
+                ToolTip="EXIT" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                <Image Source="/CAM.Tools;component/Resources/Close.png"/>
+            </Button>
+
+            <Button x:Name="Settings" Background="#607D8B" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+                ToolTip="SETTINGS" Command="{Binding Path=SettingsCommand}">
+                <Image Source="/CAM.Tools;component/Resources/Settings.png"/>
+            </Button>
+            <Button x:Name="Record" Background="#607D8B" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+                ToolTip="RECORD">
+                <Image Source="/CAM.Tools;component/Resources/Record.png"/>
+            </Button>
+            <Button x:Name="Pause" Background="#607D8B" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" 
+                ToolTip="PAUSE">
+                <Image Source="/CAM.Tools;component/Resources/Pause.png"/>
+            </Button>
+            <Button x:Name="Stop" Background="#607D8B" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" 
+                ToolTip="STOP">
+                <Image Source="/CAM.Tools;component/Resources/Stop.png"/>
+            </Button>
+            <Button x:Name="Reset" Background="#607D8B" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" 
+                ToolTip="RESET">
+                <Image Source="/CAM.Tools;component/Resources/Reset.png"/>
+            </Button>
+            <Button x:Name="Pin" Background="#607D8B" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" 
+                ToolTip="PIN" Command="{Binding Path=PinUnPinCommand}">
+                <Image Source="/CAM.Tools;component/Resources/Pin.png"/>
+            </Button>
+        </UniformGrid>
+        <UniformGrid/>
+    </UniformGrid>
+</UserControl>
