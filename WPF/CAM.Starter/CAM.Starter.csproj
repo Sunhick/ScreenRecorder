@@ -151,6 +151,12 @@
   <ItemGroup>
     <Resource Include="Resources\AVRecorder.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CAM.Common\CAM.Common.csproj">
+      <Project>{033C00D7-1510-462C-B67A-6C14C09905FE}</Project>
+      <Name>CAM.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
