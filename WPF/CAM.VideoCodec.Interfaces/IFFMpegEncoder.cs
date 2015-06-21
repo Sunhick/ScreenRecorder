@@ -13,13 +13,16 @@
 // You should have received a copy of the GNU General Public License
 // along with ScreenRecorder.  If not, see <http://www.gnu.org/licenses/>.
 
+using CAM.Common;
+
 namespace CAM.VideoCodec.Interfaces
 {
     /// <summary>
     ///     FFMpeg encoder interface
     /// </summary>
-// ReSharper disable once InconsistentNaming
+    // ReSharper disable once InconsistentNaming
     public interface IFFMpegEncoder
     {
+        bool Encode(HookInfo theHookInfo);
     }
 }

@@ -132,6 +132,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CAM.Common\CAM.Common.csproj">
+      <Project>{033C00D7-1510-462C-B67A-6C14C09905FE}</Project>
+      <Name>CAM.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CAM.VideoCodec.Interfaces\CAM.VideoCodec.Interfaces.csproj">
       <Project>{5E170C42-D6BB-4C17-938B-A968821C64F6}</Project>
       <Name>CAM.VideoCodec.Interfaces</Name>

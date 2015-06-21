@@ -149,6 +149,10 @@
       <Project>{033C00D7-1510-462C-B67A-6C14C09905FE}</Project>
       <Name>CAM.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CAM.Configuration\CAM.Configuration.csproj">
+      <Project>{AFB8EF06-74AF-48FF-8450-45CFDDE6A5C6}</Project>
+      <Name>CAM.Configuration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CAM.VideoCodec.Interfaces\CAM.VideoCodec.Interfaces.csproj">
       <Project>{5E170C42-D6BB-4C17-938B-A968821C64F6}</Project>
       <Name>CAM.VideoCodec.Interfaces</Name>

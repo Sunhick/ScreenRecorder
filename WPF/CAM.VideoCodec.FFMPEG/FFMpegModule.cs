@@ -23,8 +23,8 @@ namespace CAM.VideoCodec.FFMPEG
     // ReSharper disable once InconsistentNaming
     internal class FFMpegModule : IModule
     {
+        private readonly ILog Log = LogManager.GetLogger(typeof (FFMpegModule));
         private readonly IUnityContainer myContainer;
-        private ILog Log = LogManager.GetLogger(typeof (FFMpegModule));
 
         public FFMpegModule(IUnityContainer theContainer)
         {

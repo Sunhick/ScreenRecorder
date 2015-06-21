@@ -13,6 +13,7 @@
 // You should have received a copy of the GNU General Public License
 // along with ScreenRecorder.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using CAM.Common;
 using CAM.VideoCodec.Interfaces;
 using Microsoft.Practices.Unity;
@@ -21,15 +22,22 @@ namespace CAM.Tools.Model
 {
     public class ToolsModel
     {
+        private readonly IConfiguration myConfiguration;
         private readonly IUnityContainer myContainer;
-        private IFFMpegEncoder myFFMpegEncoder;
-        private IConfiguration myConfiguration;
+// ReSharper disable once InconsistentNaming
+        private readonly IFFMpegEncoder myFFMpegEncoder;
 
         public ToolsModel(IUnityContainer theContainer)
         {
             myContainer = theContainer;
             myFFMpegEncoder = myContainer.Resolve<IFFMpegEncoder>();
             myConfiguration = myContainer.Resolve<IConfiguration>();
+        }
+
+        public bool EncodeBitmapsToVideo(String theVideoType)
+        {
+            HookInfo aHookInfo = myConfiguration.GetHook(theVideoType);
+            return myFFMpegEncoder.Encode(aHookInfo);
         }
     }
 }

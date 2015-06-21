@@ -22,8 +22,8 @@ namespace CAM.Configuration
 {
     internal class ConfigurationModule : IModule
     {
+        private readonly ILog Log = LogManager.GetLogger(typeof (ConfigurationModule));
         private readonly IUnityContainer myContainer;
-        private readonly ILog Log = LogManager.GetLogger(typeof(ConfigurationModule));
 
         public ConfigurationModule(IUnityContainer theContainer)
         {

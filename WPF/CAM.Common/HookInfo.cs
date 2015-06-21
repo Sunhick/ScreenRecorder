@@ -17,8 +17,18 @@ using System;
 
 namespace CAM.Common
 {
-    public interface IConfiguration
+    public class HookInfo
     {
-        HookInfo GetHook(String theHookId);
+        private String myArgs;
+        public String HookId { get; set; }
+        public String Mode { get; set; }
+        public String ExeName { get; set; }
+        public String ExePath { get; set; }
+
+        public String Arguments
+        {
+            get { return myArgs; }
+            set { myArgs = VariablesParser.ExpandVariables(value); }
+        }
     }
 }

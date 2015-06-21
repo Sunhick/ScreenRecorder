@@ -36,7 +36,7 @@
                 <Image Source="/CAM.Tools;component/Resources/Pause.png"/>
             </Button>
             <Button x:Name="Stop" Background="#607D8B" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" 
-                ToolTip="STOP">
+                ToolTip="STOP" Command="{Binding Path=StopCommand}">
                 <Image Source="/CAM.Tools;component/Resources/Stop.png"/>
             </Button>
             <Button x:Name="Reset" Background="#607D8B" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" 
