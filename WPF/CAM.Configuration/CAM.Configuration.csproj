@@ -78,6 +78,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -88,9 +89,32 @@
   <ItemGroup>
     <Compile Include="Configuration.cs" />
     <Compile Include="ConfigurationModule.cs" />
+    <Compile Include="Hook\HookConfigurationSection.csd.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HookConfigurationSection.csd</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Hook\HookConfigurationSection.csd">
+      <Generator>CsdFileGenerator</Generator>
+      <LastGenOutput>HookConfigurationSection.csd.cs</LastGenOutput>
+    </None>
+    <None Include="Hook\HookConfigurationSection.csd.config">
+      <DependentUpon>HookConfigurationSection.csd</DependentUpon>
+    </None>
+    <None Include="Hook\HookConfigurationSection.csd.diagram">
+      <DependentUpon>HookConfigurationSection.csd</DependentUpon>
+    </None>
+    <None Include="Hook\HookConfigurationSection.csd.xsd">
+      <DependentUpon>HookConfigurationSection.csd</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Hooks.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -98,6 +122,9 @@
       <Project>{033C00D7-1510-462C-B67A-6C14C09905FE}</Project>
       <Name>CAM.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
