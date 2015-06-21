@@ -26,28 +26,40 @@ namespace CAM.Tools.ViewModel
         private readonly bool myCanExitApp;
 
         private readonly IEventAggregator myEventAggregator;
-        private ToolsModel myModel;
+        private readonly ToolsModel myModel;
         private IRegionManager myRegionManager;
 
         public ToolsViewModel(ToolsModel theModel, IEventAggregator theEventAggregator, IRegionManager theManager)
         {
             AppExitCommand = new RelayCommand(CanExitApp, AppExitEvent);
             SettingsCommand = new RelayCommand(CanOpenSettings, OpenSettings);
-            StopCommand = new RelayCommand(CanStopRecording, StopRecording);
+            StopRecordCommand = new RelayCommand(CanStopRecording, StopRecording);
+            StartRecordCommand = new RelayCommand(CanStartRecording, StartRecording);
             myCanExitApp = true;
             myEventAggregator = theEventAggregator;
             myRegionManager = theManager;
             myModel = theModel;
         }
 
-        private void StopRecording(object theObj)
-        {
-            myModel.EncodeBitmapsToVideo("MP4");
-        }
-
         public ICommand AppExitCommand { get; set; }
         public ICommand SettingsCommand { get; set; }
-        public ICommand StopCommand { get; set; }
+        public ICommand StopRecordCommand { get; set; }
+        public ICommand StartRecordCommand { get; set; }
+
+        private bool CanStartRecording(object theObj)
+        {
+            return true;
+        }
+
+        private void StartRecording(object theObj)
+        {
+            myModel.StartRecording();
+        }
+
+        private void StopRecording(object theObj)
+        {
+            myModel.StopRecording();
+        }
 
         private void OpenSettings(object theObj)
         {

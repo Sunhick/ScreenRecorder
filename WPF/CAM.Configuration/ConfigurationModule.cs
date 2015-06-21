@@ -13,9 +13,9 @@
 // You should have received a copy of the GNU General Public License
 // along with ScreenRecorder.  If not, see <http://www.gnu.org/licenses/>.
 
-using CAM.Common;
 using log4net;
 using Microsoft.Practices.Prism.Modularity;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Unity;
 
 namespace CAM.Configuration
@@ -24,17 +24,19 @@ namespace CAM.Configuration
     {
         private readonly ILog Log = LogManager.GetLogger(typeof (ConfigurationModule));
         private readonly IUnityContainer myContainer;
+        private readonly IEventAggregator myEventAggregator;
 
-        public ConfigurationModule(IUnityContainer theContainer)
+        public ConfigurationModule(IUnityContainer theContainer, IEventAggregator theEventAggregator)
         {
             myContainer = theContainer;
+            myEventAggregator = theEventAggregator;
         }
 
         public void Initialize()
         {
             Log.Info("Initialize Configuration Module");
-            IConfiguration aConfig = new Configuration();
-            myContainer.RegisterInstance<IConfiguration>(aConfig, new ContainerControlledLifetimeManager());
+            IConfiguration aConfig = new Configuration(myEventAggregator);
+            myContainer.RegisterInstance(aConfig, new ContainerControlledLifetimeManager());
         }
     }
 }

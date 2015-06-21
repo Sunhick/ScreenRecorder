@@ -28,7 +28,7 @@
                 <Image Source="/CAM.Tools;component/Resources/Settings.png"/>
             </Button>
             <Button x:Name="Record" Background="#607D8B" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
-                ToolTip="RECORD">
+                ToolTip="RECORD" Command="{Binding Path=StartRecordCommand}">
                 <Image Source="/CAM.Tools;component/Resources/Record.png"/>
             </Button>
             <Button x:Name="Pause" Background="#607D8B" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" 
@@ -36,7 +36,7 @@
                 <Image Source="/CAM.Tools;component/Resources/Pause.png"/>
             </Button>
             <Button x:Name="Stop" Background="#607D8B" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" 
-                ToolTip="STOP" Command="{Binding Path=StopCommand}">
+                ToolTip="STOP" Command="{Binding Path=StopRecordCommand}">
                 <Image Source="/CAM.Tools;component/Resources/Stop.png"/>
             </Button>
             <Button x:Name="Reset" Background="#607D8B" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" 

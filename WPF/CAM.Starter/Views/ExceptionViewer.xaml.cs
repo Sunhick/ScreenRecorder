@@ -14,11 +14,23 @@
 // along with ScreenRecorder.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Windows;
 
-namespace CAM.Common
+namespace CAM.Starter.Views
 {
-    public interface IConfiguration
+    /// <summary>
+    ///     Interaction logic for ExceptionViewer.xaml
+    /// </summary>
+    public partial class ExceptionViewer : Window
     {
-        HookInfo GetHook(String theHookId);
+        public ExceptionViewer()
+        {
+            InitializeComponent();
+        }
+
+        private void OnAbortClicked(object theSender, RoutedEventArgs theE)
+        {
+            Environment.Exit(1);
+        }
     }
 }

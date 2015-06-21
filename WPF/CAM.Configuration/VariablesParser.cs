@@ -17,7 +17,7 @@ using System;
 using System.Collections;
 using log4net;
 
-namespace CAM.Common
+namespace CAM.Configuration
 {
     /// <summary>
     ///     Expand the environment varibles in the hooks files.
@@ -29,11 +29,7 @@ namespace CAM.Common
         /// <summary>
         ///     application environment variables
         /// </summary>
-        private static readonly Hashtable AppVariables = new Hashtable()
-        {
-            //{"BITMAPS", Settings.Default.BitmapTempLoc},
-            //{"FPS", Settings.Default.FramesPerSec}
-        };
+        private static readonly Hashtable AppVariables = new Hashtable();
 
         /// <summary>
         ///     Push App environment variable
@@ -59,7 +55,7 @@ namespace CAM.Common
         {
             if (string.IsNullOrEmpty(theContent)) return theContent;
 
-            Log.Info("Before Expand contents: " + theContent);
+            Log.Debug("Before Expand contents: " + theContent);
 
             string aExpandedContent = theContent;
 
@@ -92,7 +88,7 @@ namespace CAM.Common
                 }
             }
 
-            Log.Info("After Expand contents: " + aExpandedContent);
+            Log.Debug("After Expand contents: " + aExpandedContent);
             return aExpandedContent;
         }
     }

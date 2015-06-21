@@ -13,6 +13,7 @@
 // You should have received a copy of the GNU General Public License
 // along with ScreenRecorder.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Diagnostics;
 using System.IO;
 using CAM.Common;
@@ -36,28 +37,27 @@ namespace CAM.VideoCodec.FFMPEG
             {
                 StartInfo =
                 {
-                    FileName = Path.Combine(theHookInfo.ExePath, theHookInfo.ExeName),
-                    UseShellExecute = false,
-                    CreateNoWindow = false
+                    FileName = Path.Combine(theHookInfo.ExePath, theHookInfo.ExeName)
+                    //RedirectStandardOutput = true,
+                    //RedirectStandardError = true
                 }
             }; //Audio-Video maker process
 
             //TODO: ask If output.mp4 need to be overwritten?
 
 #if DEBUG
-            aVMaker.StartInfo.UseShellExecute = true;
+            aVMaker.StartInfo.UseShellExecute = false;
             aVMaker.StartInfo.CreateNoWindow = false;
 #else 
             aVMaker.StartInfo.UseShellExecute = false;
             aVMaker.StartInfo.CreateNoWindow = true;
 #endif
-
-            string aOutFile = GetOutputFile();
+            string aOutFile = GetOutputFile(theHookInfo.HookId);
 
             //avMaker.StartInfo.Arguments = String.Format(@"-i bitmaps\{0} -vcodec huffyuv output.avi", pngLoc);
             //avMaker.StartInfo.Arguments = String.Format(@"-i bitmaps\{0} -r 20 output.mp4", pngLoc);
 
-            aVMaker.StartInfo.Arguments = theHookInfo.Arguments;
+            aVMaker.StartInfo.Arguments = theHookInfo.Arguments + "\\" + aOutFile;
             // String.Format(@"-i {0} -r {2} -c:v libx264 -preset slow -crf 21 {1}", ifile, outFile, Settings.Default.FramesPerSec);
             // avMaker.StartInfo.Arguments = String.Format(@" -r 20 -i bitmaps\{0} -c:v libx264 -r 20 -pix_fmt yuv420p output.mp4", pngLoc);
 
@@ -66,23 +66,23 @@ namespace CAM.VideoCodec.FFMPEG
                 return false;
             }
 
-            //output
-            // log.Info(avMaker.StandardOutput.ReadToEnd());
-            //errors
-            //log.Error(avMaker.StandardError.ReadToEnd());
-
             aVMaker.WaitForExit();
             aVMaker.Close();
+
+            //// output
+            // Log.Info(aVMaker.StandardOutput.ReadToEnd());
+            ////errors
+            //Log.Error(aVMaker.StandardError.ReadToEnd());
 
             Log.Info("End of encoding bitmaps into video stream...");
             return false;
         }
 
-        private string GetOutputFile()
+        private string GetOutputFile(string theHookId)
         {
-            string aTempFileName = Path.GetTempFileName();
+            string aTempFileName = Path.ChangeExtension(Path.GetTempFileName(), theHookId);
             Log.Info("Creating Video in TEMP Directory:" + aTempFileName);
-            return aTempFileName;
+            return Path.GetFileName(aTempFileName);
         }
     }
 }

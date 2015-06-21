@@ -14,15 +14,13 @@
 // along with ScreenRecorder.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using CAM.Common;
 
-namespace CAM.Common
+namespace CAM.Configuration
 {
-    public class HookInfo
+    public interface IConfiguration
     {
-        public String HookId { get; set; }
-        public String Mode { get; set; }
-        public String ExeName { get; set; }
-        public String ExePath { get; set; }
-        public String Arguments { get; set; }
+        VideoSettings VideoConfiguration { get; set; }
+        HookInfo GetHook(String theHookId);
     }
 }

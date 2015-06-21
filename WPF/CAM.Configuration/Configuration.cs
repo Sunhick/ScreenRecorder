@@ -20,6 +20,7 @@ using System.IO;
 using System.Linq;
 using CAM.Common;
 using log4net;
+using Microsoft.Practices.Prism.PubSubEvents;
 
 namespace CAM.Configuration
 {
@@ -28,9 +29,16 @@ namespace CAM.Configuration
         private const string HookFile = "Hooks.config";
         private readonly ILog Log = LogManager.GetLogger(typeof (Configuration));
         private readonly IList<HookInfo> myConfiguredHooks = new List<HookInfo>();
+        private readonly IEventAggregator myEventAggregator;
 
-        public Configuration()
+        public Configuration(IEventAggregator theEventAggregator)
         {
+            myEventAggregator = theEventAggregator;
+            myEventAggregator.GetEvent<AppExitEvent>().Subscribe(SaveConfigurationSettings);
+
+            VideoConfiguration = new VideoSettings();
+            SetupApplicationVariables();
+
             var aFileMap = new ExeConfigurationFileMap {ExeConfigFilename = HookFile};
 
             if (!File.Exists(aFileMap.ExeConfigFilename))
@@ -45,7 +53,7 @@ namespace CAM.Configuration
             var aHook = aConfigurationSection as Hook;
             if (aHook == null)
             {
-                Log.Error("No Hooks configured! No command targed for FFMPEG. CAM Recorder may not work!");
+                Log.Error("No Hooks configured! No command targeted for FFMPEG. CAM Recorder may not work!");
                 return;
             }
 
@@ -60,7 +68,7 @@ namespace CAM.Configuration
                     Mode = aCurrent.Mode,
                     ExeName = aCurrent.Executable.Name,
                     ExePath = aCurrent.Executable.ExeLocation,
-                    Arguments = aCurrent.Arguments.CommandLine
+                    Arguments = VariablesParser.ExpandVariables(aCurrent.Arguments.CommandLine)
                 });
             } while (aEnumerator.MoveNext());
         }
@@ -82,6 +90,31 @@ namespace CAM.Configuration
 
             Log.Info("No hook configured with hook Id:" + theHookId);
             return null;
+        }
+
+        public VideoSettings VideoConfiguration { get; set; }
+
+        private void SetupApplicationVariables()
+        {
+            VariablesParser.PushVariable("VIDEO_LOCATION", VideoConfiguration.OutputLocation);
+            VariablesParser.PushVariable("FPS", VideoConfiguration.FPS);
+            VariablesParser.PushVariable("BITMAPS", VideoConfiguration.BitmapLocation);
+        }
+
+        private void SaveConfigurationSettings(AppExitType theExitType)
+        {
+            switch (theExitType)
+            {
+                case AppExitType.Normal:
+                    VideoConfiguration.Save();
+                    Log.Debug("Video settings saved.");
+                    break;
+
+                case AppExitType.Forced:
+                case AppExitType.Error:
+                    Log.Info("Error in application close. Not saving configuration settings");
+                    break;
+            }
         }
     }
 }
