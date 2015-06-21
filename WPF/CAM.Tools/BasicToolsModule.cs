@@ -39,7 +39,7 @@ namespace CAM.Tools
 
         public void Initialize()
         {
-            Log.Info("Initializing BasicToolsModule");
+            Log.Info("Initializing Basic Tools Module");
             myRegionManager.RegisterViewWithRegion("ToolsRegion", typeof (ToolsView));
         }
     }

@@ -15,6 +15,7 @@
 
 using System.Windows.Input;
 using CAM.Common;
+using CAM.Tools.Model;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.Regions;
 
@@ -26,14 +27,16 @@ namespace CAM.Tools.ViewModel
 
         private readonly IEventAggregator myEventAggregator;
         private IRegionManager myRegionManager;
+        private ToolsModel myModel;
 
-        public ToolsViewModel(IEventAggregator theEventAggregator, IRegionManager theManager)
+        public ToolsViewModel(ToolsModel theModel,IEventAggregator theEventAggregator, IRegionManager theManager)
         {
             AppExitCommand = new RelayCommand(CanExitApp, AppExitEvent);
             SettingsCommand = new RelayCommand(CanOpenSettings, OpenSettings);
             myCanExitApp = true;
             myEventAggregator = theEventAggregator;
             myRegionManager = theManager;
+            myModel = theModel;
         }
 
         public ICommand AppExitCommand { get; set; }
