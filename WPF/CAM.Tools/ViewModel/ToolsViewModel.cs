@@ -16,8 +16,10 @@
 using System.Windows.Input;
 using CAM.Common;
 using CAM.Tools.Model;
+using CAM.Tools.Views;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.Regions;
+using Microsoft.Practices.Unity;
 
 namespace CAM.Tools.ViewModel
 {
@@ -27,24 +29,42 @@ namespace CAM.Tools.ViewModel
 
         private readonly IEventAggregator myEventAggregator;
         private readonly ToolsModel myModel;
+        private Cursor myCursor;
         private IRegionManager myRegionManager;
+        private readonly IUnityContainer myContainer;
+        private SettingsView mySettingsView;
 
-        public ToolsViewModel(ToolsModel theModel, IEventAggregator theEventAggregator, IRegionManager theManager)
+        public ToolsViewModel(ToolsModel theModel, IEventAggregator theEventAggregator, IRegionManager theManager,
+            IUnityContainer theContainer)
         {
+            Cursor = Cursors.Arrow;
+            myCanExitApp = true;
+            myEventAggregator = theEventAggregator;
+            myRegionManager = theManager;
+            myContainer = theContainer;
+            myModel = theModel;
+
             AppExitCommand = new RelayCommand(CanExitApp, AppExitEvent);
             SettingsCommand = new RelayCommand(CanOpenSettings, OpenSettings);
             StopRecordCommand = new RelayCommand(CanStopRecording, StopRecording);
             StartRecordCommand = new RelayCommand(CanStartRecording, StartRecording);
-            myCanExitApp = true;
-            myEventAggregator = theEventAggregator;
-            myRegionManager = theManager;
-            myModel = theModel;
+            mySettingsView = myContainer.Resolve<SettingsView>();
         }
 
         public ICommand AppExitCommand { get; set; }
         public ICommand SettingsCommand { get; set; }
         public ICommand StopRecordCommand { get; set; }
         public ICommand StartRecordCommand { get; set; }
+
+        public Cursor Cursor
+        {
+            get { return myCursor; }
+            set
+            {
+                myCursor = value;
+                OnPropertyChanged("Cursor");
+            }
+        }
 
         private bool CanStartRecording(object theObj)
         {
@@ -58,11 +78,22 @@ namespace CAM.Tools.ViewModel
 
         private void StopRecording(object theObj)
         {
+            Cursor = Cursors.Wait;
             myModel.StopRecording();
+            Cursor = Cursors.Arrow;
         }
 
         private void OpenSettings(object theObj)
         {
+            IRegion aRegion = myRegionManager.Regions["SettingsRegion"];
+            if (aRegion.Views.Contains(mySettingsView))
+            {
+                aRegion.Deactivate(mySettingsView);
+                aRegion.Remove(mySettingsView);
+                return;
+            }
+            aRegion.Add(mySettingsView);
+            aRegion.Activate(mySettingsView);
         }
 
         private bool CanOpenSettings(object theObj)

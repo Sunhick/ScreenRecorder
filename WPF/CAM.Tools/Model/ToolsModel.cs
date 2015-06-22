@@ -30,6 +30,7 @@ namespace CAM.Tools.Model
 {
     public class ToolsModel
     {
+        private readonly ILog Log = LogManager.GetLogger(typeof (ToolsModel));
         private readonly string myBitmapLocation;
         private readonly IConfiguration myConfiguration;
         private readonly IUnityContainer myContainer;
@@ -37,7 +38,6 @@ namespace CAM.Tools.Model
         private readonly IFFMpegEncoder myFFMpegEncoder;
         private int myBitmapCount;
         private Timer myTimer;
-        private ILog Log = LogManager.GetLogger(typeof (ToolsModel));
 
         public ToolsModel(IUnityContainer theContainer)
         {

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<!-- Select a Product Configuration -->
+		<InstallShieldProductConfiguration>Express</InstallShieldProductConfiguration>
+		<!-- Select a Visual Studio Configuration / InstallShield Release -->
+		<Configuration>Debug</Configuration>
+		<InstallShieldRelease>$(Configuration)</InstallShieldRelease>
+	</PropertyGroup>
+	<ItemGroup>
+		<!-- The InstallShieldProject item selects the project to build -->
+		<InstallShieldProject Include="$(MSBuildProjectDirectory)\$(MSBuildProjectName).isl"/>
+		<!-- The InstallShieldReleaseFlags sets Release Flags -->
+		<!--<InstallShieldReleaseFlags Include=""/>-->
+		<!-- The InstallShieldMergeModulePath specifies what directories are
+		searched for Merge Modules -->
+		<!--<InstallShieldMergeModulePath Include=""/>-->
+	</ItemGroup>
+	<ItemGroup>
+		<!-- The ProjectReference items refer to any Visual Studio solutions you want to automatically probe for Project Output Groups.  -->
+	</ItemGroup>
+	<ItemGroup>
+		<!-- The TaggedOutputs items allow you to explicitly add extra files to output groups. Each item must include both Name and OutputGroup, as well as TargetPath metadata values. -->
+		<!--<TaggedOutputs Include="C:\My Test Exe.exe">
+			<Name>My Test Project</Name>
+			<OutputGroup>Primary output</OutputGroup>
+			<TargetPath>My Test Exe.exe</TargetPath>
+		</TaggedOutputs> -->
+	</ItemGroup>
+	<Import Project="$(MSBuildExtensionsPath32)\InstallShield\2013Limited\InstallShield.targets"/>
+	<ItemGroup>
+		<ProjectReference Include="..\CAM.Bootscreen\CAM.Bootscreen.csproj">
+			<Name>CAM.Bootscreen</Name>
+			<Project>{8C937354-DD59-4857-B824-C8516F0A9C99}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\CAM.Common\CAM.Common.csproj">
+			<Name>CAM.Common</Name>
+			<Project>{033C00D7-1510-462C-B67A-6C14C09905FE}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\CAM.Configuration\CAM.Configuration.csproj">
+			<Name>CAM.Configuration</Name>
+			<Project>{AFB8EF06-74AF-48FF-8450-45CFDDE6A5C6}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\CAM.Starter\CAM.Starter.csproj">
+			<Name>CAM.Starter</Name>
+			<Project>{619D8E20-4836-43E4-BF76-40A98964F133}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\CAM.Tools\CAM.Tools.csproj">
+			<Name>CAM.Tools</Name>
+			<Project>{BF99F2F8-B18E-484B-B9C9-58EDC207D7D5}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\CAM.VideoCodec.FFMPEG\CAM.VideoCodec.FFMPEG.csproj">
+			<Name>CAM.VideoCodec.FFMPEG</Name>
+			<Project>{4CA51786-35A6-48D6-A402-245D51CFACCD}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\CAM.VideoCodec.Interfaces\CAM.VideoCodec.Interfaces.csproj">
+			<Name>CAM.VideoCodec.Interfaces</Name>
+			<Project>{5E170C42-D6BB-4C17-938B-A968821C64F6}</Project>
+		</ProjectReference>
+	</ItemGroup>
+</Project>

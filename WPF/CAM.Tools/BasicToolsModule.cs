@@ -41,6 +41,7 @@ namespace CAM.Tools
         {
             Log.Info("Initializing Basic Tools Module");
             myRegionManager.RegisterViewWithRegion("ToolsRegion", typeof (ToolsView));
+            myRegionManager.RegisterViewWithRegion("ViewingRegion", typeof (TransparentView));
         }
     }
 }
