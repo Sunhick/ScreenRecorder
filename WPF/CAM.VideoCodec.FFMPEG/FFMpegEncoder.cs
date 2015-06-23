@@ -29,14 +29,14 @@ namespace CAM.VideoCodec.FFMPEG
     {
         private readonly ILog Log = LogManager.GetLogger(typeof (FFMpegEncoder));
 
-        public bool Encode(HookInfo theHookInfo)
+        public string Encode(EncoderInfo theEncoderInfo)
         {
             Log.Info("Start of encoding bitmaps into video stream...");
             Process aVMaker = new Process
             {
                 StartInfo =
                 {
-                    FileName = Path.Combine(theHookInfo.ExePath, theHookInfo.ExeName)
+                    FileName = Path.Combine(theEncoderInfo.ExePath, theEncoderInfo.ExeName)
                     //RedirectStandardOutput = true,
                     //RedirectStandardError = true
                 }
@@ -51,18 +51,18 @@ namespace CAM.VideoCodec.FFMPEG
             aVMaker.StartInfo.UseShellExecute = false;
             aVMaker.StartInfo.CreateNoWindow = true;
 #endif
-            string aOutFile = GetOutputFile(theHookInfo.HookId);
+            string aOutFile = GetOutputFile(theEncoderInfo.HookId);
 
             //avMaker.StartInfo.Arguments = String.Format(@"-i bitmaps\{0} -vcodec huffyuv output.avi", pngLoc);
             //avMaker.StartInfo.Arguments = String.Format(@"-i bitmaps\{0} -r 20 output.mp4", pngLoc);
 
-            aVMaker.StartInfo.Arguments = theHookInfo.Arguments + "\\" + aOutFile;
+            aVMaker.StartInfo.Arguments = theEncoderInfo.Arguments + "\\" + aOutFile;
             // String.Format(@"-i {0} -r {2} -c:v libx264 -preset slow -crf 21 {1}", ifile, outFile, Settings.Default.FramesPerSec);
             // avMaker.StartInfo.Arguments = String.Format(@" -r 20 -i bitmaps\{0} -c:v libx264 -r 20 -pix_fmt yuv420p output.mp4", pngLoc);
 
             if (!aVMaker.Start())
             {
-                return false;
+                return null;
             }
 
             aVMaker.WaitForExit();
@@ -74,7 +74,7 @@ namespace CAM.VideoCodec.FFMPEG
             //Log.Error(aVMaker.StandardError.ReadToEnd());
 
             Log.Info("End of encoding bitmaps into video stream...");
-            return false;
+            return aOutFile;
         }
 
         private string GetOutputFile(string theHookId)

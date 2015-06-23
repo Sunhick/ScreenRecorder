@@ -14,6 +14,7 @@
 // along with ScreenRecorder.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -114,9 +115,22 @@ namespace CAM.Tools.Model
 
             var aVideoType = myConfiguration.VideoConfiguration.PreferedVideoType;
 
-            var aHookInfo = myConfiguration.GetHook(aVideoType);
-            myFFMpegEncoder.Encode(aHookInfo);
+            var aEncodeInfo = myConfiguration.GetHook(aVideoType);
+            string aVideofile = myFFMpegEncoder.Encode(aEncodeInfo);
 
+            if (!string.IsNullOrEmpty(aVideofile))
+            {
+                Log.Debug("Video created!");
+                Process.Start("explorer.exe",
+                    string.Format("/select, {0}",
+                        Path.Combine(myConfiguration.VideoConfiguration.OutputLocation, aVideofile)));
+            }
+            else
+            {
+                Log.Debug("unable to created video. Check the error logs!");
+            }
+
+            // clean up the temporary files
             string[] aTempBmps = Directory.GetFiles(myBitmapLocation, "*.png");
             foreach (var aTempBmp in aTempBmps)
             {

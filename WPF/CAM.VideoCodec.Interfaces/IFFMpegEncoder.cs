@@ -23,6 +23,6 @@ namespace CAM.VideoCodec.Interfaces
     // ReSharper disable once InconsistentNaming
     public interface IFFMpegEncoder
     {
-        bool Encode(HookInfo theHookInfo);
+        string Encode(EncoderInfo theEncoderInfo);
     }
 }

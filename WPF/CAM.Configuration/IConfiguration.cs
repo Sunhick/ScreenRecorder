@@ -21,6 +21,6 @@ namespace CAM.Configuration
     public interface IConfiguration
     {
         VideoSettings VideoConfiguration { get; set; }
-        HookInfo GetHook(String theHookId);
+        EncoderInfo GetHook(String theHookId);
     }
 }

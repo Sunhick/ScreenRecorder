@@ -28,7 +28,7 @@ namespace CAM.Configuration
     {
         private const string HookFile = "Hooks.config";
         private readonly ILog Log = LogManager.GetLogger(typeof (Configuration));
-        private readonly IList<HookInfo> myConfiguredHooks = new List<HookInfo>();
+        private readonly IList<EncoderInfo> myConfiguredHooks = new List<EncoderInfo>();
         private readonly IEventAggregator myEventAggregator;
 
         public Configuration(IEventAggregator theEventAggregator)
@@ -62,7 +62,7 @@ namespace CAM.Configuration
             {
                 var aCurrent = aEnumerator.Current as Command;
                 if (aCurrent == null) continue;
-                myConfiguredHooks.Add(new HookInfo()
+                myConfiguredHooks.Add(new EncoderInfo()
                 {
                     HookId = aCurrent.HookId,
                     Mode = aCurrent.Mode,
@@ -73,7 +73,7 @@ namespace CAM.Configuration
             } while (aEnumerator.MoveNext());
         }
 
-        public HookInfo GetHook(String theHookId)
+        public EncoderInfo GetHook(String theHookId)
         {
             if (myConfiguredHooks.Count == 0)
             {
