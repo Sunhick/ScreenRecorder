@@ -341,15 +341,24 @@
 		<col def="S0">ISDotNetInstallerArgsCommit</col>
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
-		<row><td>CAM.Bootscreen.Primary_output</td><td>{53017FC7-9603-4178-8CDA-A54612A2909F}</td><td>INSTALLDIR</td><td>2</td><td/><td>cam.bootscreen.primary_outpu</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>CAM.Common.Primary_output</td><td>{B159C7EE-6CD7-4A02-A1CC-E1E37E6FFB7A}</td><td>INSTALLDIR</td><td>2</td><td/><td>cam.common.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>CAM.Configuration.Content_Files</td><td>{5D948D77-81DE-43C5-9125-0D495EA63867}</td><td>INSTALLDIR</td><td>2</td><td/><td>cam.configuration.content_fi</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>CAM.Configuration.Primary_output</td><td>{DB94C799-2D30-4372-9264-21EE4B7F444E}</td><td>INSTALLDIR</td><td>2</td><td/><td>cam.configuration.primary_ou</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>CAM.Starter.Primary_output</td><td>{17130AD5-247C-42BE-9DEB-16DA4D49E2EF}</td><td>INSTALLDIR</td><td>2</td><td/><td>cam.starter.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>CAM.Tools.Primary_output</td><td>{874835A5-71D8-4A0E-8AC7-9AB8E8A2F2D9}</td><td>INSTALLDIR</td><td>2</td><td/><td>cam.tools.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>CAM.VideoCodec.FFMPEG.Content_Files</td><td>{5C42F01F-BC57-4CD9-94E3-FF8DF9EC75C6}</td><td>INSTALLDIR</td><td>2</td><td/><td>cam.videocodec.ffmpeg.conten</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>CAM.VideoCodec.FFMPEG.Primary_output</td><td>{85637DAA-8FBB-465F-ABB7-8201400754FB}</td><td>INSTALLDIR</td><td>2</td><td/><td>cam.videocodec.ffmpeg.primar</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>CAM.VideoCodec.Interfaces.Primary_output</td><td>{502A1B40-F593-49D0-82E2-9F7E37BEF3AA}</td><td>INSTALLDIR</td><td>2</td><td/><td>cam.videocodec.interfaces.pr</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>CAM.Bootscreen.Debug_Symbols</td><td>{43AD5BCD-CE82-4213-B516-7C2F5FCBEE54}</td><td>INSTALLDIR</td><td>2</td><td/><td>cam.bootscreen.debug_symbols</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>CAM.Bootscreen.Primary_output</td><td>{B2E39B63-E8C5-42D0-9E9E-EC7610B4F630}</td><td>INSTALLDIR</td><td>2</td><td/><td>cam.bootscreen.primary_outpu</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>CAM.Common.Content_Files</td><td>{CBC96B9A-8FA7-4B2F-A7EB-FD5F7B93BC2B}</td><td>INSTALLDIR</td><td>2</td><td/><td>cam.common.content_files</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>CAM.Common.Debug_Symbols</td><td>{DE4575FC-6C73-45EF-9EEC-ABD1E7BB549C}</td><td>INSTALLDIR</td><td>2</td><td/><td>cam.common.debug_symbols</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>CAM.Common.Primary_output</td><td>{112F222C-3684-4EA2-BA69-7063EEA23981}</td><td>INSTALLDIR</td><td>2</td><td/><td>cam.common.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>CAM.Configuration.Content_Files</td><td>{D3A098C4-DF5B-497F-920D-7CA1A14A350A}</td><td>INSTALLDIR</td><td>2</td><td/><td>cam.configuration.content_fi</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>CAM.Configuration.Debug_Symbols</td><td>{3ED7EC67-724C-4620-B588-B438E9B765C5}</td><td>INSTALLDIR</td><td>2</td><td/><td>cam.configuration.debug_symb</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>CAM.Configuration.Primary_output</td><td>{F7E23E5E-21FA-40C1-AC14-7125D3509E99}</td><td>INSTALLDIR</td><td>2</td><td/><td>cam.configuration.primary_ou</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>CAM.Starter.Debug_Symbols</td><td>{44AA45E2-EFD8-4E68-9967-E4A1849F959C}</td><td>INSTALLDIR</td><td>2</td><td/><td>cam.starter.debug_symbols</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>CAM.Starter.Primary_output</td><td>{6972BACB-8FAF-4DC0-B7FB-0ED0D69ADD7E}</td><td>INSTALLDIR</td><td>2</td><td/><td>cam.starter.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>CAM.Tools.Debug_Symbols</td><td>{2509CAA9-B0D7-4BBC-B531-7618968D1E0F}</td><td>INSTALLDIR</td><td>2</td><td/><td>cam.tools.debug_symbols</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>CAM.Tools.Primary_output</td><td>{97CD3EE3-BAF5-4458-8B23-D7512FA2BFEB}</td><td>INSTALLDIR</td><td>2</td><td/><td>cam.tools.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>CAM.VideoCodec.FFMPEG.Content_Files</td><td>{70D49BBC-DF41-407B-8828-64C392426681}</td><td>INSTALLDIR</td><td>2</td><td/><td>cam.videocodec.ffmpeg.conten</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>CAM.VideoCodec.FFMPEG.Debug_Symbols</td><td>{C49E7966-D163-4949-857C-F2F9C1302529}</td><td>INSTALLDIR</td><td>2</td><td/><td>cam.videocodec.ffmpeg.debug_</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>CAM.VideoCodec.FFMPEG.Primary_output</td><td>{75B43CE1-7A42-4A3B-88F1-287A7E5D946F}</td><td>INSTALLDIR</td><td>2</td><td/><td>cam.videocodec.ffmpeg.primar</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>CAM.VideoCodec.Interfaces.Debug_Symbols</td><td>{34BE0D29-A7AA-4461-ACEE-044AA6BA7982}</td><td>INSTALLDIR</td><td>2</td><td/><td>cam.videocodec.interfaces.de</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>CAM.VideoCodec.Interfaces.Primary_output</td><td>{3FA74A57-AE52-4512-A1D0-63A75A83A430}</td><td>INSTALLDIR</td><td>2</td><td/><td>cam.videocodec.interfaces.pr</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>ISX_DEFAULTCOMPONENT</td><td>{422F1261-B372-4644-BB4A-3DFCDFD98945}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
 	<table name="Condition">
@@ -1059,6 +1068,7 @@
 	<table name="CreateFolder">
 		<col key="yes" def="s72">Directory_</col>
 		<col key="yes" def="s72">Component_</col>
+		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT</td></row>
 	</table>
 
 	<table name="CustomAction">
@@ -1874,15 +1884,24 @@
 	<table name="FeatureComponents">
 		<col key="yes" def="s38">Feature_</col>
 		<col key="yes" def="s72">Component_</col>
+		<row><td>AlwaysInstall</td><td>CAM.Bootscreen.Debug_Symbols</td></row>
 		<row><td>AlwaysInstall</td><td>CAM.Bootscreen.Primary_output</td></row>
+		<row><td>AlwaysInstall</td><td>CAM.Common.Content_Files</td></row>
+		<row><td>AlwaysInstall</td><td>CAM.Common.Debug_Symbols</td></row>
 		<row><td>AlwaysInstall</td><td>CAM.Common.Primary_output</td></row>
 		<row><td>AlwaysInstall</td><td>CAM.Configuration.Content_Files</td></row>
+		<row><td>AlwaysInstall</td><td>CAM.Configuration.Debug_Symbols</td></row>
 		<row><td>AlwaysInstall</td><td>CAM.Configuration.Primary_output</td></row>
+		<row><td>AlwaysInstall</td><td>CAM.Starter.Debug_Symbols</td></row>
 		<row><td>AlwaysInstall</td><td>CAM.Starter.Primary_output</td></row>
+		<row><td>AlwaysInstall</td><td>CAM.Tools.Debug_Symbols</td></row>
 		<row><td>AlwaysInstall</td><td>CAM.Tools.Primary_output</td></row>
 		<row><td>AlwaysInstall</td><td>CAM.VideoCodec.FFMPEG.Content_Files</td></row>
+		<row><td>AlwaysInstall</td><td>CAM.VideoCodec.FFMPEG.Debug_Symbols</td></row>
 		<row><td>AlwaysInstall</td><td>CAM.VideoCodec.FFMPEG.Primary_output</td></row>
+		<row><td>AlwaysInstall</td><td>CAM.VideoCodec.Interfaces.Debug_Symbols</td></row>
 		<row><td>AlwaysInstall</td><td>CAM.VideoCodec.Interfaces.Primary_output</td></row>
+		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT</td></row>
 	</table>
 
 	<table name="File">
@@ -1897,14 +1916,22 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
+		<row><td>cam.bootscreen.debug_symbols</td><td>CAM.Bootscreen.Debug_Symbols</td><td>CAM.Bootscreen.Debug Symbols</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;CAM.Bootscreen&gt;|Symbols</td><td>3</td><td/></row>
 		<row><td>cam.bootscreen.primary_outpu</td><td>CAM.Bootscreen.Primary_output</td><td>CAM.Bootscreen.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;CAM.Bootscreen&gt;|Built</td><td>3</td><td/></row>
+		<row><td>cam.common.content_files</td><td>CAM.Common.Content_Files</td><td>CAM.Common.Content Files</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;CAM.Common&gt;|ContentFiles</td><td>3</td><td/></row>
+		<row><td>cam.common.debug_symbols</td><td>CAM.Common.Debug_Symbols</td><td>CAM.Common.Debug Symbols</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;CAM.Common&gt;|Symbols</td><td>3</td><td/></row>
 		<row><td>cam.common.primary_output</td><td>CAM.Common.Primary_output</td><td>CAM.Common.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;CAM.Common&gt;|Built</td><td>3</td><td/></row>
 		<row><td>cam.configuration.content_fi</td><td>CAM.Configuration.Content_Files</td><td>CAM.Configuration.Content Files</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;CAM.Configuration&gt;|ContentFiles</td><td>3</td><td/></row>
+		<row><td>cam.configuration.debug_symb</td><td>CAM.Configuration.Debug_Symbols</td><td>CAM.Configuration.Debug Symbols</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;CAM.Configuration&gt;|Symbols</td><td>3</td><td/></row>
 		<row><td>cam.configuration.primary_ou</td><td>CAM.Configuration.Primary_output</td><td>CAM.Configuration.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;CAM.Configuration&gt;|Built</td><td>3</td><td/></row>
+		<row><td>cam.starter.debug_symbols</td><td>CAM.Starter.Debug_Symbols</td><td>CAM.Starter.Debug Symbols</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;CAM.Starter&gt;|Symbols</td><td>3</td><td/></row>
 		<row><td>cam.starter.primary_output</td><td>CAM.Starter.Primary_output</td><td>CAM.Starter.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;CAM.Starter&gt;|Built</td><td>3</td><td/></row>
+		<row><td>cam.tools.debug_symbols</td><td>CAM.Tools.Debug_Symbols</td><td>CAM.Tools.Debug Symbols</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;CAM.Tools&gt;|Symbols</td><td>3</td><td/></row>
 		<row><td>cam.tools.primary_output</td><td>CAM.Tools.Primary_output</td><td>CAM.Tools.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;CAM.Tools&gt;|Built</td><td>3</td><td/></row>
 		<row><td>cam.videocodec.ffmpeg.conten</td><td>CAM.VideoCodec.FFMPEG.Content_Files</td><td>CAM.VideoCodec.FFMPEG.Content Files</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;CAM.VideoCodec.FFMPEG&gt;|ContentFiles</td><td>3</td><td/></row>
+		<row><td>cam.videocodec.ffmpeg.debug_</td><td>CAM.VideoCodec.FFMPEG.Debug_Symbols</td><td>CAM.VideoCodec.FFMPEG.Debug Symbols</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;CAM.VideoCodec.FFMPEG&gt;|Symbols</td><td>3</td><td/></row>
 		<row><td>cam.videocodec.ffmpeg.primar</td><td>CAM.VideoCodec.FFMPEG.Primary_output</td><td>CAM.VideoCodec.FFMPEG.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;CAM.VideoCodec.FFMPEG&gt;|Built</td><td>3</td><td/></row>
+		<row><td>cam.videocodec.interfaces.de</td><td>CAM.VideoCodec.Interfaces.Debug_Symbols</td><td>CAM.VideoCodec.Interfaces.Debug Symbols</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;CAM.VideoCodec.Interfaces&gt;|Symbols</td><td>3</td><td/></row>
 		<row><td>cam.videocodec.interfaces.pr</td><td>CAM.VideoCodec.Interfaces.Primary_output</td><td>CAM.VideoCodec.Interfaces.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;CAM.VideoCodec.Interfaces&gt;|Built</td><td>3</td><td/></row>
 	</table>
 
@@ -2049,15 +2076,24 @@
 		<col def="S0">FTPLocation</col>
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
-		<row><td>CAM.Bootscreen.Primary_output</td><td/><td/><td>_299D2386_F94B_4029_92B0_0ED349CED55A_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>CAM.Common.Primary_output</td><td/><td/><td>_CC4752C8_ECC9_4554_AD62_3634E89EC23F_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>CAM.Configuration.Content_Files</td><td/><td/><td>_BFC61383_C1ED_42B6_BF7C_BE025D2921B6_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>CAM.Configuration.Primary_output</td><td/><td/><td>_3DCB4A97_FB88_489D_9728_B259C815D861_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>CAM.Starter.Primary_output</td><td/><td/><td>_04DDD03D_9200_46D2_ABA0_BF9B4A030826_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>CAM.Tools.Primary_output</td><td/><td/><td>_F88A048C_8C16_4407_8AA1_B9408E67EF65_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>CAM.VideoCodec.FFMPEG.Content_Files</td><td/><td/><td>_2CFEF9F9_6746_4F5A_8464_E18F59C0E563_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>CAM.VideoCodec.FFMPEG.Primary_output</td><td/><td/><td>_1F5CAA72_A3BA_4FE4_AF9C_22F5B2945EE3_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>CAM.VideoCodec.Interfaces.Primary_output</td><td/><td/><td>_64A21AD8_3F2C_4586_BA45_1CEB6485A83C_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>CAM.Bootscreen.Debug_Symbols</td><td/><td/><td>_82931AD5_45B1_44C2_936D_016BA6A6E6B7_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>CAM.Bootscreen.Primary_output</td><td/><td/><td>_02DF8F6E_00DF_4978_8A5C_0B231A09185F_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>CAM.Common.Content_Files</td><td/><td/><td>_EEB40374_DFFD_4E33_833A_A00798170D95_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>CAM.Common.Debug_Symbols</td><td/><td/><td>_B2700BAC_8250_41D2_9707_40DCF51FE64C_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>CAM.Common.Primary_output</td><td/><td/><td>_B7B1B243_A506_47E2_A531_B647C1FF1CDC_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>CAM.Configuration.Content_Files</td><td/><td/><td>_4AB4A9EA_B0B5_418D_8D95_5061DB36B137_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>CAM.Configuration.Debug_Symbols</td><td/><td/><td>_04E4E253_42B5_4948_A8F7_9DB5CB519E12_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>CAM.Configuration.Primary_output</td><td/><td/><td>_CCBC76E9_7184_474D_98DC_90167FE8636C_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>CAM.Starter.Debug_Symbols</td><td/><td/><td>_F9F93100_6317_4F18_B7F6_337B7F8B0103_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>CAM.Starter.Primary_output</td><td/><td/><td>_FEC0F3E7_971F_49FE_B586_BBD4E7721F61_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>CAM.Tools.Debug_Symbols</td><td/><td/><td>_0192C2B0_695B_4B99_AEC7_8E188AE93289_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>CAM.Tools.Primary_output</td><td/><td/><td>_B091607C_39B8_47AF_B1B0_3E9B217EAA98_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>CAM.VideoCodec.FFMPEG.Content_Files</td><td/><td/><td>_AA02F49F_0BF6_494E_B033_83ED943CA16C_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>CAM.VideoCodec.FFMPEG.Debug_Symbols</td><td/><td/><td>_AD0FB3F6_D1F7_4DCB_936E_E2B43AB937CA_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>CAM.VideoCodec.FFMPEG.Primary_output</td><td/><td/><td>_3D4B89DD_6152_4820_AFCB_B0DC5A77FAEC_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>CAM.VideoCodec.Interfaces.Debug_Symbols</td><td/><td/><td>_5C37805E_3BED_43EA_B6C7_DC7C6647D3E1_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>CAM.VideoCodec.Interfaces.Primary_output</td><td/><td/><td>_FECBAEC8_62B6_47CA_8B1E_202B994E34E9_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_E678E982_D854_48F0_834C_717786A74A18_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="ISCustomActionReference">
@@ -2682,7 +2718,7 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>1033</td><td>opensource</td><td>0</td><td/><td>-1155277600</td></row>
+		<row><td>COMPANY_NAME</td><td>1033</td><td>opensource</td><td>0</td><td/><td>-1155293163</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1033</td><td>Always Install</td><td>0</td><td/><td>-1155330016</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1033</td><td>The color settings of your system are not adequate for running [ProductName].</td><td>0</td><td/><td>-1155330016</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION40FULL</td><td>1033</td><td>Microsoft .NET Framework 4.0 Full package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>-1155327552</td></row>
@@ -3785,8 +3821,8 @@
 		<row><td>IDS__TargetReq_DESC_PROCESSOR</td><td>1033</td><td>The processor is not adequate for running [ProductName].</td><td>0</td><td/><td>-1155330016</td></row>
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>-1155330016</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>-1155330016</td></row>
-		<row><td>ID_STRING1</td><td>1033</td><td>http://www.opensource.com</td><td>0</td><td/><td>-1155277600</td></row>
-		<row><td>ID_STRING2</td><td>1033</td><td>opensource</td><td>0</td><td/><td>-1155277600</td></row>
+		<row><td>ID_STRING1</td><td>1033</td><td>http://www.opensource.com</td><td>0</td><td/><td>-1155293163</td></row>
+		<row><td>ID_STRING2</td><td>1033</td><td>opensource</td><td>0</td><td/><td>-1155293163</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>1033</td><td>This feature will remain uninstalled.</td><td>0</td><td/><td>-1155330016</td></row>
 	</table>
 

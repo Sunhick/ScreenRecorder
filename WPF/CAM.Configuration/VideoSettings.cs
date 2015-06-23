@@ -53,7 +53,7 @@ namespace CAM.Configuration
         }
 
         [UserScopedSetting]
-        [DefaultSettingValue("MP4")]
+        [DefaultSettingValue("MKV")]
         public String PreferedVideoType
         {
             get { return (String) this["PreferedVideoType"]; }
