@@ -27,20 +27,50 @@
                 <Image Source="/CAM.Tools;component/Resources/Close.png"/>
             </Button>
             <Button x:Name="Settings" Background="#607D8B" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
-                ToolTip="SETTINGS" Command="{Binding Path=SettingsCommand}">
-                <Image Source="/CAM.Tools;component/Resources/Settings.png"/>
+                ToolTip="SETTINGS" Command="{Binding Path=SettingsCommand}" IsEnabled="{Binding Path=IsSettingsEnabled}">
+                <Image Source="/CAM.Tools;component/Resources/Settings.png">
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Style.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Opacity" Value="0.4" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
             </Button>
             <Button x:Name="Record" Background="#607D8B" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
                 ToolTip="RECORD" Command="{Binding Path=StartRecordCommand}" Click="OnStartRecording">
                 <Image Source="/CAM.Tools;component/Resources/Record.png"/>
             </Button>
             <Button x:Name="Pause" Background="#607D8B" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" 
-                ToolTip="PAUSE">
-                <Image Source="/CAM.Tools;component/Resources/Pause.png"/>
+                ToolTip="PAUSE" IsEnabled="{Binding Path=IsPauseEnabled}">
+                <Image Source="/CAM.Tools;component/Resources/Pause.png">
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Style.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Opacity" Value="0.4" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
             </Button>
             <Button x:Name="Stop" Background="#607D8B" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" 
-                ToolTip="STOP" Command="{Binding Path=StopRecordCommand}" Click="OnStopRecording">
-                <Image Source="/CAM.Tools;component/Resources/Stop.png"/>
+                ToolTip="STOP" Command="{Binding Path=StopRecordCommand}" Click="OnStopRecording" IsEnabled="{Binding Path=IsStopEnabled}">
+                <Image Source="/CAM.Tools;component/Resources/Stop.png">
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Style.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Opacity" Value="0.4" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
             </Button>
             <Button x:Name="Reset" Background="#607D8B" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" 
                 ToolTip="RESET">

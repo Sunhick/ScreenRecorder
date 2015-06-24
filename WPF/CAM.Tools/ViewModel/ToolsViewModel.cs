@@ -26,13 +26,15 @@ namespace CAM.Tools.ViewModel
     public class ToolsViewModel : ViewModelBase
     {
         private readonly bool myCanExitApp;
-
         private readonly IEventAggregator myEventAggregator;
         private readonly ToolsModel myModel;
         private Cursor myCursor;
         private IRegionManager myRegionManager;
         private readonly IUnityContainer myContainer;
         private SettingsView mySettingsView;
+        private bool myIsPauseEnabled;
+        private bool myIsStopEnabled;
+        private bool myIsSettingsEnabled;
 
         public ToolsViewModel(ToolsModel theModel, IEventAggregator theEventAggregator, IRegionManager theManager,
             IUnityContainer theContainer)
@@ -49,12 +51,44 @@ namespace CAM.Tools.ViewModel
             StopRecordCommand = new RelayCommand(CanStopRecording, StopRecording);
             StartRecordCommand = new RelayCommand(CanStartRecording, StartRecording);
             mySettingsView = myContainer.Resolve<SettingsView>();
+            IsSettingsEnabled = true;
         }
 
         public ICommand AppExitCommand { get; set; }
         public ICommand SettingsCommand { get; set; }
         public ICommand StopRecordCommand { get; set; }
         public ICommand StartRecordCommand { get; set; }
+
+        public bool IsSettingsEnabled
+        {
+            get { return myIsSettingsEnabled; }
+            set
+            {
+                myIsSettingsEnabled = value;
+                OnPropertyChanged("IsSettingsEnabled");
+            }
+        }
+
+
+        public bool IsStopEnabled
+        {
+            get { return myIsStopEnabled; }
+            set
+            {
+                myIsStopEnabled = value;
+                OnPropertyChanged("IsStopEnabled");
+            }
+        }
+
+        public bool IsPauseEnabled
+        {
+            get { return myIsPauseEnabled; }
+            set
+            {
+                myIsPauseEnabled = value;
+                OnPropertyChanged("IsPauseEnabled");
+            }
+        }
 
         public Cursor Cursor
         {
@@ -74,12 +108,16 @@ namespace CAM.Tools.ViewModel
         private void StartRecording(object theObj)
         {
             myModel.StartRecording();
+            IsStopEnabled = IsPauseEnabled = true;
+            IsSettingsEnabled = false;
         }
 
         private void StopRecording(object theObj)
         {
             Cursor = Cursors.Wait;
             myModel.StopRecording();
+            IsStopEnabled = IsPauseEnabled = false;
+            IsSettingsEnabled = true;
             Cursor = Cursors.Arrow;
         }
 
