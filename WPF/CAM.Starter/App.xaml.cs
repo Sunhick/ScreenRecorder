@@ -38,7 +38,7 @@ namespace CAM.Starter
 
         protected override void OnStartup(StartupEventArgs theArgs)
         {
-            Bootstrapper aBootstrapper = new Bootstrapper();
+            var aBootstrapper = new Bootstrapper();
             aBootstrapper.Run();
         }
     }

@@ -37,7 +37,7 @@ namespace CAM.Bootscreen
         public void Initialize()
         {
             Log.Info("Initialzing the Bootscreen Module");
-            Process aCurrentProcess = Process.GetCurrentProcess();
+            var aCurrentProcess = Process.GetCurrentProcess();
             Log.Info(string.Format("Process ID: {0} Thread ID: {1}", aCurrentProcess.Id,
                 Thread.CurrentThread.ManagedThreadId));
 

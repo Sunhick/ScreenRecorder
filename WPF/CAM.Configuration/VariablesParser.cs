@@ -57,25 +57,25 @@ namespace CAM.Configuration
 
             Log.Debug("Before Expand contents: " + theContent);
 
-            string aExpandedContent = theContent;
+            var aExpandedContent = theContent;
 
             foreach (DictionaryEntry aEntry in AppVariables)
             {
-                string aOldString = "$" + ((string) (aEntry.Key)) + "$";
-                string aNewString = (aEntry.Value != null) ? aEntry.Value.ToString() : null;
+                var aOldString = "$" + ((string) (aEntry.Key)) + "$";
+                var aNewString = (aEntry.Value != null) ? aEntry.Value.ToString() : null;
 
                 // check whether Value is of type string and contains Key
                 if (aNewString != null && aNewString.IndexOf(aOldString, StringComparison.OrdinalIgnoreCase) < 0)
                 {
-                    int aStartIndex = 0;
+                    var aStartIndex = 0;
                     while (aStartIndex < aExpandedContent.Length)
                     {
-                        int aBeginIndexOfOldString = aExpandedContent.IndexOf(aOldString, aStartIndex,
+                        var aBeginIndexOfOldString = aExpandedContent.IndexOf(aOldString, aStartIndex,
                             StringComparison.OrdinalIgnoreCase);
                         if (aBeginIndexOfOldString >= 0)
                         {
-                            int aOldStringLength = aOldString.Length;
-                            int aEndIndexOfOldString = aBeginIndexOfOldString + aOldStringLength - 1;
+                            var aOldStringLength = aOldString.Length;
+                            var aEndIndexOfOldString = aBeginIndexOfOldString + aOldStringLength - 1;
                             aExpandedContent = aExpandedContent.Substring(0, aBeginIndexOfOldString) + aNewString +
                                                aExpandedContent.Substring(aEndIndexOfOldString + 1);
                             aStartIndex = aBeginIndexOfOldString + aNewString.Length;

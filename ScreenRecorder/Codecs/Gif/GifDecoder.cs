@@ -257,13 +257,13 @@ namespace ScreenRecorder.Codecs
 
         private int[] GetPixels(Bitmap bitmap)
         {
-            int[] pixels = new int[3*image.Width*image.Height];
-            int count = 0;
-            for (int th = 0; th < image.Height; th++)
+            var pixels = new int[3*image.Width*image.Height];
+            var count = 0;
+            for (var th = 0; th < image.Height; th++)
             {
-                for (int tw = 0; tw < image.Width; tw++)
+                for (var tw = 0; tw < image.Width; tw++)
                 {
-                    Color color = bitmap.GetPixel(tw, th);
+                    var color = bitmap.GetPixel(tw, th);
                     pixels[count] = color.R;
                     count++;
                     pixels[count] = color.G;
@@ -277,12 +277,12 @@ namespace ScreenRecorder.Codecs
 
         private void SetPixels(int[] pixels)
         {
-            int count = 0;
-            for (int th = 0; th < image.Height; th++)
+            var count = 0;
+            for (var th = 0; th < image.Height; th++)
             {
-                for (int tw = 0; tw < image.Width; tw++)
+                for (var tw = 0; tw < image.Width; tw++)
                 {
-                    Color color = Color.FromArgb(pixels[count++]);
+                    var color = Color.FromArgb(pixels[count++]);
                     bitmap.SetPixel(tw, th, color);
                 }
             }
@@ -293,7 +293,7 @@ namespace ScreenRecorder.Codecs
             // expose destination image's pixels as int array
             //		int[] dest =
             //			(( int ) image.getRaster().getDataBuffer()).getData();
-            int[] dest = GetPixels(bitmap);
+            var dest = GetPixels(bitmap);
 
             // fill in starting image contents based on last image's dispose code
             if (lastDispose > 0)
@@ -301,7 +301,7 @@ namespace ScreenRecorder.Codecs
                 if (lastDispose == 3)
                 {
                     // use image before last
-                    int n = frameCount - 2;
+                    var n = frameCount - 2;
                     if (n > 0)
                     {
                         lastImage = GetFrame(n - 1);
@@ -316,15 +316,15 @@ namespace ScreenRecorder.Codecs
                 {
                     //				int[] prev =
                     //					((DataBufferInt) lastImage.getRaster().getDataBuffer()).getData();
-                    int[] prev = GetPixels(new Bitmap(lastImage));
+                    var prev = GetPixels(new Bitmap(lastImage));
                     Array.Copy(prev, 0, dest, 0, width*height);
                     // copy pixels
 
                     if (lastDispose == 2)
                     {
                         // fill last image rect area with background color
-                        Graphics g = Graphics.FromImage(image);
-                        Color c = Color.Empty;
+                        var g = Graphics.FromImage(image);
+                        var c = Color.Empty;
                         if (transparency)
                         {
                             c = Color.FromArgb(0, 0, 0, 0); // assume background is transparent
@@ -343,12 +343,12 @@ namespace ScreenRecorder.Codecs
             }
 
             // copy each source line to the appropriate place in the destination
-            int pass = 1;
-            int inc = 8;
-            int iline = 0;
-            for (int i = 0; i < ih; i++)
+            var pass = 1;
+            var inc = 8;
+            var iline = 0;
+            for (var i = 0; i < ih; i++)
             {
-                int line = i;
+                var line = i;
                 if (interlace)
                 {
                     if (iline >= ih)
@@ -375,19 +375,19 @@ namespace ScreenRecorder.Codecs
                 line += iy;
                 if (line < height)
                 {
-                    int k = line*width;
-                    int dx = k + ix; // start of line in dest
-                    int dlim = dx + iw; // end of dest line
+                    var k = line*width;
+                    var dx = k + ix; // start of line in dest
+                    var dlim = dx + iw; // end of dest line
                     if ((k + width) < dlim)
                     {
                         dlim = k + width; // past dest edge
                     }
-                    int sx = i*iw; // start of line in source
+                    var sx = i*iw; // start of line in source
                     while (dx < dlim)
                     {
                         // map color and insert in destination
-                        int index = ((int) pixels[sx++]) & 0xff;
-                        int c = act[index];
+                        var index = ((int) pixels[sx++]) & 0xff;
+                        var c = act[index];
                         if (c != 0)
                         {
                             dest[dx] = c;
@@ -488,8 +488,8 @@ namespace ScreenRecorder.Codecs
 
         protected void DecodeImageData()
         {
-            int NullCode = -1;
-            int npix = iw*ih;
+            var NullCode = -1;
+            var npix = iw*ih;
             int available,
                 clear,
                 code_mask,
@@ -654,7 +654,7 @@ namespace ScreenRecorder.Codecs
 
         protected int Read()
         {
-            int curByte = 0;
+            var curByte = 0;
             try
             {
                 curByte = inStream.ReadByte();
@@ -675,12 +675,12 @@ namespace ScreenRecorder.Codecs
         protected int ReadBlock()
         {
             blockSize = Read();
-            int n = 0;
+            var n = 0;
             if (blockSize > 0)
             {
                 try
                 {
-                    int count = 0;
+                    var count = 0;
                     while (n < blockSize)
                     {
                         count = inStream.Read(block, n, blockSize - n);
@@ -710,10 +710,10 @@ namespace ScreenRecorder.Codecs
 
         protected int[] ReadColorTable(int ncolors)
         {
-            int nbytes = 3*ncolors;
+            var nbytes = 3*ncolors;
             int[] tab = null;
-            byte[] c = new byte[nbytes];
-            int n = 0;
+            var c = new byte[nbytes];
+            var n = 0;
             try
             {
                 n = inStream.Read(c, 0, c.Length);
@@ -728,13 +728,13 @@ namespace ScreenRecorder.Codecs
             else
             {
                 tab = new int[256]; // max size to avoid bounds checks
-                int i = 0;
-                int j = 0;
+                var i = 0;
+                var j = 0;
                 while (i < ncolors)
                 {
-                    int r = ((int) c[j++]) & 0xff;
-                    int g = ((int) c[j++]) & 0xff;
-                    int b = ((int) c[j++]) & 0xff;
+                    var r = ((int) c[j++]) & 0xff;
+                    var g = ((int) c[j++]) & 0xff;
+                    var b = ((int) c[j++]) & 0xff;
                     tab[i++] = (int) (0xff000000 | (r << 16) | (g << 8) | b);
                 }
             }
@@ -748,10 +748,10 @@ namespace ScreenRecorder.Codecs
         protected void ReadContents()
         {
             // read GIF file content blocks
-            bool done = false;
+            var done = false;
             while (!(done || Error()))
             {
-                int code = Read();
+                var code = Read();
                 switch (code)
                 {
                     case 0x2C: // image separator
@@ -768,8 +768,8 @@ namespace ScreenRecorder.Codecs
 
                             case 0xff: // application extension
                                 ReadBlock();
-                                String app = "";
-                                for (int i = 0; i < 11; i++)
+                                var app = "";
+                                for (var i = 0; i < 11; i++)
                                 {
                                     app += (char) block[i];
                                 }
@@ -808,7 +808,7 @@ namespace ScreenRecorder.Codecs
         protected void ReadGraphicControlExt()
         {
             Read(); // block size
-            int packed = Read(); // packed fields
+            var packed = Read(); // packed fields
             dispose = (packed & 0x1c) >> 2; // disposal method
             if (dispose == 0)
             {
@@ -826,8 +826,8 @@ namespace ScreenRecorder.Codecs
 
         protected void ReadHeader()
         {
-            String id = "";
-            for (int i = 0; i < 6; i++)
+            var id = "";
+            for (var i = 0; i < 6; i++)
             {
                 id += (char) Read();
             }
@@ -856,7 +856,7 @@ namespace ScreenRecorder.Codecs
             iw = ReadShort();
             ih = ReadShort();
 
-            int packed = Read();
+            var packed = Read();
             lctFlag = (packed & 0x80) != 0; // 1 - local color table flag
             interlace = (packed & 0x40) != 0; // 2 - interlace flag
             // 3 - sort flag
@@ -874,7 +874,7 @@ namespace ScreenRecorder.Codecs
                 if (bgIndex == transIndex)
                     bgColor = 0;
             }
-            int save = 0;
+            var save = 0;
             if (transparency)
             {
                 save = act[transIndex];
@@ -923,7 +923,7 @@ namespace ScreenRecorder.Codecs
             height = ReadShort();
 
             // packed fields
-            int packed = Read();
+            var packed = Read();
             gctFlag = (packed & 0x80) != 0; // 1   : global color table flag
             // 2-4 : color resolution
             // 5   : gct sort flag
@@ -945,8 +945,8 @@ namespace ScreenRecorder.Codecs
                 if (block[0] == 1)
                 {
                     // loop count sub-block
-                    int b1 = ((int) block[1]) & 0xff;
-                    int b2 = ((int) block[2]) & 0xff;
+                    var b1 = ((int) block[1]) & 0xff;
+                    var b2 = ((int) block[2]) & 0xff;
                     loopCount = (b2 << 8) | b1;
                 }
             } while ((blockSize > 0) && !Error());
@@ -973,8 +973,8 @@ namespace ScreenRecorder.Codecs
             lastImage = image;
             lastBgColor = bgColor;
             //		int dispose = 0;
-            bool transparency = false;
-            int delay = 0;
+            var transparency = false;
+            var delay = 0;
             lct = null;
         }
 

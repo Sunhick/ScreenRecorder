@@ -220,14 +220,14 @@ namespace ScreenRecorder.Codecs
 
         public byte[] ColorMap()
         {
-            byte[] map = new byte[3*netsize];
-            int[] index = new int[netsize];
-            for (int i = 0; i < netsize; i++)
+            var map = new byte[3*netsize];
+            var index = new int[netsize];
+            for (var i = 0; i < netsize; i++)
                 index[network[i][3]] = i;
-            int k = 0;
-            for (int i = 0; i < netsize; i++)
+            var k = 0;
+            for (var i = 0; i < netsize; i++)
             {
-                int j = index[i];
+                var j = index[i];
                 map[k++] = (byte) (network[j][0]);
                 map[k++] = (byte) (network[j][1]);
                 map[k++] = (byte) (network[j][2]);
@@ -243,9 +243,9 @@ namespace ScreenRecorder.Codecs
             int i, j, smallpos, smallval;
             int[] p;
             int[] q;
-            int startpos = 0;
+            var startpos = 0;
 
-            int previouscol = 0;
+            var previouscol = 0;
             for (i = 0; i < netsize; i++)
             {
                 p = network[i];
@@ -308,7 +308,7 @@ namespace ScreenRecorder.Codecs
                 samplefac = 1;
             alphadec = 30 + ((samplefac - 1)/3);
             p = thepicture;
-            int pix = 0;
+            var pix = 0;
             lim = lengthcount;
             samplepixels = lengthcount/(3*samplefac);
             delta = samplepixels/ncycles;
@@ -382,9 +382,9 @@ namespace ScreenRecorder.Codecs
         {
             int i, j, dist, a;
             int[] p;
-            int best = -1;
+            var best = -1;
 
-            int bestd = 1000; /* biggest possible dist is 256*3 */
+            var bestd = 1000; /* biggest possible dist is 256*3 */
             i = netindex[g]; /* index on g */
             j = i - 1; /* start at netindex[g] and work outwards */
 
@@ -493,7 +493,7 @@ namespace ScreenRecorder.Codecs
 
             j = i + 1;
             k = i - 1;
-            int m = 1;
+            var m = 1;
             while ((j < hi) || (k > lo))
             {
                 a = radpower[m++];
@@ -532,7 +532,7 @@ namespace ScreenRecorder.Codecs
         protected void Altersingle(int alpha, int i, int b, int g, int r)
         {
             /* alter hit neuron */
-            int[] n = network[i];
+            var n = network[i];
             n[0] -= (alpha*(n[0] - b))/initalpha;
             n[1] -= (alpha*(n[1] - g))/initalpha;
             n[2] -= (alpha*(n[2] - r))/initalpha;
@@ -552,9 +552,9 @@ namespace ScreenRecorder.Codecs
             int bestbiaspos, bestbiasd;
             int[] n;
 
-            int bestd = ~(((int) 1) << 31);
+            var bestd = ~(((int) 1) << 31);
             bestbiasd = bestd;
-            int bestpos = -1;
+            var bestpos = -1;
             bestbiaspos = bestpos;
 
             for (i = 0; i < netsize; i++)

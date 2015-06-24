@@ -259,7 +259,7 @@ namespace ScreenRecorder.Codecs
             {
                 return false;
             }
-            bool ok = true;
+            var ok = true;
             try
             {
                 if (!sizeSet)
@@ -306,7 +306,7 @@ namespace ScreenRecorder.Codecs
         public bool Finish()
         {
             if (!started) return false;
-            bool ok = true;
+            var ok = true;
             started = false;
             try
             {
@@ -398,7 +398,7 @@ namespace ScreenRecorder.Codecs
         public bool Start(FileStream os)
         {
             if (os == null) return false;
-            bool ok = true;
+            var ok = true;
             closeStream = false;
             fs = os;
             try
@@ -421,7 +421,7 @@ namespace ScreenRecorder.Codecs
 
         public bool Start(String file)
         {
-            bool ok = true;
+            var ok = true;
             try
             {
                 //			bw = new BinaryWriter( new FileStream( file, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None ) );
@@ -442,10 +442,10 @@ namespace ScreenRecorder.Codecs
 
         protected void AnalyzePixels()
         {
-            int len = pixels.Length;
-            int nPix = len/3;
+            var len = pixels.Length;
+            var nPix = len/3;
             indexedPixels = new byte[nPix];
-            NeuQuant nq = new NeuQuant(pixels, len, sample);
+            var nq = new NeuQuant(pixels, len, sample);
             // initialize quantizer
             colorTab = nq.Process(); // create reduced palette
             // convert map from BGR to RGB
@@ -457,10 +457,10 @@ namespace ScreenRecorder.Codecs
 //				usedEntry[i / 3] = false;
 //			}
             // map image pixels to new palette
-            int k = 0;
-            for (int i = 0; i < nPix; i++)
+            var k = 0;
+            for (var i = 0; i < nPix; i++)
             {
-                int index =
+                var index =
                     nq.Map(pixels[k++] & 0xff,
                         pixels[k++] & 0xff,
                         pixels[k++] & 0xff);
@@ -488,16 +488,16 @@ namespace ScreenRecorder.Codecs
             int r = c.R;
             int g = c.G;
             int b = c.B;
-            int minpos = 0;
-            int dmin = 256*256*256;
-            int len = colorTab.Length;
-            for (int i = 0; i < len;)
+            var minpos = 0;
+            var dmin = 256*256*256;
+            var len = colorTab.Length;
+            for (var i = 0; i < len;)
             {
-                int dr = r - (colorTab[i++] & 0xff);
-                int dg = g - (colorTab[i++] & 0xff);
-                int db = b - (colorTab[i] & 0xff);
-                int d = dr*dr + dg*dg + db*db;
-                int index = i/3;
+                var dr = r - (colorTab[i++] & 0xff);
+                var dg = g - (colorTab[i++] & 0xff);
+                var db = b - (colorTab[i] & 0xff);
+                var d = dr*dr + dg*dg + db*db;
+                var index = i/3;
                 if (usedEntry[index] && (d < dmin))
                 {
                     dmin = d;
@@ -514,8 +514,8 @@ namespace ScreenRecorder.Codecs
 
         protected void GetImagePixels()
         {
-            int w = image.Width;
-            int h = image.Height;
+            var w = image.Width;
+            var h = image.Height;
             //		int type = image.GetType().;
             if ((w != width)
                 || (h != height)
@@ -524,7 +524,7 @@ namespace ScreenRecorder.Codecs
                 // create new image with right size/format
                 Image temp =
                     new Bitmap(width, height);
-                Graphics g = Graphics.FromImage(temp);
+                var g = Graphics.FromImage(temp);
                 g.DrawImage(image, 0, 0);
                 image = temp;
                 g.Dispose();
@@ -534,13 +534,13 @@ namespace ScreenRecorder.Codecs
 				improve performance: use unsafe code 
 			*/
             pixels = new Byte[3*image.Width*image.Height];
-            int count = 0;
-            Bitmap tempBitmap = new Bitmap(image);
-            for (int th = 0; th < image.Height; th++)
+            var count = 0;
+            var tempBitmap = new Bitmap(image);
+            for (var th = 0; th < image.Height; th++)
             {
-                for (int tw = 0; tw < image.Width; tw++)
+                for (var tw = 0; tw < image.Width; tw++)
                 {
-                    Color color = tempBitmap.GetPixel(tw, th);
+                    var color = tempBitmap.GetPixel(tw, th);
                     pixels[count] = color.R;
                     count++;
                     pixels[count] = color.G;
@@ -661,8 +661,8 @@ namespace ScreenRecorder.Codecs
         protected void WritePalette()
         {
             fs.Write(colorTab, 0, colorTab.Length);
-            int n = (3*256) - colorTab.Length;
-            for (int i = 0; i < n; i++)
+            var n = (3*256) - colorTab.Length;
+            for (var i = 0; i < n; i++)
             {
                 fs.WriteByte(0);
             }
@@ -674,7 +674,7 @@ namespace ScreenRecorder.Codecs
 
         protected void WritePixels()
         {
-            LZWEncoder encoder =
+            var encoder =
                 new LZWEncoder(width, height, indexedPixels, colorDepth);
             encoder.Encode(fs);
         }
@@ -695,8 +695,8 @@ namespace ScreenRecorder.Codecs
 
         protected void WriteString(String s)
         {
-            char[] chars = s.ToCharArray();
-            for (int i = 0; i < chars.Length; i++)
+            var chars = s.ToCharArray();
+            for (var i = 0; i < chars.Length; i++)
             {
                 fs.WriteByte((byte) chars[i]);
             }

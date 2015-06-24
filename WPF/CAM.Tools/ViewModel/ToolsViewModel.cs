@@ -85,7 +85,7 @@ namespace CAM.Tools.ViewModel
 
         private void OpenSettings(object theObj)
         {
-            IRegion aRegion = myRegionManager.Regions["SettingsRegion"];
+            var aRegion = myRegionManager.Regions["SettingsRegion"];
             if (aRegion.Views.Contains(mySettingsView))
             {
                 aRegion.Deactivate(mySettingsView);

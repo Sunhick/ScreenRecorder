@@ -44,8 +44,8 @@ namespace ScreenRecorder
         /// </summary>
         private static void Setup()
         {
-            AppDomain root = AppDomain.CurrentDomain;
-            AppDomainSetup setup = new AppDomainSetup
+            var root = AppDomain.CurrentDomain;
+            var setup = new AppDomainSetup
             {
                 ApplicationBase = root.SetupInformation.ApplicationBase
             };

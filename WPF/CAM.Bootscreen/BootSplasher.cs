@@ -36,7 +36,7 @@ namespace CAM.Bootscreen
 
         public void ShowSplash()
         {
-            Process aCurrentProcess = Process.GetCurrentProcess();
+            var aCurrentProcess = Process.GetCurrentProcess();
             Log.Info(string.Format("ShowSplash() :: Process ID: {0} Thread ID: {1}", aCurrentProcess.Id,
                 Thread.CurrentThread.ManagedThreadId));
 
@@ -52,7 +52,7 @@ namespace CAM.Bootscreen
 
         public void CloseSplash()
         {
-            Process aCurrentProcess = Process.GetCurrentProcess();
+            var aCurrentProcess = Process.GetCurrentProcess();
             Log.Info(string.Format("CloseSplash() :: Process ID: {0} Thread ID: {1}", aCurrentProcess.Id,
                 Thread.CurrentThread.ManagedThreadId));
 
@@ -84,7 +84,7 @@ namespace CAM.Bootscreen
 
         public void Init()
         {
-            Process aCurrentProcess = Process.GetCurrentProcess();
+            var aCurrentProcess = Process.GetCurrentProcess();
             Log.Info(string.Format("Init Process ID: {0} Thread ID: {1}", aCurrentProcess.Id,
                 Thread.CurrentThread.ManagedThreadId));
             myBootscreen = new Bootscreen(new BootscreenViewModel());

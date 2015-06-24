@@ -59,7 +59,7 @@ namespace ScreenRecorder.Hooks
         /// </summary>
         public void Execute()
         {
-            Process avMaker = new Process(); //Audio-Video maker process
+            var avMaker = new Process(); //Audio-Video maker process
 
             avMaker.StartInfo.FileName = Path.Combine(WorkingDir, Executable);
 
@@ -73,7 +73,7 @@ namespace ScreenRecorder.Hooks
             avMaker.StartInfo.CreateNoWindow = true;
 #endif
 
-            string outFile = GetOutputFile();
+            var outFile = GetOutputFile();
 
             //avMaker.StartInfo.Arguments = String.Format(@"-i bitmaps\{0} -vcodec huffyuv output.avi", pngLoc);
             //avMaker.StartInfo.Arguments = String.Format(@"-i bitmaps\{0} -r 20 output.mp4", pngLoc);
@@ -102,14 +102,14 @@ namespace ScreenRecorder.Hooks
         /// </summary>
         private string GetOutputFile()
         {
-            string file = Path.Combine(
+            var file = Path.Combine(
                 Settings.Default.VideoLoc, "ScreenCapture"
                 );
 
             if (File.Exists(file))
             {
                 //create unique name
-                int index = 1;
+                var index = 1;
                 while (true)
                 {
                     file = Path.Combine(

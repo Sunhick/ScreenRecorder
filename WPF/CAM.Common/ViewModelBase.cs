@@ -36,7 +36,7 @@ namespace CAM.Common
             // public, instance property on this object.
             if (TypeDescriptor.GetProperties(this)[thePropertyName] == null)
             {
-                string aMsg = "Invalid property name: " + thePropertyName;
+                var aMsg = "Invalid property name: " + thePropertyName;
 
                 if (ThrowOnInvalidPropertyName)
                 {
@@ -51,7 +51,7 @@ namespace CAM.Common
         {
             VerifyPropertyName(thePropertyName);
 
-            PropertyChangedEventHandler aHandler = PropertyChanged;
+            var aHandler = PropertyChanged;
             if (aHandler != null)
             {
                 var aE = new PropertyChangedEventArgs(thePropertyName);

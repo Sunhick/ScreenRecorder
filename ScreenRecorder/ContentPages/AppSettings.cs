@@ -54,10 +54,10 @@ namespace ScreenRecorder.ContentPages
             voutLocBox.Text = Settings.Default.VideoLoc;
             videoTypeBox.Text = Settings.Default.VideoType;
 
-            HookParser parser = new HookParser();
-            List<HookData> data = parser.Parse();
+            var parser = new HookParser();
+            var data = parser.Parse();
 
-            foreach (HookData item in data)
+            foreach (var item in data)
             {
                 videoTypeBox.Items.Add(item.HookId);
             }
@@ -70,7 +70,7 @@ namespace ScreenRecorder.ContentPages
         /// <param name="e">Event arguments</param>
         private void Opacity_Scroll(object sender, EventArgs e)
         {
-            int v = OpacityBar.Value;
+            var v = OpacityBar.Value;
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace ScreenRecorder.ContentPages
         /// <param name="e"></param>
         private void aboutusBtn_Click(object sender, EventArgs e)
         {
-            AboutBox aboutUs = new AboutBox();
+            var aboutUs = new AboutBox();
             aboutUs.ShowDialog();
         }
     } // class AppSettings

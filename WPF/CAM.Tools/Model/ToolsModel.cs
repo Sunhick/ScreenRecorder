@@ -54,8 +54,8 @@ namespace CAM.Tools.Model
 
         public void StartRecording()
         {
-            int aFps = myConfiguration.VideoConfiguration.FPS;
-            int aCallback = (1*1000/myConfiguration.VideoConfiguration.FPS);
+            var aFps = myConfiguration.VideoConfiguration.FPS;
+            var aCallback = (1*1000/myConfiguration.VideoConfiguration.FPS);
             Log.DebugFormat("FPS: {0} Settings Timer callback to {1} ms", aFps, aCallback);
             myTimer = new Timer(OnTimedEvent, null, 0, aCallback);
         }
@@ -63,7 +63,7 @@ namespace CAM.Tools.Model
         private static Bitmap CaptureScreen(int theX, int theY, int theWidth, int theHeight)
         {
             var aBitmap = new Bitmap(theWidth, theHeight, PixelFormat.Format32bppRgb);
-            using (Graphics aG = Graphics.FromImage(aBitmap))
+            using (var aG = Graphics.FromImage(aBitmap))
             {
                 aG.CopyFromScreen(theX, theY, 0, 0, aBitmap.Size, CopyPixelOperation.SourceCopy);
 
@@ -82,8 +82,8 @@ namespace CAM.Tools.Model
                         if (User32.GetIconInfo(aIconPointer, out aIconInfo))
                         {
                             // calculate the correct position of the cursor
-                            int aIconX = aCursorInfo.ptScreenPos.x - ((int) aIconInfo.xHotspot);
-                            int aIconY = aCursorInfo.ptScreenPos.y - ((int) aIconInfo.yHotspot);
+                            var aIconX = aCursorInfo.ptScreenPos.x - ((int) aIconInfo.xHotspot);
+                            var aIconY = aCursorInfo.ptScreenPos.y - ((int) aIconInfo.yHotspot);
 
                             // draw the cursor icon on top of the captured screen image
                             User32.DrawIcon(aG.GetHdc(), aIconX, aIconY, aCursorInfo.hCursor);
@@ -116,7 +116,7 @@ namespace CAM.Tools.Model
             var aVideoType = myConfiguration.VideoConfiguration.PreferedVideoType;
 
             var aEncodeInfo = myConfiguration.GetHook(aVideoType);
-            string aVideofile = myFFMpegEncoder.Encode(aEncodeInfo);
+            var aVideofile = myFFMpegEncoder.Encode(aEncodeInfo);
 
             if (!string.IsNullOrEmpty(aVideofile))
             {
@@ -127,11 +127,11 @@ namespace CAM.Tools.Model
             }
             else
             {
-                Log.Debug("unable to created video. Check the error logs!");
+                Log.Debug("unable to create video. Check the error logs!");
             }
 
             // clean up the temporary files
-            string[] aTempBmps = Directory.GetFiles(myBitmapLocation, "*.png");
+            var aTempBmps = Directory.GetFiles(myBitmapLocation, "*.png");
             foreach (var aTempBmp in aTempBmps)
             {
                 File.Delete(aTempBmp);

@@ -164,7 +164,7 @@ namespace ScreenRecorderMP
                 }
             }
 
-            HookParser parser = new HookParser();
+            var parser = new HookParser();
             hooks = parser.Parse();
 
             //retrive the user stored fps from the settings file config.
@@ -254,13 +254,13 @@ namespace ScreenRecorderMP
             const UInt32 WM_MOUSEMOVE = 0x0200;
             const UInt32 HTBOTTOMRIGHT = 17;
             const int RESIZE_HANDLE_SIZE = 10;
-            bool handled = false;
+            var handled = false;
             if (m.Msg == WM_NCHITTEST || m.Msg == WM_MOUSEMOVE)
             {
-                Size formSize = Size;
-                Point screenPoint = new Point(m.LParam.ToInt32());
-                Point clientPoint = PointToClient(screenPoint);
-                Rectangle hitBox = new Rectangle(formSize.Width - RESIZE_HANDLE_SIZE,
+                var formSize = Size;
+                var screenPoint = new Point(m.LParam.ToInt32());
+                var clientPoint = PointToClient(screenPoint);
+                var hitBox = new Rectangle(formSize.Width - RESIZE_HANDLE_SIZE,
                     formSize.Height - RESIZE_HANDLE_SIZE, RESIZE_HANDLE_SIZE, RESIZE_HANDLE_SIZE);
                 if (hitBox.Contains(clientPoint))
                 {
@@ -282,9 +282,9 @@ namespace ScreenRecorderMP
         {
             if (e.Button == MouseButtons.Left)
             {
-                Point p1 = new Point(e.X, e.Y);
-                Point p2 = PointToScreen(p1);
-                Point p3 = new Point(p2.X - lastPoint.X, p2.Y - lastPoint.Y);
+                var p1 = new Point(e.X, e.Y);
+                var p2 = PointToScreen(p1);
+                var p3 = new Point(p2.X - lastPoint.X, p2.Y - lastPoint.Y);
 
                 Location = p3;
             }
@@ -316,7 +316,7 @@ namespace ScreenRecorderMP
         /// <param name="page">Page</param>
         private void ActivatePage(IContentPage page)
         {
-            Control control = page as Control;
+            var control = page as Control;
             control.Dock = DockStyle.Fill;
 
             if (screenViewMP.Controls.Contains(control))
@@ -353,19 +353,19 @@ namespace ScreenRecorderMP
         /// <param name="e">Event arguments</param>
         private void frameCaptureTimer_Tick(object sender, EventArgs e)
         {
-            string fileName = String.Format("{1}\\img{0}.png", index++, saveLoc);
+            var fileName = String.Format("{1}\\img{0}.png", index++, saveLoc);
 
             //use the location of the form (x,y)
-            Point leftPt = //new Point(this.Location.X, this.Location.Y);
+            var leftPt = //new Point(this.Location.X, this.Location.Y);
                 new Point(screenViewMP.Location.X, screenViewMP.Location.Y);
 
-            using (Bitmap bmp = new Bitmap(screenViewMP.Bounds.Size.Width, screenViewMP.Bounds.Size.Height))
+            using (var bmp = new Bitmap(screenViewMP.Bounds.Size.Width, screenViewMP.Bounds.Size.Height))
             {
-                using (Graphics g = Graphics.FromImage(bmp))
+                using (var g = Graphics.FromImage(bmp))
                 {
                     g.CopyFromScreen(leftPt.X, leftPt.Y, 0, 0, screenViewMP.Bounds.Size, CopyPixelOperation.SourceCopy);
 
-                    PCURSORINFO cinfo = new PCURSORINFO
+                    var cinfo = new PCURSORINFO
                     {
                         Size = Marshal.SizeOf(typeof (PCURSORINFO))
                     };
@@ -444,9 +444,9 @@ namespace ScreenRecorderMP
         /// </summary>
         private void NotifyUserTask(string message)
         {
-            Point p = new Point(Location.X + Width/3, Location.Y + Height/3);
+            var p = new Point(Location.X + Width/3, Location.Y + Height/3);
 
-            NotificationForm notifyUser = new NotificationForm()
+            var notifyUser = new NotificationForm()
             {
                 /*set the location of the user notification*/
                 StartPosition = FormStartPosition.Manual,
@@ -479,7 +479,7 @@ namespace ScreenRecorderMP
             //TODO : capture audio and embed with video file. check out NAudio from www.Codeplex.com
 
             //run the suitable hook command
-            foreach (HookData hook in hooks)
+            foreach (var hook in hooks)
             {
                 if (string.Equals(hook.HookId, Settings.Default.VideoType))
                 {
@@ -499,11 +499,11 @@ namespace ScreenRecorderMP
         private void DeleteTempFiles()
         {
             //delete all temp bitmaps
-            foreach (string file in Directory.GetFiles(saveLoc))
+            foreach (var file in Directory.GetFiles(saveLoc))
             {
                 try
                 {
-                    Regex regex = new Regex(@"img.*\.png");
+                    var regex = new Regex(@"img.*\.png");
 
                     if (regex.Match(file).Success) File.Delete(file);
                 }

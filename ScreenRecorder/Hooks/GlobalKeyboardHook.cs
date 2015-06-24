@@ -52,10 +52,10 @@ namespace ScreenRecorder.Hooks
         {
             if (nCode >= 0)
             {
-                Keys key = (Keys) lParam.vkCode;
+                var key = (Keys) lParam.vkCode;
                 if (HookedKeys.Contains(key))
                 {
-                    KeyEventArgs kArgs = new KeyEventArgs(key);
+                    var kArgs = new KeyEventArgs(key);
                     if ((wParam == Win32Api.WM_KEYDOWN || wParam == Win32Api.WM_SYSKEYDOWN) && (KeyDown != null))
                     {
                         KeyDown(this, kArgs);
@@ -79,7 +79,7 @@ namespace ScreenRecorder.Hooks
             // Create an instance of HookProc.
             keyboardProcHook = new HookProc(KeyboardHookProc);
 
-            IntPtr hInstance = Win32Api.LoadLibrary("User32");
+            var hInstance = Win32Api.LoadLibrary("User32");
 
             //install hook
             keyboardHook = Win32Api.SetWindowsHookEx(
@@ -92,7 +92,7 @@ namespace ScreenRecorder.Hooks
             if (keyboardHook == IntPtr.Zero)
             {
                 //Returns the error code returned by the last unmanaged function called using platform invoke that has the DllImportAttribute.SetLastError flag set. 
-                int errorCode = Marshal.GetLastWin32Error();
+                var errorCode = Marshal.GetLastWin32Error();
 
                 log.Error("Unable to install keyboard hook.", new Win32Exception(errorCode));
             }
@@ -106,14 +106,14 @@ namespace ScreenRecorder.Hooks
             if (keyboardHook != IntPtr.Zero)
             {
                 //uninstall hook
-                int retKeyboard = Win32Api.UnhookWindowsHookEx(keyboardHook);
+                var retKeyboard = Win32Api.UnhookWindowsHookEx(keyboardHook);
                 //reset invalid handle
                 keyboardHook = IntPtr.Zero;
                 //if failed and exception must be thrown
                 if (retKeyboard == 0)
                 {
                     //Returns the error code returned by the last unmanaged function called using platform invoke that has the DllImportAttribute.SetLastError flag set. 
-                    int errorCode = Marshal.GetLastWin32Error();
+                    var errorCode = Marshal.GetLastWin32Error();
                     //Initializes and throws a new instance of the Win32Exception class with the specified error. 
                     log.Error("Error while uninstalling keyboard hook", new Win32Exception(errorCode));
                 }

@@ -39,26 +39,26 @@ namespace ScreenRecorder.Hooks
         public List<HookData> Parse()
         {
             //get all hook files with extension *.hook
-            string[] files = Directory.GetFiles(
+            var files = Directory.GetFiles(
                 Path.Combine(AppDomain.CurrentDomain.BaseDirectory, hookLocation), "*.hook"
                 );
 
-            List<HookData> data = new List<HookData>();
+            var data = new List<HookData>();
 
-            foreach (string hookFile in files)
+            foreach (var hookFile in files)
             {
-                XDocument doc = XDocument.Load(hookFile);
+                var doc = XDocument.Load(hookFile);
                 var query = from d in doc.Root.Descendants("Command") select d;
 
                 foreach (var q in query)
                 {
-                    HookData hook = new HookData();
+                    var hook = new HookData();
 
-                    string exe = q.Element("Executable").Value;
-                    string path = q.Element("Path").Value;
-                    string arg = q.Element("Arguments").Value;
-                    string hookid = q.FirstAttribute.Value;
-                    string mode = q.LastAttribute.Value;
+                    var exe = q.Element("Executable").Value;
+                    var path = q.Element("Path").Value;
+                    var arg = q.Element("Arguments").Value;
+                    var hookid = q.FirstAttribute.Value;
+                    var mode = q.LastAttribute.Value;
 
                     hook.HookId = hookid;
                     hook.WorkingDir = path;

@@ -202,7 +202,7 @@ namespace ScreenRecorder.Codecs
         // reset code table
         private void ResetCodeTable(int hsize)
         {
-            for (int i = 0; i < hsize; ++i)
+            for (var i = 0; i < hsize; ++i)
                 htab[i] = -1;
         }
 
@@ -214,7 +214,7 @@ namespace ScreenRecorder.Codecs
             int ent;
             int disp;
             int hsize_reg;
-            int hshift = 0;
+            var hshift = 0;
 
             // Set up the globals:  g_init_bits - initial number of bits
             g_init_bits = init_bits;
@@ -322,10 +322,10 @@ namespace ScreenRecorder.Codecs
 
             --remaining;
 
-            int temp = curPixel + 1;
+            var temp = curPixel + 1;
             if (temp < pixAry.GetUpperBound(0))
             {
-                byte pix = pixAry[curPixel++];
+                var pix = pixAry[curPixel++];
 
                 return pix & 0xff;
             }

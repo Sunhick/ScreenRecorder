@@ -97,6 +97,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BasicToolsModule.cs" />
+    <Compile Include="Helper\VisualThreadedHelper.cs" />
+    <Compile Include="Helper\VisualTargetPresentationSource.cs" />
+    <Compile Include="Helper\VisualWrapper.cs" />
     <Compile Include="Model\ToolsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\ToolsViewModel.cs" />

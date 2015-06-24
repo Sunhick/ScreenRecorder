@@ -212,7 +212,7 @@ namespace ScreenRecorder.Codecs
             /// </summary>
             public AVICOMPRESSOPTIONS ToStruct()
             {
-                AVICOMPRESSOPTIONS returnVar = new AVICOMPRESSOPTIONS();
+                var returnVar = new AVICOMPRESSOPTIONS();
                 returnVar.fccType = fccType;
                 returnVar.fccHandler = fccHandler;
                 returnVar.dwKeyFrameEvery = dwKeyFrameEvery;

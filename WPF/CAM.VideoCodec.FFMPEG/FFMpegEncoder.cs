@@ -32,7 +32,7 @@ namespace CAM.VideoCodec.FFMPEG
         public string Encode(EncoderInfo theEncoderInfo)
         {
             Log.Info("Start of encoding bitmaps into video stream...");
-            Process aVMaker = new Process
+            var aVMaker = new Process
             {
                 StartInfo =
                 {
@@ -51,7 +51,7 @@ namespace CAM.VideoCodec.FFMPEG
             aVMaker.StartInfo.UseShellExecute = false;
             aVMaker.StartInfo.CreateNoWindow = true;
 #endif
-            string aOutFile = GetOutputFile(theEncoderInfo.HookId);
+            var aOutFile = GetOutputFile(theEncoderInfo.HookId);
 
             //avMaker.StartInfo.Arguments = String.Format(@"-i bitmaps\{0} -vcodec huffyuv output.avi", pngLoc);
             //avMaker.StartInfo.Arguments = String.Format(@"-i bitmaps\{0} -r 20 output.mp4", pngLoc);
@@ -79,7 +79,7 @@ namespace CAM.VideoCodec.FFMPEG
 
         private string GetOutputFile(string theHookId)
         {
-            string aTempFileName = Path.ChangeExtension(Path.GetTempFileName(), theHookId);
+            var aTempFileName = Path.ChangeExtension(Path.GetTempFileName(), theHookId);
             Log.Info("Creating Video in TEMP Directory:" + aTempFileName);
             return Path.GetFileName(aTempFileName);
         }
