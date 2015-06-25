@@ -113,6 +113,7 @@
     <Compile Include="Views\TransparentView.xaml.cs">
       <DependentUpon>TransparentView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Win32\Gdi32.cs" />
     <Compile Include="Win32\User32.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -31,6 +31,9 @@ namespace CAM.Tools.Win32
         [DllImport("user32.dll")]
         public static extern bool DrawIcon(IntPtr hdc, int x, int y, IntPtr hIcon);
 
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public static extern bool DestroyIcon(IntPtr handle);
+
         [DllImport("user32.dll")]
         public static extern bool GetIconInfo(IntPtr hIcon, out ICONINFO piconinfo);
 
