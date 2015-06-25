@@ -38,7 +38,6 @@ namespace CAM.Starter
         private void CurrentDomainUnhandledException(object theSender, UnhandledExceptionEventArgs theArgs)
         {
             Log.Fatal("Unhandled exception from CAM Recorder!", (Exception)theArgs.ExceptionObject);
-            Log.Error("Creating Process dump...");
             CreateDump();
         }
 

@@ -65,57 +65,41 @@ namespace CAM.VideoCodec.FFMPEG
                 {
                     using (var aErrorWaitHandle = new AutoResetEvent(false))
                     {
+                        aVMaker.OutputDataReceived += (theSender, theArgs) =>
                         {
-                            aVMaker.OutputDataReceived += (theSender, theArgs) =>
-                            {
-                                if (theArgs.Data == null)
-                                {
-                                    aOutputWaitHandle.Set();
-                                }
-                                else
-                                {
-                                    aOutput.AppendLine(theArgs.Data);
-                                }
-                            };
-                            aVMaker.ErrorDataReceived += (theSender, theArgs) =>
-                            {
-                                if (theArgs.Data == null)
-                                {
-                                    aErrorWaitHandle.Set();
-                                }
-                                else
-                                {
-                                    aError.AppendLine(theArgs.Data);
-                                }
-                            };
-
-                            if (!aVMaker.Start())
-                            {
-                                Log.Error("Error in starting the FFMPEG process!");
-                            }
-
-                            aVMaker.BeginOutputReadLine();
-                            aVMaker.BeginErrorReadLine();
-
-                            // Log FFMPEG output and errors
-                            Log.Info(aOutput);
-                            Log.Error(aError);
-
-                            if (aVMaker.WaitForExit(int.MaxValue) &&
-                                aOutputWaitHandle.WaitOne() &&
-                                aErrorWaitHandle.WaitOne())
-                            {
-                                // Process completed. Check process.ExitCode here.
-                                Log.Info("FFMPEG Process completed! Error code:" + aVMaker.ExitCode);
-                            }
+                            if (theArgs.Data == null)
+                                aOutputWaitHandle.Set();
                             else
-                            {
-                                // Timed out.
-                                Log.Info("FFMPEG Process timeout!");
-                            }
+                                aOutput.AppendLine(theArgs.Data);
+                        };
+                        aVMaker.ErrorDataReceived += (theSender, theArgs) =>
+                        {
+                            if (theArgs.Data == null)
+                                aErrorWaitHandle.Set();
+                            else
+                                aError.AppendLine(theArgs.Data);
+                        };
 
-                            return aOutFile;
-                        }
+                        if (!aVMaker.Start())
+                            Log.Error("Error in starting the FFMPEG process!");
+
+                        aVMaker.BeginOutputReadLine();
+                        aVMaker.BeginErrorReadLine();
+
+                        // Log FFMPEG output and errors
+                        Log.Info(aOutput);
+                        Log.Error(aError);
+
+                        if (aVMaker.WaitForExit(int.MaxValue) &&
+                            aOutputWaitHandle.WaitOne() &&
+                            aErrorWaitHandle.WaitOne())
+                            // Process completed. Check process.ExitCode here.
+                            Log.Info("FFMPEG Process completed with exit code:" + aVMaker.ExitCode);
+                        else
+                            // Timed out.
+                            Log.Info("FFMPEG Process timeout!");
+
+                        return aOutFile;
                     }
                 }
             }
