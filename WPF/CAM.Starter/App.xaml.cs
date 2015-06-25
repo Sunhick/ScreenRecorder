@@ -14,6 +14,10 @@
 // along with ScreenRecorder.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Reflection;
 using System.Windows;
 using log4net;
 
@@ -22,9 +26,9 @@ namespace CAM.Starter
     /// <summary>
     ///     Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App
     {
-        private static readonly ILog Log = LogManager.GetLogger(typeof (App));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(App));
 
         public App()
         {
@@ -33,7 +37,31 @@ namespace CAM.Starter
 
         private void CurrentDomainUnhandledException(object theSender, UnhandledExceptionEventArgs theArgs)
         {
-            Log.Fatal("Unhandled exception from CAM Recorder!", (Exception) theArgs.ExceptionObject);
+            Log.Fatal("Unhandled exception from CAM Recorder!", (Exception)theArgs.ExceptionObject);
+            Log.Error("Creating Process dump...");
+            CreateDump();
+        }
+
+        private void CreateDump()
+        {
+            string aDirectoryName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            
+            var aDumpProcess = new Process();
+            var aCurrentProcess = Process.GetCurrentProcess();
+
+            var aPId = aCurrentProcess.Id.ToString(CultureInfo.InvariantCulture);
+
+            string aDumpFilePath = Path.Combine(aDirectoryName, "CAM.Starter_" + aPId + ".dmp");
+
+            Log.Info("Dumping process to file :" + aDumpFilePath);
+
+            aDumpProcess.StartInfo = new ProcessStartInfo("Extern\\procdump.exe",
+                string.Format("{0} {1}", aPId, aDumpFilePath));
+            aDumpProcess.Start();
+            aDumpProcess.WaitForExit();
+
+            Log.Info("Killing CAM.Starter.exe....");
+            aCurrentProcess.Kill();
         }
 
         protected override void OnStartup(StartupEventArgs theArgs)

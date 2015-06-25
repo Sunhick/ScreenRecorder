@@ -63,9 +63,9 @@ namespace CAM.Tools.Model
         private static Bitmap CaptureScreen(int theX, int theY, int theWidth, int theHeight)
         {
             var aBitmap = new Bitmap(theWidth, theHeight, PixelFormat.Format32bppRgb);
-            using (var aG = Graphics.FromImage(aBitmap))
+            using (var aGraphics = Graphics.FromImage(aBitmap))
             {
-                aG.CopyFromScreen(theX, theY, 0, 0, aBitmap.Size, CopyPixelOperation.SourceCopy);
+                aGraphics.CopyFromScreen(theX, theY, 0, 0, aBitmap.Size, CopyPixelOperation.SourceCopy);
 
                 User32.CURSORINFO aCursorInfo;
                 aCursorInfo.cbSize = Marshal.SizeOf(typeof (User32.CURSORINFO));
@@ -86,13 +86,12 @@ namespace CAM.Tools.Model
                             var aIconY = aCursorInfo.ptScreenPos.y - ((int) aIconInfo.yHotspot);
 
                             // draw the cursor icon on top of the captured screen image
-                            User32.DrawIcon(aG.GetHdc(), aIconX, aIconY, aCursorInfo.hCursor);
-
-                            // release the handle created by call to g.GetHdc()
-                            aG.ReleaseHdc();
+                            User32.DrawIcon(aGraphics.GetHdc(), aIconX, aIconY, aCursorInfo.hCursor);
                         }
                     }
                 }
+
+                aGraphics.ReleaseHdc();
             }
             return aBitmap;
         }
