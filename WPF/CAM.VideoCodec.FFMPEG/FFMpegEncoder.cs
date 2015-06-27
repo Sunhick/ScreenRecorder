@@ -41,6 +41,7 @@ namespace CAM.VideoCodec.FFMPEG
                 aVMaker.StartInfo.FileName = Path.Combine(theEncoderInfo.ExePath, theEncoderInfo.ExeName);
                 aVMaker.StartInfo.RedirectStandardOutput = true;
                 aVMaker.StartInfo.RedirectStandardError = true;
+                aVMaker.EnableRaisingEvents = true;
 
 #if DEBUG
                 aVMaker.StartInfo.UseShellExecute = false;
@@ -65,6 +66,9 @@ namespace CAM.VideoCodec.FFMPEG
                 {
                     using (var aErrorWaitHandle = new AutoResetEvent(false))
                     {
+                        if (!aVMaker.Start())
+                            Log.Error("Error in starting the FFMPEG process!");
+
                         aVMaker.OutputDataReceived += (theSender, theArgs) =>
                         {
                             if (theArgs.Data == null)
@@ -80,9 +84,7 @@ namespace CAM.VideoCodec.FFMPEG
                                 aError.AppendLine(theArgs.Data);
                         };
 
-                        if (!aVMaker.Start())
-                            Log.Error("Error in starting the FFMPEG process!");
-
+                       
                         aVMaker.BeginOutputReadLine();
                         aVMaker.BeginErrorReadLine();
 
