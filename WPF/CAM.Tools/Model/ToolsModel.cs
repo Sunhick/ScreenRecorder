@@ -89,7 +89,7 @@ namespace CAM.Tools.Model
 
         private static Bitmap CaptureScreen(int theX, int theY, int theWidth, int theHeight)
         {
-            var aBitmap = new Bitmap(theWidth, theHeight, PixelFormat.Format32bppRgb);
+            var aBitmap = new Bitmap(theWidth, theHeight, PixelFormat.Format24bppRgb);
             var aGraphics = Graphics.FromImage(aBitmap);
             try
             {
