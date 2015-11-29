@@ -3,3 +3,4 @@ language: csharp
 solution: ScreenRecorder.sln
 
 script:
+  - xbuild /p:Configuration=Debug /p:Platform=x64 ScreenRecorder.sln
